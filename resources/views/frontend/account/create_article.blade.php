@@ -43,8 +43,11 @@
                             <form action="{{ url()->current() }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group ">
-                                    <label for="name">Title*</label>
-                                    <input title="" type="text" name="title" class="form-control @if ($errors->has('title')) has-error @endif">
+                                    <label for="title">Title*</label>
+                                    <input type="text" name="title"
+                                           id="title"
+                                           class="form-control @if ($errors->has('title')) has-error @endif"
+                                           value="{{ old('title') }}">
 
                                     @if ($errors->has('title'))
                                         <div class="errors">{{ $errors->first('title') }}</div>
@@ -52,11 +55,11 @@
                                 </div>
 
                                 <div class="form-group @if ($errors->has('category_id')) has-error @endif">
-                                    <label for="pwd">Select Category*</label>
+                                    <label for="category_id">Select Category*</label>
 
-                                    <select title="" name="category_id[]" multiple id="select2" class="form-control">
+                                    <select name="category_id[]" multiple id="category_id" class="form-control">
                                         @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" {{ ( in_array($category->id, old("category_id", [])) ? "selected":"") }}>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
 
@@ -66,9 +69,9 @@
                                 </div>
 
                                 <div class="form-group @if ($errors->has('description')) has-error @endif">
-                                    <label for="name">Description*</label>
+                                    <label for="description">Description*</label>
                                     <textarea title="" name="description" id="description" class="form-control"
-                                              required="required"></textarea>
+                                              required="required">{{ old('description') }}</textarea>
 
                                     @if ($errors->has('description'))
                                         <div class="errors">{{ $errors->first('description') }}</div>
@@ -96,6 +99,6 @@
     <script>
         CKEDITOR.replace('description');
         CKEDITOR.config.height = '400px';
-        $('#select2').select2({});
+        $('#category_id').select2({});
     </script>
 @endsection
