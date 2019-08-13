@@ -24,6 +24,7 @@ Route::get('/authors-list', ['as' => 'author.list', 'uses' => 'HomeController@Ge
 Route::get('/user-profile/index/{id}', ['as' => 'old.user.profile', 'uses' => 'HomeController@UserProfile']);
 Route::get('/author/{id}/{name}', ['as' => 'user.profile', 'uses' => 'HomeController@UserProfile']);
 Route::get('/contact-us', ['as' => 'contact.us', 'uses' => 'HomeController@ContactUs']);
+Route::post('/contact-us', ['as' => 'submit.contact.form', 'uses' => 'HomeController@SubmitContactForm']);
 Route::get('/about-us', ['as' => 'about.us', 'uses' => 'HomeController@AboutUs']);
 Route::get('/tv-schedule', ['as' => 'tv.schedule', 'uses' => 'HomeController@TvSchedule']);
 Route::get('/match-schedule/search', ['as' => 'match.schedule', 'uses' => 'HomeController@SearchMatch']);

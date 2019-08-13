@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Category;
 use App\GameWeek;
+use App\Mail\ContactUs;
 use App\MatchSchedule;
 use App\Subscriber;
 use App\Tweet;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use function asset;
 use function explode;
 use function str_replace;
@@ -252,4 +254,21 @@ class HomeController extends Controller
         return back()->with('message', 'Thanks for subscription.');
     }
 
+    public function SubmitContactForm(Request $request)
+    {
+        $request->validate([
+            'your_name' => 'required|min:6',
+            'your_email' => 'required|email',
+            'subject' => 'required',
+            'your_comment' => 'required|min:20',
+        ]);
+        $data = array(
+            'name' => $request->get('your_name'),
+            'subject' => $request->get('subject'),
+            'email' => $request->get('your_email'),
+            'user_message' => $request->get('your_comment')
+        );
+        Mail::to(['uvlsports@gmail.com', 'inverse.shakil@gmail.com', 'top2dcutlet@gmail.com'], 'UVL Sports')->send(new ContactUs($data));
+        return back()->with('success', 'We have received your email. We will get back at you as soon as possible. thanks for being in touch with us!');
+    }
 }

@@ -48,31 +48,52 @@
                     </div>
                     <div class="message-box">
                         <h1 class="section-title title">Drop Your Message</h1>
-                        <form id="comment-form" name="comment-form" method="post">
+                        <form id="comment-form" name="comment-form" method="post"
+                              action="{{ route('submit.contact.form') }}">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" name="name" class="form-control" required="required">
+                                        <label for="your_name">Name</label>
+                                        <input type="text" id="your_name" name="your_name"
+                                               value="{{ old('your_name') }}"
+                                               class="form-control @if ($errors->has('your_name')) has-error @endif">
+
+                                        @if ($errors->has('your_name'))
+                                            <div class="errors">{{ $errors->first('your_name') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" class="form-control" required="required">
+                                        <label for="your_email">Email</label>
+                                        <input type="text" id="your_email" name="your_email"
+                                               value="{{ old('your_email') }}"
+                                               class="form-control @if ($errors->has('your_email')) has-error @endif">
+                                        @if ($errors->has('your_email'))
+                                            <div class="errors">{{ $errors->first('your_email') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="subject">Subject</label>
-                                        <input type="subject" name="subject" class="form-control">
+                                        <input type="text" id="subject" name="subject" value="{{ old('subject') }}"
+                                               class="form-control @if ($errors->has('subject')) has-error @endif">
+                                        @if ($errors->has('subject'))
+                                            <div class="errors">{{ $errors->first('subject') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="comment">Your Text</label>
-                                        <textarea name="comment" id="comment" required="required" class="form-control"
-                                                  rows="5"></textarea>
+                                        <label for="your_comment">Your Text</label>
+                                        <textarea name="your_comment" id="your_comment"
+                                                  class="form-control @if ($errors->has('your_comment')) has-error @endif"
+                                                  rows="5">{{ old('your_comment') }}</textarea>
+                                        @if ($errors->has('your_comment'))
+                                            <div class="errors">{{ $errors->first('your_comment') }}</div>
+                                        @endif
                                     </div>
                                     <div class="text-right">
                                         <button type="submit" class="btn btn-primary">Send</button>
@@ -112,10 +133,10 @@
 
             map = new GMaps({
                 el: '#gmap',
-                lat: 22.3815544,
-                lng: 91.8407592,
+                lat: 23.4607,
+                lng: 91.180299,
                 scrollwheel: false,
-                zoom: 8,
+                zoom: 9,
                 zoomControl: true,
                 panControl: false,
                 streetViewControl: false,
@@ -126,15 +147,15 @@
 
             var image = '';
             map.addMarker({
-                lat: 22.3815544,
-                lng: 91.8407592,
+                lat: 23.4607,
+                lng: 91.1809,
                 icon: image,
                 animation: google.maps.Animation.DROP,
                 verticalAlign: 'bottom',
                 horizontalAlign: 'center',
                 backgroundColor: '#d3cfcf',
                 infoWindow: {
-                    content: '<div class="map-info"><address>UVL Sports<br />39, Road 2, B Block, Chandgaon <br />Chittagong</address></div>',
+                    content: '<div class="map-info"><address>UVL Sports<br />304, Kazi Para Road, Comilla South Sadar <br />Comilla</address></div>',
                     borderColor: 'red',
                 }
             });
