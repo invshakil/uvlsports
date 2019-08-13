@@ -1,7 +1,8 @@
 @php
 
-    $published = count(App\Article::where('user_id', auth() -> user() -> id) -> where('status', 1)->get()) ;
-    $pending = count(App\Article::where('user_id', auth() -> user() -> id) -> where('status', 0)->get()) ;
+    $published = count(App\Article::where('user_id', auth() -> user() -> id)->where('status', 1)->get()) ;
+    $pending = count(App\Article::where('user_id', auth() -> user() -> id)->where('status', 0)->get()) ;
+    $favorites = count(App\Favorite::where('user_id', auth() -> user() -> id)->get()) ;
 
 @endphp
 
@@ -63,12 +64,13 @@
                             </a>
                         </li>
 
-                        {{--<li>--}}
-                        {{--<a class="@if(request()->url() == route('favorite.articles')) active @endif" href="{{ route('favorite.articles') }}">--}}
-                        {{--<i class="fa fa-heart"></i> Favorite Articles &nbsp;--}}
-                        {{--<span class="badge">6</span>--}}
-                        {{--</a>--}}
-                        {{--</li>--}}
+                        <li>
+                            <a class="@if(request()->url() == route('favorite.articles')) active @endif"
+                               href="{{ route('favorite.articles') }}">
+                                <i class="fa fa-heart"></i> Favorite Articles &nbsp;
+                                <span class="badge">{{ $favorites }}</span>
+                            </a>
+                        </li>
 
                         {{--<li>--}}
                         {{--<a class="@if(request()->url() == route('saved.articles')) active @endif" href="{{ route('saved.articles') }}">--}}

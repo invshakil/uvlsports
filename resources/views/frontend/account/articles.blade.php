@@ -11,6 +11,10 @@
             padding: 20px 5px 20px 5px;
         }
 
+        .table > tbody > tr > td > a {
+            margin-bottom: 5px;
+        }
+
         @media only screen and (min-width: 900px) {
             .inner-body, .inner-box {
                 min-height: 700px;
@@ -67,7 +71,9 @@
                                     <th data-sort-ignore="true"> Category</th>
                                     <th> Title</th>
                                     <th data-type="numeric">Visit</th>
+                                    @if(route('favorite.articles') == false)
                                     <th> Option</th>
+                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +81,6 @@
                                 @if(count($articles) > 0)
                                     @foreach($articles as $key=>$article)
                                         @php $categories = explode(',',$article->category_id); @endphp
-
                                         <tr>
                                             <td>{{ $key+1 }}</td>
                                             <td>
@@ -89,9 +94,11 @@
                                             <td>
                                                 <a href="{{ route('article.details', ['id'=>$article->id,'slug'=>$article->slug]) }}" class="btn btn-success">Go to Article</a>
                                             </td>
+                                            @if(route('favorite.articles') == false)
                                             <td>
                                                 <a href="{{ route('account.article.edit', ['id'=>$article->id]) }}" class="btn btn-warning">Edit</a>
                                             </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 @else

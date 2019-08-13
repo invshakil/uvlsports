@@ -124,6 +124,9 @@ class UserController extends Controller
     public function FavoriteArticles()
     {
         $data['title'] = 'Favorite Articles';
+        $data['articles'] = Article::with(['favorites' => function ($q) {
+            return $q->where('user_id', auth()->user()->id);
+        }])->whereHas('favorites')->latest()->paginate(10);
         return view('frontend.account.articles', $data);
     }
 

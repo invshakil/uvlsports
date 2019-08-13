@@ -31,7 +31,7 @@
                                         <div class="entry-thumbnail">
                                                 <img class="img-responsive"
                                                      src="{{ $article->medium_image }}"
-                                                     alt=""/>
+                                                     alt="{{ $article->title }}"/>
                                         </div>
                                     </div>
                                     <div class="post-content">
