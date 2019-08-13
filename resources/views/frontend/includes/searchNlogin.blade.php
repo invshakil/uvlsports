@@ -101,8 +101,8 @@
     </ul>
 
     <div class="search">
-        <form role="form">
-            <input type="text" class="search-form" autocomplete="off" placeholder="Type & Press Enter">
+        <form role="form" action="{{ url('search') }}" method="get">
+            <input type="text" class="search-form" autocomplete="off" name="keyword" placeholder="Type & Press Enter">
         </form>
     </div> <!--/.search-->
 </div>

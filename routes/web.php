@@ -16,24 +16,18 @@
  */
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('/search', ['as' => 'search', 'uses' => 'HomeController@SearchResult']);
 Route::get('category/{slug}', ['as' => 'article.by.category', 'uses' => 'HomeController@GetArticleByCategory']);
-
 Route::get('/news-details/{id}/{cat_id}/{slug}', ['as' => 'article.details', 'uses' => 'HomeController@ArticleDetails2']);
 Route::get('/article/{id}/{slug}', ['as' => 'article.details', 'uses' => 'HomeController@ArticleDetails']);
-
 Route::get('/authors-list', ['as' => 'author.list', 'uses' => 'HomeController@GetAuthorList']);
-
 Route::get('/user-profile/index/{id}', ['as' => 'old.user.profile', 'uses' => 'HomeController@UserProfile']);
 Route::get('/author/{id}/{name}', ['as' => 'user.profile', 'uses' => 'HomeController@UserProfile']);
-
 Route::get('/contact-us', ['as' => 'contact.us', 'uses' => 'HomeController@ContactUs']);
 Route::get('/about-us', ['as' => 'about.us', 'uses' => 'HomeController@AboutUs']);
-
 Route::get('/tv-schedule', ['as' => 'tv.schedule', 'uses' => 'HomeController@TvSchedule']);
 Route::get('/match-schedule/search', ['as' => 'match.schedule', 'uses' => 'HomeController@SearchMatch']);
-
 Route::post('/create-subscribe', ['as' => 'create.subscriber', 'uses' => 'HomeController@CreateSubscriber']);
-
 Route::post('/save-favorite-article', ['as' => 'save.favorite', 'uses' => 'UserController@SaveFavorite']);
 
 /*
