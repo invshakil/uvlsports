@@ -34,7 +34,7 @@
                                                 <div class="entry-header">
                                                     <div class="entry-thumbnail">
                                                         <img class="img-responsive"
-                                                             src="{{ asset('image_upload/post_image/'.$info->image) }}"
+                                                             src="{{ $info->full_image }}"
                                                              style="margin: 0 auto; padding-top: 10px;"
                                                              alt="{{ $info->title }}"/>
                                                     </div>
@@ -172,9 +172,9 @@
                                                 <div class="entry-header">
                                                     <div class="entry-thumbnail">
                                                         <img class="img-responsive"
-                                                             src="{{ asset('image_upload/post_image/resized/'.$article->image) }}"
+                                                             src="{{ $article->medium_image }}"
                                                              style="max-height: 130px; margin: 0px auto"
-                                                             alt=""/>
+                                                             alt="{{ $article->title }}"/>
                                                     </div>
                                                 </div>
                                                 <div class="post-content">
@@ -187,8 +187,21 @@
                                                                             class="fa fa-eye"></i>{{ $article->hit_count }}
                                                                 </a>
                                                             </li>
-                                                            <li class="loves"><a href="#"><i
-                                                                            class="fa fa-heart-o"></i>278</a></li>
+                                                            <li class="loves">
+                                                                @if(Auth::check())
+                                                                    @php $status = $article->favByUser($article->favorites, auth()->user()->id);@endphp
+                                                                    <a href="javascript:void(null)">
+                                                                        <i class="fa fa-heart-o save-favorite @if($status == 1) fav-color @endif"
+                                                                           id="fav{{ $article->id }}"
+                                                                           data-id="{{ $article->id }}"> {{ $article->favorites_count }}</i>
+                                                                    </a>
+                                                                @else
+                                                                    <a href="{{ route('login') }}" class="save-favorite"
+                                                                       onclick="return confirm('To save as favorite, you will have to be logged in. Proceed?')">
+                                                                        <i class="fa fa-heart-o"></i> {{ $article->favorites_count }}
+                                                                    </a>
+                                                                @endif
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                     <h2 class="entry-title">

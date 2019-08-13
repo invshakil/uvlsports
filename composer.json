@@ -21,6 +21,9 @@
         "symfony/thanks": "^1.0"
     },
     "autoload": {
+        "files": [
+            "app/helpers/custom_helper.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"

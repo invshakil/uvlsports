@@ -16,7 +16,7 @@
                                         @if(file_exists('image_upload/post_image/'.$slider->image))
                                             <img class="img-responsive"
                                                  src="{{ asset('image_upload/post_image/'.$slider->image) }}"
-                                                 alt=""/>
+                                                 alt="{{ $slider->title }}"/>
                                         @else
                                             <img class="img-responsive"
                                                  src="https://via.placeholder.com/800x450"
@@ -56,7 +56,7 @@
                                         </ul>
                                     </div>
                                     <h2 class="entry-title">
-                                        <a href="{{ route('article.details', ['id'=>$slider->id,'slug'=>$slider->slug]) }}">{{ $slider->title }}</a>
+                                        <a href="{{ route('article.details', ['id'=>$slider->id,'slug'=>$slider->slug]) }}">{{ $slider->slider_title }}</a>
                                     </h2>
                                 </div>
                             </div><!--/post-->

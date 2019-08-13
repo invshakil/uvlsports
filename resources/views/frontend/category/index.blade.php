@@ -29,15 +29,9 @@
                                 <div class="post">
                                     <div class="entry-header">
                                         <div class="entry-thumbnail">
-                                            @if(file_exists('image_upload/post_image/resized/'.$article->image))
                                                 <img class="img-responsive"
-                                                     src="{{ asset('image_upload/post_image/resized/'.$article->image) }}"
+                                                     src="{{ $article->medium_image }}"
                                                      alt=""/>
-                                            @else
-                                                <img class="img-responsive"
-                                                     src="https://via.placeholder.com/340x195"
-                                                     alt=""/>
-                                            @endif
                                         </div>
                                     </div>
                                     <div class="post-content">

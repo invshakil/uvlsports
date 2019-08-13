@@ -11,15 +11,9 @@
                             <div class="post medium-post" style="max-height: 300px; min-height: 300px;">
                                 <div class="entry-header">
                                     <div class="entry-thumbnail">
-                                        @if(file_exists('image_upload/post_image/resized/'.$article->image))
                                             <img class="img-responsive"
-                                                 src="{{ asset('image_upload/post_image/resized/'.$article->image) }}"
-                                                 alt=""/>
-                                        @else
-                                            <img class="img-responsive"
-                                                 src="https://via.placeholder.com/272x160"
-                                                 alt=""/>
-                                        @endif
+                                                 src="{{ $article->medium_image }}"
+                                                 alt="{{ $article->title }}"/>
                                     </div>
                                 </div>
                                 <div class="post-content">
@@ -51,7 +45,7 @@
                                         </ul>
                                     </div>
                                     <h2 class="entry-title">
-                                        <a href="{{ route('article.details', ['id'=>$article->id,'slug'=>$article->slug]) }}">{{ $article->title }}</a>
+                                        <a href="{{ route('article.details', ['id'=>$article->id,'slug'=>$article->slug]) }}">{{ $article->card_title }}</a>
                                     </h2>
                                 </div>
                             </div><!--/post-->

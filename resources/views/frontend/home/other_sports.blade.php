@@ -4,15 +4,9 @@
             <div class="post feature-post">
                 <div class="entry-header">
                     <div class="entry-thumbnail">
-                        @if(file_exists('image_upload/post_image/resized/'.$others_sport->image))
-                            <img class="img-responsive"
-                                 src="{{ asset('image_upload/post_image/resized/'.$others_sport->image) }}"
-                                 alt=""/>
-                        @else
-                            <img class="img-responsive"
-                                 src="https://via.placeholder.com/300x200"
-                                 alt=""/>
-                        @endif
+                        <img class="img-responsive"
+                             src="{{ $others_sport->medium_image }}"
+                             alt="{{ $others_sport->title }}"/>
                     </div>
                     @php $categories = explode(',',$others_sport->category_id); $category_id = $categories[0]; @endphp
                     <div class="catagory technology"><span><a href="#">{{ $others_sport->category($category_id) }}</a></span></div>
