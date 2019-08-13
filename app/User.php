@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -41,4 +41,20 @@ class User extends Authenticatable
 	{
 		return $this->hasMany(Favorite ::class, 'user_id', 'id');
 	}
+
+    public function getUserAvatarAttribute()
+    {
+        if ($this->image == null) {
+            return 'https://www.infrascan.net/demo/assets/img/avatar5.png';
+        } else if (strpos($this->image, "http") > -1) {
+            return $this->image;
+        } else {
+            $imagePath = asset(substr($this->image, 1));
+            $fileExists = file_exists(public_path() . substr($this->image, 1));
+            if ($fileExists)
+                return $imagePath;
+            else
+                return 'https://www.infrascan.net/demo/assets/img/avatar5.png';
+        }
+    }
 }

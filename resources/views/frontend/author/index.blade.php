@@ -34,26 +34,10 @@
                                     <li class="col-sm-6 col-md-4">
                                         <div class="single-author">
                                             <div class="author-bg">
-                                                @if(strpos($author->image, "http") !== false)
-
-                                                    <img class="media-object" style="width: 100px; height: 100px"
-                                                         src="{{ asset($author->image) }}"
-                                                         alt="{{ $author->name }}">
-                                                @else
-                                                    @if($author->image == '')
-                                                        <img class="media-object"
-                                                             style="width: 100px; height: 100px"
-                                                             src="https://www.infrascan.net/demo/assets/img/avatar5.png"
-                                                             alt="{{ $author->name }}">
-                                                    @else
-                                                    
                                                     <img class="media-object"
-                                                                 style="width: 100px; height: 100px"
-                                                                 src="{{ asset($author->image) }}"
-                                                                 alt="{{ $author->name }}">
-                                                                 
-                                                    @endif
-                                                @endif
+                                                         style="width: 100px; height: 100px"
+                                                         src="{{ $author->user_avatar }}"
+                                                         alt="{{ $author->name }}">
                                             </div>
 
                                             <div class="author-info">

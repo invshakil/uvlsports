@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Category;
+use App\Favorite;
 use App\GameWeek;
 use App\Mail\ContactUs;
 use App\MatchSchedule;
@@ -191,6 +192,8 @@ class HomeController extends Controller
         $data['author_info'] = User::where('id', $id)->first();
         $data['articles'] = Article::with('favorites')->withCount('favorites')->orderBy('id', 'desc')->where('user_id', $id)->paginate(12);
         $data['total_hit'] = Article::where('user_id', $id)->sum('hit_count');
+        $articleIds = Article::select('id')->where('user_id', $id)->get()->toArray();
+        $data['total_favorites'] = Favorite::whereIn('article_id', $articleIds)->get()->count();
         $data['popular_articles'] = $this->MostPopularArticle(10, null, $id);
 
         $data['image'] = asset($data['author_info']->image);

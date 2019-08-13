@@ -65,7 +65,7 @@
                             <div class="author-info">
                                 <p>Total Article: {{ count($articles) }}</p>
                                 <p>Total Article Hits: {{ $total_hit }} View</p>
-                                <p>Earned Favorite: 25</p>
+                                <p>Earned Favorite: {{ $total_favorites }}</p>
                                 <hr>
                                 @if(isset($author_info->bio))
                                     <h3>About Me</h3>
@@ -87,8 +87,8 @@
                                     <div class="entry-header">
                                         <div class="entry-thumbnail">
                                             <img class="img-responsive"
-                                                 src="{{ asset('image_upload/post_image/'.$article->image) }}"
-                                                 alt="{{ $article->name }}"/>
+                                                 src="{{ $article->full_image }}"
+                                                 alt="{{ $article->title }}"/>
                                         </div>
                                     </div>
                                     <div class="post-content">
@@ -106,7 +106,7 @@
                                             <a href="{{ route('article.details', ['id'=>$article->id,'slug'=>$article->slug]) }}">{{ $article->title }}</a>
                                         </h2>
                                         <div class="entry-content">
-                                            <p align="justify">{!! mb_substr(strip_tags($article->description), 0, strpos(strip_tags($article->description), ' ', 200)).' ...' !!}</p>
+                                            <p align="justify">{!! strLimit($article->description, 200) !!}</p>
                                         </div>
                                     </div>
                                 </div><!--/post-->
