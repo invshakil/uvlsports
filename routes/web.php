@@ -1,0 +1,165 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+/*
+ * WEBSITE ROUTES
+ */
+
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('category/{slug}', ['as' => 'article.by.category', 'uses' => 'HomeController@GetArticleByCategory']);
+
+Route::get('/news-details/{id}/{cat_id}/{slug}', ['as' => 'article.details', 'uses' => 'HomeController@ArticleDetails2']);
+Route::get('/article/{id}/{slug}', ['as' => 'article.details', 'uses' => 'HomeController@ArticleDetails']);
+
+Route::get('/authors-list', ['as' => 'author.list', 'uses' => 'HomeController@GetAuthorList']);
+
+Route::get('/user-profile/index/{id}', ['as' => 'old.user.profile', 'uses' => 'HomeController@UserProfile']);
+Route::get('/author/{id}/{name}', ['as' => 'user.profile', 'uses' => 'HomeController@UserProfile']);
+
+Route::get('/contact-us', ['as' => 'contact.us', 'uses' => 'HomeController@ContactUs']);
+Route::get('/about-us', ['as' => 'about.us', 'uses' => 'HomeController@AboutUs']);
+
+Route::get('/tv-schedule', ['as' => 'tv.schedule', 'uses' => 'HomeController@TvSchedule']);
+Route::get('/match-schedule/search', ['as' => 'match.schedule', 'uses' => 'HomeController@SearchMatch']);
+
+Route::post('/create-subscribe', ['as' => 'create.subscriber', 'uses' => 'HomeController@CreateSubscriber']);
+
+Route::post('/save-favorite-article', ['as' => 'save.favorite', 'uses' => 'UserController@SaveFavorite']);
+
+/*
+ * AUTHENTICATION ROUTES
+ */
+
+
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+
+Route::get('/account', 'UserController@index')->name('account')->middleware('auth');
+Route::post('/account', 'UserController@UpdateUserSettings')->name('save.user.settings')->middleware('auth');
+
+Route::get('/account/create-article', 'UserController@CreateArticle')->name('create.article')->middleware('auth');
+Route::post('/account/create-article', 'UserController@SaveArticle')->name('save.article')->middleware('auth');
+Route::get('/account/edit-article/{id}', 'UserController@EditArticle')->name('account.article.edit')->middleware('auth');
+Route::post('/account/edit-article/{id}', 'UserController@UpdateArticle')->name('account.article.update')->middleware('auth');
+
+Route::get('/account/my-articles', 'UserController@MyArticles')->name('my.articles')->middleware('auth');
+Route::get('/account/pending-articles', 'UserController@PendingArticles')->name('pending.articles')->middleware('auth');
+Route::get('/account/favorite-articles', 'UserController@FavoriteArticles')->name('favorite.articles')->middleware('auth');
+Route::get('/account/saved-articles', 'UserController@SavedArticle')->name('saved.articles')->middleware('auth');
+
+
+/*
+ * SOCIAL LOGIN WITH FACEBOOK / TWITTER / GMAIL
+ */
+
+
+$s = 'social.';
+Route::get('/login/{provider}/redirect', ['as' => $s . 'redirect', 'uses' => 'SocialLoginController@getSocialRedirect']);
+Route::get('/login/{provider}/callback', ['as' => $s . 'handle', 'uses' => 'SocialLoginController@getSocialHandle']);
+
+/*
+ *
+ * DEFINING
+ * ADMIN ROUTES
+ *
+ */
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin/', 'middleware' => ['auth']], function () {
+
+    Route::get('/dashboard', ['as' => 'admin.dashboard', 'uses' => 'AdminController@index']);
+
+    Route::get('/add-user', ['as' => 'user.add', 'uses' => 'AdminController@add_user']);
+    Route::post('/save-user', ['as' => 'save.user', 'uses' => 'AdminController@saveUser']);
+    Route::get('/delete-user/{id}', ['as' => 'delete.user', 'uses' => 'AdminController@deleteUser']);
+    Route::get('/promote-user/{id}', ['as' => 'promote.user', 'uses' => 'AdminController@promoteUser']);
+    Route::get('/demote-user/{id}', ['as' => 'demote.user', 'uses' => 'AdminController@demoteUser']);
+
+    Route::get('/user-list', ['as' => 'user.manage', 'uses' => 'AdminController@manage_user']);
+    Route::get('/user-role', ['as' => 'user.role', 'uses' => 'AdminController@user_role']);
+
+    Route::get('/system-settings', ['as' => 'system.settings', 'uses' => 'AdminController@system_settings']);
+    Route::post('/system-settings', ['as' => 'save.system.settings', 'uses' => 'AdminController@save_system_settings']);
+    Route::post('/save-logo', ['as' => 'save.logo', 'uses' => 'AdminController@save_system_logo']);
+    Route::post('/save-mail-config', ['as' => 'save.mail.config', 'uses' => 'AdminController@save_system_mail_config']);
+
+    Route::get('/account-settings', ['as' => 'account.settings', 'uses' => 'AdminController@account_settings']);
+
+    /*
+     * CATEGORIES
+     */
+    Route::get('/categories', ['as' => 'categories', 'uses' => 'PostController@Categories']);
+    Route::post('/categories', ['as' => 'create.category', 'uses' => 'PostController@SaveCategory']);
+    Route::post('/update-category', ['as' => 'update.category', 'uses' => 'PostController@UpdateCategory']);
+    Route::get('/delete-category/{id}', ['as' => 'delete.category', 'uses' => 'PostController@DeleteCategory']);
+
+    /*
+     * ARTICLES
+     */
+
+    Route::get('/create-article', ['as' => 'admin.create.article', 'uses' => 'PostController@CreateArticle']);
+    Route::post('/create-article', ['as' => 'admin.save.article', 'uses' => 'PostController@SaveArticle']);
+
+    Route::get('/articles-list', ['as' => 'admin.article.list', 'uses' => 'PostController@manageArticles']);
+    Route::get('/pending-articles-list', ['as' => 'admin.pending.article.list', 'uses' => 'PostController@managePendingArticles']);
+    Route::get('/delete-article/{id}', ['as' => 'delete.article', 'uses' => 'PostController@deleteArticle']);
+    Route::get('/edit-article/{id}', ['as' => 'edit.article', 'uses' => 'PostController@EditArticle']);
+    Route::post('/edit-article/{id}', ['as' => 'update.article', 'uses' => 'PostController@UpdateArticle']);
+
+    /*
+     * TV SCHEDULE
+     */
+
+    Route::get('/create-game-week', ['as' => 'create.game.week', 'uses' => 'TvScheduleController@CreateGameWeek']);
+    Route::post('/create-game-week', ['as' => 'save.game.week', 'uses' => 'TvScheduleController@SaveGameWeek']);
+    Route::post('/update-game-week', ['as' => 'update.game.week', 'uses' => 'TvScheduleController@UpdateGameWeek']);
+    Route::get('/delete-game-week/{id}', ['as' => 'delete.game.week', 'uses' => 'TvScheduleController@DeleteGameWeek']);
+
+
+    Route::get('/create-matches-info', ['as' => 'create.matches.info', 'uses' => 'TvScheduleController@CreateMatchesInfo']);
+    Route::post('/create-matches-info', ['as' => 'save.matches.info', 'uses' => 'TvScheduleController@SaveMatchesInfo']);
+    Route::post('/update-matches-info', ['as' => 'update.matches.info', 'uses' => 'TvScheduleController@UpdateMatchesInfo']);
+    Route::get('/delete-matches-info/{id}', ['as' => 'delete.matches.info', 'uses' => 'TvScheduleController@DeleteMatchesInfo']);
+
+    Route::get('/create-tournament', ['as' => 'create.tournament', 'uses' => 'TvScheduleController@CreateTournament']);
+    Route::post('/create-tournament', ['as' => 'save.tournament', 'uses' => 'TvScheduleController@SaveTournament']);
+    Route::post('/update-tournament', ['as' => 'update.tournament', 'uses' => 'TvScheduleController@UpdateTournament']);
+    Route::get('/delete-tournament/{id}', ['as' => 'delete.tournament', 'uses' => 'TvScheduleController@DeleteTournament']);
+});
+
+
+/*
+ *
+ * DEFINING
+ * MODERATOR ROUTES
+ *
+ */
+
+Route::group(['prefix' => 'user/', 'middleware' => ['auth']], function () {
+
+    Route::get('/dashboard', function () {
+        echo 'welcome to dashboard!<a href="' . route('logout') . '">Logout</a>';
+    });
+
+});
