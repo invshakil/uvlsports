@@ -9,7 +9,6 @@ use App\MatchSchedule;
 use App\Subscriber;
 use App\Tweet;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use function asset;
 use function explode;
@@ -261,8 +260,9 @@ class HomeController extends Controller
 
     public function CreateSubscriber(Request $request)
     {
+        $request->validate(['subscription_email' => 'required|email']);
         $subscriber = new Subscriber();
-        $subscriber->email = $request->email;
+        $subscriber->email = $request->subscription_email;
         $subscriber->save();
 
         return back()->with('message', 'Thanks for subscription.');

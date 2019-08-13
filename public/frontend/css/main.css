@@ -2916,19 +2916,17 @@ img.mfp-img {
 
 /*=========================================:: END :: =============================================*/
 
+.errors{
+	padding: 10px 0;
+	color: #ed1c24;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.select2-container--default, .select2-container--focus, .select2-selection--multiple{
+	border: 1px solid  #ececec!important;
+}
+.form-control.has-error, .has-error > .select2-container, .has-error .cke_chrome, .widget.news-letter .has-error{
+	border: 1px solid #ed1c24 !important;
+}
 
 
 

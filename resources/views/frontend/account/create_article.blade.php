@@ -42,13 +42,17 @@
 
                             <form action="{{ url()->current() }}" method="post">
                                 {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label for="name">Title</label>
-                                    <input title="" type="text" name="title" class="form-control" required="required">
+                                <div class="form-group ">
+                                    <label for="name">Title*</label>
+                                    <input title="" type="text" name="title" class="form-control @if ($errors->has('title')) has-error @endif">
+
+                                    @if ($errors->has('title'))
+                                        <div class="errors">{{ $errors->first('title') }}</div>
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="pwd">Select Category</label>
+                                <div class="form-group @if ($errors->has('category_id')) has-error @endif">
+                                    <label for="pwd">Select Category*</label>
 
                                     <select title="" name="category_id[]" multiple id="select2" class="form-control">
                                         @foreach($categories as $category)
@@ -56,12 +60,19 @@
                                         @endforeach
                                     </select>
 
+                                    @if ($errors->has('category_id'))
+                                        <div class="errors">{{ $errors->first('category_id') }}</div>
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="name">Description</label>
+                                <div class="form-group @if ($errors->has('description')) has-error @endif">
+                                    <label for="name">Description*</label>
                                     <textarea title="" name="description" id="description" class="form-control"
                                               required="required"></textarea>
+
+                                    @if ($errors->has('description'))
+                                        <div class="errors">{{ $errors->first('description') }}</div>
+                                    @endif
                                 </div>
 
 

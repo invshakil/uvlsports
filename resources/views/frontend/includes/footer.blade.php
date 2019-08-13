@@ -24,7 +24,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="widget">
-                    <h1 class="section-title title">গ্রুত্বপূর্ণ লিঙ্ক</h1>
+                    <h1 class="section-title title">গুরুত্বপূর্ন লিঙ্ক</h1>
                     <ul>
                         <li><a href="https://www.facebook.com/groups/footballfansbd">আমাদের গ্রুপ</a></li>
                         <li><a href="https://www.facebook.com/uvlsportsofficial/">আমাদের পেইজ</a></li>
@@ -40,8 +40,12 @@
                     <form action="{{ route('create.subscriber') }}" method="post" id="subscribe-form"
                           name="subscribe-form">
                         {{ csrf_field() }}
-                        <input type="text" placeholder="Your E-mail" name="email">
-                        <button type="submit" name="subscribe" id="subscribe">Subscribe</button>
+                        <input type="text" placeholder="Your E-mail" name="subscription_email"
+                               @if ($errors->has('subscription_email')) class="has-error" @endif>
+                        @if ($errors->has('subscription_email'))
+                            <div class="errors">{{ $errors->first('subscription_email') }}</div>
+                        @endif
+                        <button type="submit" name="subscribe" id="subscribe">সাবসাক্রাইব</button>
                     </form>
                 </div>
             </div>
@@ -52,7 +56,8 @@
 
 <div class="footer-bottom">
     <div class="container text-center">
-        <p><a href="https://www.sshakil.com" target="_blank">Developed By Saif Shakil </a>&copy; {{ date('Y') }}
+        <p><a href="https://www.sshakil.com" target="_blank">Developed By Md. Syful Islam
+                Shakil </a>&copy; {{ date('Y') }}
         </p>
     </div>
 </div>

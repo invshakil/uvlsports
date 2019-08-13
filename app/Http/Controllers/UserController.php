@@ -75,6 +75,11 @@ class UserController extends Controller
 
     public function SaveArticle(Request $request)
     {
+        $request->validate([
+            'title' => 'required|min:30',
+            'category_id' => 'required',
+            'description' => 'required|min:150',
+        ]);
         $categories = implode(',', $request->category_id);
         $new = new Article();
         $new->title = $request->title;
