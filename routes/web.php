@@ -80,8 +80,9 @@ Route::get('/login/{provider}/callback', ['as' => $s . 'handle', 'uses' => 'Soci
  * ADMIN ROUTES
  *
  */
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin/', 'middleware' => ['auth']], function () {
+Route::redirect('/admin', '/admin/dashboard', 301);
 
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin/', 'middleware' => ['auth']], function () {
     Route::get('/dashboard', ['as' => 'admin.dashboard', 'uses' => 'AdminController@index']);
 
     Route::get('/add-user', ['as' => 'user.add', 'uses' => 'AdminController@add_user']);

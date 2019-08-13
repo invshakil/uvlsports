@@ -1,23 +1,23 @@
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 
-<script src="{{ asset('admin') }}/libs/responsejs/response.min.js"></script>
-<script src="{{ asset('admin') }}/libs/loading-overlay/loadingoverlay.min.js"></script>
-<script src="{{ asset('admin') }}/libs/tether/js/tether.min.js"></script>
-<script src="{{ asset('admin') }}/libs/bootstrap/js/bootstrap.min.js"></script>
-<script src="{{ asset('admin') }}/libs/jscrollpane/jquery.jscrollpane.min.js"></script>
-<script src="{{ asset('admin') }}/libs/jscrollpane/jquery.mousewheel.js"></script>
-<script src="{{ asset('admin') }}/libs/flexibility/flexibility.js"></script>
-<script src="{{ asset('admin') }}/libs/noty/noty.min.js"></script>
-<script src="{{ asset('admin') }}/libs/velocity/velocity.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/responsejs/response.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/loading-overlay/loadingoverlay.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/tether/js/tether.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/jscrollpane/jquery.jscrollpane.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/jscrollpane/jquery.mousewheel.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/flexibility/flexibility.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/noty/noty.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/velocity/velocity.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
-<script src="{{ asset('admin') }}/assets/scripts/common.min.js"></script>
+<script src="{{ asset('adminAssets') }}/assets/scripts/common.min.js"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
 
-<script src="{{ asset('admin') }}/libs/d3/d3.min.js"></script>
-<script src="{{ asset('admin') }}/libs/c3js/c3.min.js"></script>
-<script src="{{ asset('admin') }}/libs/noty/noty.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/d3/d3.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/c3js/c3.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/noty/noty.min.js"></script>
 
 <script type="application/javascript">
     (function ($) {
@@ -105,7 +105,7 @@
     })(jQuery);
 </script>
 
-<script src="{{ asset('admin') }}/libs/jquery-form-validator/jquery.form-validator.min.js"></script>
+<script src="{{ asset('adminAssets') }}/libs/jquery-form-validator/jquery.form-validator.min.js"></script>
 <script type="application/javascript">
     (function ($) {
         $(document).ready(function() {
