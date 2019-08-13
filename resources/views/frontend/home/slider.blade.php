@@ -39,7 +39,7 @@
                                                         href="#">{{ $slider->hit_count }}</a></li>
                                             <li class="loves">
                                                 @if(Auth::check())
-                                                    @php $status = $slider->favByUser($slider->id, auth()->user()->id); @endphp
+                                                    @php $status = $slider->favByUser($slider->favorites, auth()->user()->id); @endphp
                                                     <a href="javascript:void(null)">
                                                         <i class="fa fa-heart-o save-favorite @if($status == 1) fav-color @endif"
                                                            id="fav{{ $slider->id }}"

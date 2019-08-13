@@ -56,7 +56,7 @@
                                                         </li>
                                                         <li class="loves">
                                                             @if(Auth::check())
-                                                                @php $status = $info->favByUser($info->id, auth()->user()->id); echo auth()->user()->id;@endphp
+                                                                @php $status = $info->favByUser($info->favorites, auth()->user()->id);@endphp
                                                                 <a href="javascript:void(null)">
                                                                     <i class="fa fa-heart-o save-favorite @if($status == 1) fav-color @endif"
                                                                        id="fav{{ $info->id }}"

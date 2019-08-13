@@ -50,7 +50,8 @@ class HomeController extends Controller
     {
 
         if (isset($cat_id)) {
-            return Article::withCount('favorites')->with('favorites')->orderBy('hit_count', 'desc')
+            return Article::withCount('favorites')->with('favorites')
+                ->orderBy('hit_count', 'desc')
                 ->where('status', 1)
                 ->whereRaw("FIND_IN_SET('" . $cat_id . "', category_id)")
                 ->limit($limit)
@@ -66,7 +67,7 @@ class HomeController extends Controller
         }
 
         return Article::withCount('favorites')->with('favorites')->orderBy('hit_count', 'desc')
-            ->where('created_at', '>=', Carbon::now()->subMonth()->toDateTimeString())
+//            ->where('created_at', '>=', Carbon::now()->subMonth()->toDateTimeString())
             ->where('status', 1)
             ->limit($limit)
             ->get();

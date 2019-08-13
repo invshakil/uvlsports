@@ -24,7 +24,7 @@
                             <li class="views"><i class="fa fa-eye"></i><a href="#">{{ $others_sport->hit_count }}</a></li>
                             <li class="loves">
                                 @if(Auth::check())
-                                    @php $status = $others_sport->favByUser($others_sport->id, auth()->user()->id); @endphp
+                                    @php $status = $others_sport->favByUser($others_sport->favorites, auth()->user()->id); @endphp
                                     <a href="javascript:void(null)">
                                         <i class="fa fa-heart-o save-favorite @if($status == 1) fav-color @endif"
                                            id="fav{{ $others_sport->id }}"
