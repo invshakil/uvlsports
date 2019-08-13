@@ -53,11 +53,20 @@
                                         <p>{{ $author_info->email }}</p>
                                     </div>
                                     <div class="author-social">
-                                        <p>Find Me</p>
+                                        <p>Contact</p>
                                         <ul class="list-inline social-icons">
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                            @if($author_info->user_fb)
+                                                <li><a href="{{ $author_info->user_fb }}" target="_blank"><i
+                                                                class="fa fa-facebook"></i></a></li>
+                                            @endif
+                                            @if($author_info->user_tw)
+                                                <li><a href="{{ $author_info->user_tw }}" target="_blank"><i
+                                                                class="fa fa-twitter"></i></a></li>
+                                            @endif
+                                            @if($author_info->email)
+                                                <li><a href="mailto:{{ $author_info->email }}" target="_blank"><i
+                                                                class="fa fa-envelope"></i></a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

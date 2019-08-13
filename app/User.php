@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'image', 'bio', 'user_fb', 'user_tw', 'role'
     ];
 
     /**
@@ -36,6 +36,11 @@ class User extends Authenticatable
 	{
 		return $this->hasOne(Profile ::class, 'user_id', 'id');
 	}
+
+    public function profiles()
+    {
+        return $this->hasMany(Profile ::class, 'user_id', 'id');
+    }
 	
 	public function favorites()
 	{
@@ -56,5 +61,17 @@ class User extends Authenticatable
             else
                 return 'https://www.infrascan.net/demo/assets/img/avatar5.png';
         }
+    }
+
+    public function getTwitterAttribute()
+    {
+        if ($this->user_tw !== '' && substr($this->user_tw, 0, 4) !== "http") {
+            return 'https://twitter.com/' . $this->user_tw;
+        } else if ($this->user_tw !== null && substr($this->user_tw, 0, 4) === "http") {
+            return $this->user_tw;
+        }
+
+        return null;
+
     }
 }

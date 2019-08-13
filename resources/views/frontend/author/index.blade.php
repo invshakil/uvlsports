@@ -51,9 +51,18 @@
 
                                             <div class="author-social">
                                                 <ul class="list-inline social-icons">
-                                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                                    @if($author->user_fb)
+                                                        <li><a href="{{ $author->user_fb }}" target="_blank"><i
+                                                                        class="fa fa-facebook"></i></a></li>
+                                                    @endif
+                                                    @if($author->twitter)
+                                                        <li><a href="{{ $author->twitter }}" target="_blank"><i
+                                                                        class="fa fa-twitter"></i></a></li>
+                                                    @endif
+                                                    @if($author->email)
+                                                        <li><a href="mailto:{{ $author->email }}" target="_blank"><i
+                                                                        class="fa fa-envelope"></i></a></li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div><!-- single-author -->
