@@ -2,11 +2,11 @@
 
 namespace App;
 
+use App\Image\ImagePaths;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    //
     public function category($id)
     {
         return Category::where('id', $id)->value('name');
@@ -48,11 +48,12 @@ class Article extends Model
         return strlen($this->title) > 60 ? strLimit($this->title, 60) : $this->title;
     }
 
+
     public function getFullImageAttribute()
     {
-        $image = asset('image_upload/post_image/' . $this->image);
-        if ($this->image != null && file_exists($image)) {
-            return $image;
+        $imagePath = ImagePaths::$articleImage . $this->image;
+        if ($this->image != null && file_exists($imagePath)) {
+            return asset($imagePath);
         } else {
             return 'https://via.placeholder.com/275x160';
         }
@@ -60,9 +61,9 @@ class Article extends Model
 
     public function getMediumImageAttribute()
     {
-        $image = asset('image_upload/post_image/resized/' . $this->image);
-        if ($this->image != null && file_exists($image)) {
-            return $image;
+        $imagePath = ImagePaths::$articleImage . 'resized/' . $this->image;
+        if ($this->image != null && file_exists($imagePath)) {
+            return asset($imagePath);
         } else {
             return 'https://via.placeholder.com/275x160';
         }
@@ -70,15 +71,30 @@ class Article extends Model
 
     public function getThumbImageAttribute()
     {
-        $image = asset('image_upload/post_image/thumbs/' . $this->image);
-        if ($this->image != null && file_exists($image)) {
-            return $image;
+        $imagePath = ImagePaths::$articleImage . 'thumbs' . $this->image;
+        if ($this->image != null && file_exists($imagePath)) {
+            return asset($imagePath);
         } else {
             return 'https://via.placeholder.com/80x45';
         }
     }
 
 
-
-
+    public function unlinkPreviousImage($fileName)
+    {
+        $basePath = ImagePaths::$articleImage;
+        if (file_exists(public_path($basePath . $fileName))) // make sure it exits inside the folder
+        {
+            unlink(public_path($basePath . $fileName)); // delete file/image
+        }
+        if (file_exists(public_path($basePath . 'resized/' . $fileName))) // make sure it exits inside the folder
+        {
+            unlink(public_path($basePath . 'resized/' . $fileName)); // delete file/image
+        }
+        if (file_exists(public_path($basePath . 'thumbs/' . $fileName))) // make sure it exits inside the folder
+        {
+            unlink(public_path($basePath . 'thumbs/' . $fileName)); // delete file/image
+        }
+        return true;
+    }
 }

@@ -58,6 +58,18 @@
     .has-error {
         color: #d9534f;
     }
+
+    .errors{
+        padding: 10px 0;
+        color: #ed1c24;
+    }
+
+    .select2-container--default, .select2-container--focus, .select2-selection--multiple{
+        border: 1px solid  #ececec!important;
+    }
+    .has-danger .select2-container, .has-danger .cke_chrome{
+        border: 1px solid #ed1c24 !important;
+    }
 </style>
 
 

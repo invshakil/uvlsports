@@ -30,7 +30,7 @@
                                         @php $categories = explode(',',$info->category_id); @endphp
                                         {{--<h1 class="section-title">বিস্তারিত</h1>--}}
                                         <div class="post">
-                                            @if($info->image != null && file_exists(asset('image_upload/post_image/'.$info->image)))
+                                            @if($info->image != null && file_exists('image_upload/post_image/'.$info->image))
                                                 <div class="entry-header">
                                                     <div class="entry-thumbnail">
                                                         <img class="img-responsive"

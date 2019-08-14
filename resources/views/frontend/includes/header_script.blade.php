@@ -71,5 +71,10 @@
         line-height: 1.42857143;
         text-decoration: none;
     }
+
+    .entry-content blockquote{
+        border-left: 5px solid #f90606;
+        background: #eff2fd;
+    }
 </style>
 

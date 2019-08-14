@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Image\ImageDimensions;
+use App\Image\ImagePaths;
+use App\Image\ImageUpload;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -136,14 +139,30 @@ class PostController extends Controller
 	{
 		$data = array ();
 		$data['title'] = 'Create Article';
-        $data['categories'] = Category::orderBy('name', 'asc')->get();
-        $data['users'] = User::orderBy('name', 'asc')->get();
+        $data['categories'] = Category::orderBy('name', 'asc')->where('status', 1)->get();
+        $data['users'] = User::orderBy('name', 'asc')->where('status', 1)->get();
 		return view('backend.dynamic.article_management.create_article', $data);
 	}
 	
 	public function SaveArticle(Request $request)
 	{
-		
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:articles|max:300',
+            'meta_title' => 'required|unique:articles|max:300',
+            'description' => 'required|min:150',
+            'slug' => 'required',
+            'tags' => 'required',
+            'meta_keyword' => 'required',
+            'category_id' => 'required',
+            'status' => 'required',
+            'image' => 'required_if:status,1|image|mimes:jpeg,png,jpg,gif',
+        ]);
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 		$article = new Article();
         $article->title = $request->title;
         $article->description = $request->description;
@@ -159,50 +178,22 @@ class PostController extends Controller
         $article->category_id = $categories;
 
         if ($request->file('image')) {
-			
-			$image = Input ::file('image');
-            $image_name = str_replace(' ', '-', strtolower($request->slug)) . '_' . time() . '.' . $image->getClientOriginalExtension();
-			
-			$path = public_path('image_upload/post_image/' . $image_name);
+            $file = $request->file('image');
 
-
-            $img = Image::make($image->getRealPath())->resize(800, 800, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($path);
-			
-			
-			//Medium Size Image conversion
-			
-			$m_path = public_path('/image_upload/post_image/resized/');
-			
-			//Image resizing with aspect ratio and saving it to the directory
-            $img->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-			});
-            $img->save($m_path . '/' . $image_name, 85);
-			
-			
-			// Thumbnail Size conversion
-			
-			$thumbs_path = public_path('/image_upload/post_image/thumbs/');
-			
-			//Image resizing with aspect ratio and saving it to the directory
-            $img->resize(null, 85, function ($constraint) {
-                $constraint->aspectRatio();
-			});
-            $img->save($thumbs_path . '/' . $image_name, 85);
-
-            $article->image = $image_name;
-			
+            $fileName = $article->slug . '.' . $request->file('image')->extension();
+            $imagePath = ImagePaths::$articleImage;
+            $mainHeight = ImageDimensions::$articleFullHeight;
+            $mediumHeight = ImageDimensions::$articleMediumHeight;
+            $thumbHeight = ImageDimensions::$articleThumbHeight;
+            $img = new ImageUpload();
+            $image_uploaded = $img->pictureUploadWithMultipleFolder($file, $imagePath, $fileName, $mainHeight, $mediumHeight, $thumbHeight)['file_name'];
+            $article->image = $image_uploaded;
 		}
-
         $article->save();
-		
 		$notification = array (
 			'message' => 'Article Created Successfully!',
 			'alert-type' => 'success'
 		);
-
 
         return redirect('admin/articles-list')->with($notification);
 	}
@@ -245,13 +236,11 @@ class PostController extends Controller
 	
 	public function deleteArticle($id)
 	{
-	    $image = Article::where('id', $id)->value('image');
-	    if($image != '')
+        $article = Article::where('id', $id)->first();
+        if ($article->image != '')
 	    {
-	        $this->deleteArticleImage($id);
+            (new Article)->unlinkPreviousImage($article->image);
 	    }
-		
-		
 		Article ::destroy($id);
 		$notification = array (
 			'message' => 'Article Deleted Successfully!',
@@ -275,6 +264,24 @@ class PostController extends Controller
 	
 	public function UpdateArticle(Request $request, $id)
 	{
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:300',
+            'meta_title' => 'required|max:300',
+            'description' => 'required|min:150',
+            'slug' => 'required',
+            'tags' => 'required',
+            'meta_keyword' => 'required',
+            'category_id' => 'required',
+            'status' => 'required',
+            'image' => 'required_if:status,1|image|mimes:jpeg,png,jpg,gif',
+        ]);
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 		$article = Article::find($id);
 
         $article->title = $request->title;
@@ -291,43 +298,21 @@ class PostController extends Controller
         $article->category_id = $categories;
 
         if ($request->file('image')) {
-			
-			$this->deleteArticleImage($id);
-			
-			$image = Input ::file('image');
-            $image_name = str_replace(' ', '-', strtolower($request->slug)) . '_' . time() . '.' . $image->getClientOriginalExtension();
-			
-			$path = public_path('image_upload/post_image/' . $image_name);
 
+            if ($article->image != '') {
+                (new Article)->unlinkPreviousImage($article->image);
+            }
 
-            $img = Image::make($image->getRealPath())->resize(800, 800, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($path);
-			
-			
-			//Medium Size Image conversion
-			
-			$m_path = public_path('/image_upload/post_image/resized/');
-			
-			//Image resizing with aspect ratio and saving it to the directory
-            $img->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-			});
-            $img->save($m_path . '/' . $image_name, 85);
-			
-			
-			// Thumbnail Size conversion
-			
-			$thumbs_path = public_path('/image_upload/post_image/thumbs/');
-			
-			//Image resizing with aspect ratio and saving it to the directory
-            $img->resize(null, 85, function ($constraint) {
-                $constraint->aspectRatio();
-			});
-            $img->save($thumbs_path . '/' . $image_name, 85);
+            $file = $request->file('image');
 
-            $article->image = $image_name;
-			
+            $fileName = $article->slug . '.' . $request->file('image')->extension();
+            $imagePath = ImagePaths::$articleImage;
+            $mainHeight = ImageDimensions::$articleFullHeight;
+            $mediumHeight = ImageDimensions::$articleMediumHeight;
+            $thumbHeight = ImageDimensions::$articleThumbHeight;
+            $img = new ImageUpload();
+            $image_uploaded = $img->pictureUploadWithMultipleFolder($file, $imagePath, $fileName, $mainHeight, $mediumHeight, $thumbHeight)['file_name'];
+            $article->image = $image_uploaded;
 		}
 
         $article->save();
@@ -339,23 +324,5 @@ class PostController extends Controller
 
 
         return redirect('admin/articles-list')->with($notification);
-	}
-	
-	public function deleteArticleImage($id)
-	{
-		$image = Article::where('id', $id)->value('image');
-		
-		if($image != '')
-		{
-		    if(file_exists(public_path('/image_upload/post_image/'.$image))) // make sure it exits inside the folder
-    		{
-    			unlink(public_path('/image_upload/post_image/'.$image)); // delete file/image
-    			unlink(public_path('/image_upload/post_image/resized/'.$image)); // delete file/image
-    			unlink(public_path('/image_upload/post_image/thumbs/'.$image)); // delete file/image
-    		}
-		}
-		
-		
-		return true;
 	}
 }
