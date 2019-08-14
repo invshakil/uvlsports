@@ -8,6 +8,7 @@
     @include('backend.includes.header_script')
 
     @yield('after_css')
+
 </head>
 <!-- END HEAD -->
 
@@ -94,7 +95,7 @@
 <div class="ks-mobile-overlay"></div>
 
 <!-- BEGIN SETTINGS BLOCK -->
-@include('backend.includes.layout_settings')
+{{--@include('backend.includes.layout_settings')--}}
 <!-- END SETTINGS BLOCK -->
 </body>
 </html>

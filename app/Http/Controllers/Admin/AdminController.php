@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Article;
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
@@ -24,6 +26,12 @@ class AdminController extends Controller
 		
 		$data = array ();
 		$data['title'] = 'Dashboard';
+		$data['totalCategories'] = Category::get()->count();
+		$data['totalRegisteredUsers'] = User::where('role', 3)->get()->count();
+		$data['totalAuthors'] = User::whereHas('articles')->get()->count();
+		$data['totalAdmins'] = User::whereIn('role', [1,2])->get()->count();
+		$data['totalPublishedArticle'] = Article::where('status', 1)->get()->count();
+		$data['totalPendingArticle'] = Article::where('status', 0)->get()->count();
 		return view('backend/dynamic/dashboard') -> with($data);
 	}
 	
