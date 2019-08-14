@@ -23,9 +23,9 @@
 
                     <div id="site-content" class="site-content">
                         <div class="page-breadcrumbs">
-                            <h1 class="section-title">Author Profile</h1>
+                            <h1 class="section-title">লেখক পরিচিতি</h1>
                         </div>
-                        <div class="author-details">
+                        <div class="author-details box-design">
                             <div class="author-heading">
                                 <div class="author-profile">
                                     <div class="author-gravatar">
@@ -86,13 +86,13 @@
                     </div><!--/#site-content-->
 
                     <div id="site-content" class="site-content" >
-                        <h1 class="section-title">{{ $title }}'s Articles</h1>
+                        <h1 class="section-title">{{ $title }} এর লেখা আর্টিক্যাল সমগ্র</h1>
                         <div class="section listing-news">
 
 
                             @foreach($articles as $article)
 
-                                <div class="post" style="padding: 20px">
+                                <div class="post box-design" style="padding: 20px">
                                     <div class="entry-header">
                                         <div class="entry-thumbnail">
                                             <img class="img-responsive"
@@ -108,7 +108,7 @@
                                                     </a></li>
                                                 <li class="views"><a href="#"><i
                                                                 class="fa fa-eye"></i>{{ $article->hit_count }}</a></li>
-                                                <li class="loves"><a href="#"><i class="fa fa-heart-o"></i>278</a></li>
+                                                <li class="loves"><a href="#"><i class="fa fa-heart-o"></i>{{ $article->favorites_count }}</a></li>
                                             </ul>
                                         </div>
                                         <h2 class="entry-title">

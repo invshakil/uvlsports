@@ -11,5 +11,37 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+// mix.js('resources/assets/js/app.js', 'public/js')
+//    .sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.options({ processCssUrls: true });
+
+/* Combine CSS */
+mix.combine([
+    'public/frontend/css/bootstrap.min.css',
+    'public/frontend/css/font-awesome.min.css',
+    // 'public/frontend/css/magnific-popup.css',
+    'public/frontend/css/owl.carousel.css',
+    'public/frontend/css/subscribe-better.css',
+    'public/frontend/css/main.css',
+    'public/frontend/css/presets/preset1.css',
+    'public/frontend/css/responsive.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.min.css',
+
+], 'public/css/app.css');
+
+/* Combine JS */
+mix.combine([
+    /* 'public/js/app.js', */
+    'public/frontend/js/jquery.js',
+    'public/frontend/js/bootstrap.min.js',
+    // 'public/frontend/js/jquery.magnific-popup.min.js',
+    'public/frontend/js/owl.carousel.min.js',
+    'public/frontend/js/moment.min.js',
+    'public/frontend/js/jquery.sticky-kit.min.js',
+    'public/frontend/js/jquery.easy-ticker.min.js',
+    'public/frontend/js/main.js',
+    'public/frontend/js/switcher.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+
+], 'public/js/app.js');

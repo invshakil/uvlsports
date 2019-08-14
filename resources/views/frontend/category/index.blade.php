@@ -26,7 +26,7 @@
 
                             @foreach($articles as $article)
 
-                                <div class="post">
+                                <div class="post box-design">
                                     <div class="entry-header">
                                         <div class="entry-thumbnail">
                                                 <img class="img-responsive"

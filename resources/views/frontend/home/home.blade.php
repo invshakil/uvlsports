@@ -38,9 +38,9 @@
                         </div><!--/#widget-->
 
 
-                        <div class="widget weather-widget">
-                            <div id="weather-widget"></div>
-                        </div><!--/#widget-->
+                        {{--<div class="widget weather-widget">--}}
+                            {{--<div id="weather-widget"></div>--}}
+                        {{--</div><!--/#widget-->--}}
 
 
                     </div><!--/#sitebar-->

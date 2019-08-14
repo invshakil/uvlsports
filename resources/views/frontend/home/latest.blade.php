@@ -8,7 +8,7 @@
 
                     @foreach($latest_articles as  $article)
                         <div class="col-md-4">
-                            <div class="post medium-post" style="max-height: 300px; min-height: 300px;">
+                            <div class="post medium-post box-design" style="max-height: 300px; min-height: 300px;">
                                 <div class="entry-header">
                                     <div class="entry-thumbnail">
                                             <img class="img-responsive"

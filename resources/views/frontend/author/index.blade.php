@@ -22,7 +22,7 @@
             <div class="row">
 
                 <div class="col-sm-8 col-md-9">
-                    <h1 class="section-title">Author List</h1>
+                    <h1 class="section-title">লেখকদের তালিকা</h1>
                     <div class="author-listing">
 
                         <div class="authors">
@@ -32,7 +32,7 @@
                                 
 
                                     <li class="col-sm-6 col-md-4">
-                                        <div class="single-author">
+                                        <div class="single-author box-design">
                                             <div class="author-bg">
                                                     <img class="media-object"
                                                          style="width: 100px; height: 100px"

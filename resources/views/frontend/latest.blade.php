@@ -1,4 +1,4 @@
-<ul class="post-list">
+<ul class="post-list box-design">
     @foreach($latest_articles as $article)
         <li>
             <div class="post small-post">

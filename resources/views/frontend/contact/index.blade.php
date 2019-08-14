@@ -20,13 +20,15 @@
         <div class="row">
             <div class="col-sm-8 col-md-9">
                 <div class="contact-us">
+
                     <div class="map-section">
                         <div id="gmap" data-address="USA"></div>
                     </div>
+
                     <div class="contact-info">
                         <h1 class="section-title title">Contact Information</h1>
                         <ul class="list-inline">
-                            <li>
+                            <li class="box-design">
                                 <h2>Chittagong</h2>
                                 <address>
                                     {{--23-45A, Silictown <br>Great Country--}}
@@ -35,7 +37,7 @@
                                     <p><strong>Call:</strong> +8801675332265</p>
                                 </address>
                             </li>
-                            <li>
+                            <li class="box-design">
                                 <h2>Dhaka</h2>
                                 <address>
                                     {{--245 North Street, <br>New York, NY--}}
@@ -46,7 +48,7 @@
 
                         </ul>
                     </div>
-                    <div class="message-box">
+                    <div class="message-box box-design">
                         <h1 class="section-title title">Drop Your Message</h1>
                         <form id="comment-form" name="comment-form" method="post"
                               action="{{ route('submit.contact.form') }}">

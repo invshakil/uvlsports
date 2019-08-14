@@ -24,17 +24,10 @@
 <meta property="og:type" content="@if(isset($type)) {{$type}} @else website @endif">
 
 <!--CSS-->
-<link href="{{ asset('frontend') }}/css/bootstrap.min.css" rel="stylesheet">
-<link href="{{ asset('frontend') }}/css/font-awesome.min.css" rel="stylesheet">
-<link href="{{ asset('frontend') }}/css/magnific-popup.css" rel="stylesheet">
-<link href="{{ asset('frontend') }}/css/owl.carousel.css" rel="stylesheet">
-<link href="{{ asset('frontend') }}/css/subscribe-better.css" rel="stylesheet">
-<link href="{{ asset('frontend') }}/css/main.css" rel="stylesheet">
-<link id="preset" rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/css/presets/preset1.css">
-<link href="{{ asset('frontend') }}/css/responsive.css" rel="stylesheet">
 
 <!--Google Fonts-->
 <link href='https://fonts.googleapis.com/css?family=Signika+Negative:400,300,600,700' rel='stylesheet' type='text/css'>
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 <!--[if lt IE 9]>
 <script src="{{ asset('frontend') }}/js/html5shiv.js"></script>
@@ -48,7 +41,6 @@
 <link rel="apple-touch-icon-precomposed" sizes="72x72"
       href="{{ asset('frontend') }}/images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('frontend') }}/images/ico/apple-touch-icon-57-precomposed.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.min.css"/>
 
 
 <style>
