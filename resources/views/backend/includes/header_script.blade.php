@@ -54,6 +54,10 @@
     .ks-widget-payment-simple-amount-item.ks-orange .payment-simple-amount-item-icon-block{
         background-color: #fd0a0a;
     }
+
+    .has-error {
+        color: #d9534f;
+    }
 </style>
 
 

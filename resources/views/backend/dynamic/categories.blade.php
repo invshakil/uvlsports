@@ -11,63 +11,71 @@
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <h4 id="form-validation-basic-demo">Create Category</h4>
                         <div class="card panel">
-                            <div class="card-block" style="min-height: 840px">
+                            <div class="card-block" style="min-height: 875px">
                                 <form action="{{ url()->current() }}" method="post" enctype="multipart/form-data">
 
                                     {{ csrf_field() }}
 
-                                    <div class="form-group">
-                                        <label>Name</label>
+                                    <div class="form-group @if ($errors->has('name')) has-danger @endif">
+                                        <label class="form-control-label">Name</label>
                                         <input type="text"
                                                name="name"
                                                value="{{ old('name') }}"
-                                               class="form-control"
-                                               placeholder="Enter Name"
-                                               data-validation="required"
-                                               data-validation-length="6-30"
-                                               data-validation-error-msg="System name has to be an alphanumeric value (6-30 chars)">
+                                               class="form-control form-control-danger"
+                                               placeholder="Enter Name">
+
+                                        @if ($errors->has('name'))
+                                            <div class="has-error">
+                                                <strong>{{ $errors->first('name') }}</strong>
+                                            </div>
+                                        @endif
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Bangla Name</label>
+                                    <div class="form-group @if ($errors->has('bangla_name')) has-danger @endif">
+                                        <label class="form-control-label">Bangla Name</label>
                                         <input type="text"
                                                name="bangla_name"
                                                value="{{ old('bangla_name') }}"
-                                               class="form-control"
-                                               placeholder="Enter Name"
-                                               data-validation="required"
-                                               data-validation-length="6-30"
-                                               data-validation-error-msg="System name has to be an alphanumeric value (6-30 chars)">
+                                               class="form-control form-control-danger"
+                                               placeholder="Enter Bangla Name">
+
+                                        @if ($errors->has('bangla_name'))
+                                            <div class="has-error">
+                                                <strong>{{ $errors->first('bangla_name') }}</strong>
+                                            </div>
+                                        @endif
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Category Image</label>
+                                    <div class="form-group @if ($errors->has('logo')) has-danger @endif">
+                                        <label class="form-control-label">Category Image</label>
                                         <button class="btn btn-primary ks-btn-file">
                                             <span class="la la-cloud-upload ks-icon"></span>
                                             <span class="ks-text">Choose file</span>
-                                            <input type="file" name="logo" onchange="readURL(this);"
-                                                   data-validation="mime size required"
-                                                   data-validation-allowing="jpg, png"
-                                                   data-validation-max-size="2000kb"
-                                                   data-validation-error-msg-required="No image selected">
+                                            <input type="file" name="logo" class="form-control-danger" onchange="readURL(this);">
                                         </button>
                                         <br>
                                         <br>
                                         <img id="blah"
-                                             src="http://placehold.it/300x90"
+                                             src="http://placehold.it/620x340"
                                              class="img-responsive img-thumbnail" alt="your image"/>
+
+                                        @if ($errors->has('logo'))
+                                            <div class="has-error">
+                                                <strong>{{ $errors->first('logo') }}</strong>
+                                            </div>
+                                        @endif
                                     </div>
 
 
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea type="text" name="description" class="form-control"
-                                                  placeholder="Description of this category"
-                                                  data-validation="required"
-                                                  data-validation-length="6-30"
-                                                  data-validation-error-msg="Description value (6-150 chars)">
-
-                                        </textarea>
+                                    <div class="form-group @if ($errors->has('description')) has-danger @endif">
+                                        <label class="form-control-label">Description</label>
+                                        <textarea type="text" name="description" class="form-control form-control-danger"
+                                                  placeholder="Description of this category"></textarea>
+                                        @if ($errors->has('description'))
+                                            <div class="has-error">
+                                                <strong>{{ $errors->first('description') }}</strong>
+                                            </div>
+                                        @endif
                                     </div>
 
 
@@ -99,7 +107,7 @@
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                         <h4 id="form-validation-length">Category List</h4>
                         <div class="card panel">
-                            <div class="card-block">
+                            <div class="card-block" style="min-height: 875px">
                                 <div class="ks-user-list-view-table">
 
                                     <div class="form-group row">
@@ -112,7 +120,7 @@
                                                            class="form-control"
                                                            placeholder="Search by Name">
                                                     <span class="input-group-btn">
-                                                    <button class="btn btn-primary" type="button">Search!</button>
+                                                    <button class="btn btn-primary" type="submit">Search</button>
                                                 </span>
                                                 </div>
                                             </form>
@@ -266,10 +274,7 @@
                                            name="name"
                                            value="{{ old('name') }}"
                                            class="form-control"
-                                           placeholder="Enter Name"
-                                           data-validation="required"
-                                           data-validation-length="6-30"
-                                           data-validation-error-msg="System name has to be an alphanumeric value (6-30 chars)">
+                                           placeholder="Enter Name">
                                 </div>
 
                                 <div class="form-group">
