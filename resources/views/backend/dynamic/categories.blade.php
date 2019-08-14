@@ -70,7 +70,7 @@
                                     <div class="form-group @if ($errors->has('description')) has-danger @endif">
                                         <label class="form-control-label">Description</label>
                                         <textarea type="text" name="description" class="form-control form-control-danger"
-                                                  placeholder="Description of this category"></textarea>
+                                                  placeholder="Description of this category">{{ old('description') }}</textarea>
                                         @if ($errors->has('description'))
                                             <div class="has-error">
                                                 <strong>{{ $errors->first('description') }}</strong>
@@ -82,16 +82,16 @@
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select name="status" class="form-control">
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
+                                            <option value="1" @if(old('status') == 1) selected @endif >Active</option>
+                                            <option value="0" @if(old('status') == 0) selected @endif>Inactive</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Is it a League?</label>
                                         <select name="is_league" class="form-control">
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
+                                            <option value="1" @if(old('is_league') == 1) selected @endif >Yes</option>
+                                            <option value="0" @if(old('is_league') == 0) selected @endif >No</option>
                                         </select>
                                     </div>
 
