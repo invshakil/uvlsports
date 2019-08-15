@@ -79,7 +79,7 @@ class Article extends Model
 
     public function getTimeFormatAttribute()
     {
-        return $this->created_at->diffForHumans();
+        return $this->created_at ? $this->created_at->diffForHumans() : $this->created_at;
     }
 
 
