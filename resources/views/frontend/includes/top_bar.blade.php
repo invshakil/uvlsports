@@ -1,13 +1,13 @@
 <div class="container">
     <a class="secondary-logo" href="{{ route('home') }}">
-        <img class="img-responsive" src="{{ asset('image_upload/system_logo.png') }}"  style="max-width: 100px;"  alt="logo">
+        <img class="img-responsive" src="{{ asset(logo()) }}"  style="max-width: 100px;"  alt="logo">
     </a>
 </div>
 <div class="topbar">
     <div class="container">
         <div id="topbar" class="navbar-header">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img class="main-logo img-responsive" src="{{ asset('image_upload/system_logo.png') }}"
+                <img class="main-logo img-responsive" src="{{ asset(logo()) }}"
                      style="max-width: 120px;" alt="logo">
             </a>
             <div id="topbar-right">

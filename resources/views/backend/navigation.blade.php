@@ -80,7 +80,7 @@
                     <span>CMS</span>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="">Footer Widgets</a>
+                    <a class="dropdown-item" href="{{ route('set.footer.content') }}">Footer Widgets</a>
                     <a class="dropdown-item" href="">About Us Widgets</a>
                     <a class="dropdown-item" href="">Testimonials</a>
                 </div>

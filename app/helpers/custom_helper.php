@@ -31,3 +31,73 @@ function defaultSeo($data, $pageName = null)
     }
     return $data;
 }
+
+function footerContent()
+{
+    return \Illuminate\Support\Facades\Cache::remember('footer_content', 3600, function () {
+        return \App\Widget::getWidget('footer_content');
+    });
+}
+
+function footerLinks()
+{
+    return \Illuminate\Support\Facades\Cache::remember('footer_links', 3600, function () {
+        return json_decode(\App\Widget::getWidget('links'));
+    });
+}
+
+function phone()
+{
+    return \Illuminate\Support\Facades\Cache::remember('phone', 3600, function () {
+        return \App\Setting::getSetting('phone');
+    });
+}
+
+function email()
+{
+    return \Illuminate\Support\Facades\Cache::remember('email', 3600, function () {
+        return \App\Setting::getSetting('system_email');
+    });
+}
+
+function facebook()
+{
+    return \Illuminate\Support\Facades\Cache::remember('facebook', 3600, function () {
+        return \App\Setting::getSetting('facebook');
+    });
+}
+
+function twitter()
+{
+    return \Illuminate\Support\Facades\Cache::remember('twitter', 3600, function () {
+        return \App\Setting::getSetting('twitter');
+    });
+}
+
+function google()
+{
+    return \Illuminate\Support\Facades\Cache::remember('google', 3600, function () {
+        return \App\Setting::getSetting('google');
+    });
+}
+
+function youtube()
+{
+    return \Illuminate\Support\Facades\Cache::remember('youtube', 3600, function () {
+        return \App\Setting::getSetting('youtube');
+    });
+}
+
+function linkedin()
+{
+    return \Illuminate\Support\Facades\Cache::remember('linkedin', 3600, function () {
+        return \App\Setting::getSetting('linkedin');
+    });
+}
+
+function logo()
+{
+    return \Illuminate\Support\Facades\Cache::remember('logo', 3600, function () {
+        return \App\Setting::getSetting('logo');
+    });
+}

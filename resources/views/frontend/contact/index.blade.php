@@ -29,9 +29,10 @@
                         <h1 class="section-title title">Contact Information</h1>
                         <ul class="list-inline">
                             <li class="box-design">
-                                <h2>Chittagong</h2>
+                                <h2>Comilla</h2>
                                 <address>
                                     {{--23-45A, Silictown <br>Great Country--}}
+                                    <p><strong>Name:</strong> Shakil</p>
                                     <p class="contact-mail"><strong>Email:</strong> <a href="#">inverse.shakil@gmail.com</a>
                                     </p>
                                     <p><strong>Call:</strong> +8801675332265</p>
@@ -41,6 +42,7 @@
                                 <h2>Dhaka</h2>
                                 <address>
                                     {{--245 North Street, <br>New York, NY--}}
+                                    <p><strong>Name:</strong> Rahik</p>
                                     <p class="contact-mail"><strong>Email:</strong> <a href="#">top2dcutlet@gmail.com</a></p>
                                     <p><strong>Call:</strong> +8801822333956</p>
                                 </address>

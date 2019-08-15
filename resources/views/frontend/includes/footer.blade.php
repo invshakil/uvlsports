@@ -1,7 +1,7 @@
 <div class="footer-top">
     <div class="container text-center">
         <div class="logo-icon"><img class="img-responsive"
-                                    src="{{ asset('image_upload/system_logo.png') }}" alt=""/>
+                                    src="{{ asset(logo()) }}" alt=""/>
         </div>
     </div>
 </div>
@@ -13,22 +13,32 @@
             <div class="col-sm-4">
                 <div class="widget">
                     <h1 class="section-title title">আমাদের সম্পর্কে</h1>
-                    <p>
-                        এই ওয়েবসয়াইটটি বাংলাদেশের সবচেয়ে বড় ফুটবল কমিউনিটি 'ফুটবল ফ্যানস বাংলাদেশের' একটি অলাভজনক প্রোজেক্ট। ওয়েবসাইটের সকল লেখা আমাদের গ্রুপ মেম্বাদের নিজেদের লেখা।
-                    </p>
+
+                    @if(footerContent())
+                        <p align="justify">
+                            {{ footerContent() }}
+                        </p>
+                    @endif
                     <address>
-                        <p>ফোন : +৮৮০১৬৭৫৩৩২২৬৫</p>
-                        <p>ইমেইল: <a href="mailto:uvlsports@gmail.com">uvlsports@gmail.com</a></p>
+                        @if(phone())
+                            <p>Phone : {{ phone() }}</p>
+                        @endif
+                        @if(email())
+                            <p>ইমেইল: <a href="mailto:{{ email() }}">{{ email() }}</a></p>
+                        @endif
                     </address>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="widget">
                     <h1 class="section-title title">গুরুত্বপূর্ন লিঙ্ক</h1>
+                    @if(footerLinks())
                     <ul>
-                        <li><a href="https://www.facebook.com/groups/footballfansbd">আমাদের গ্রুপ</a></li>
-                        <li><a href="https://www.facebook.com/uvlsportsofficial/">আমাদের পেইজ</a></li>
+                        @foreach(footerLinks() as $link)
+                        <li><a href="{{ $link->link }}">{{ $link->title }}</a></li>
+                        @endforeach
                     </ul>
+                    @endif
                 </div>
             </div>
             <div class="col-sm-4">

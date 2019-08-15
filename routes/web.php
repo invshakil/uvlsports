@@ -151,6 +151,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin/', 'middleware' => ['au
 
     Route::get('/manage-subscribers', ['as' => 'get.subscribers', 'uses' => 'SubscriberController@index']);
     Route::get('/delete-subscriber/{id}', ['as' => 'delete.subscriber', 'uses' => 'SubscriberController@delete']);
+
+    /*
+     * CMS WIDGETS
+     */
+    Route::get('/manage-footer-content', ['as' => 'set.footer.content', 'uses' => 'CmsWidgetController@footer']);
+    Route::post('/save-footer-content', ['as' => 'save.footer.content', 'uses' => 'CmsWidgetController@saveFooterContent']);
+    Route::post('/save-footer-links', ['as' => 'save.footer.links', 'uses' => 'CmsWidgetController@saveFooterLinks']);
 });
 
 
