@@ -75,6 +75,10 @@
         padding-left: 10px;
         font-style: italic;
     }
+    .pagination-lg .page-link{
+        padding: 4px 10px;
+        font-size: 14px;
+    }
 </style>
 
 

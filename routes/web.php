@@ -144,6 +144,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin/', 'middleware' => ['au
     Route::post('/create-tournament', ['as' => 'save.tournament', 'uses' => 'TvScheduleController@SaveTournament']);
     Route::post('/update-tournament', ['as' => 'update.tournament', 'uses' => 'TvScheduleController@UpdateTournament']);
     Route::get('/delete-tournament/{id}', ['as' => 'delete.tournament', 'uses' => 'TvScheduleController@DeleteTournament']);
+
+    /*
+     * SUBSCRIBER LIST
+     */
+
+    Route::get('/manage-subscribers', ['as' => 'get.subscribers', 'uses' => 'SubscriberController@index']);
+    Route::get('/delete-subscriber/{id}', ['as' => 'delete.subscriber', 'uses' => 'SubscriberController@delete']);
 });
 
 

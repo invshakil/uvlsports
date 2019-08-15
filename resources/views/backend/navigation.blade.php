@@ -54,20 +54,12 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="">
+            <li class="nav-item @if(Request::url() == route('get.subscribers')) open @endif">
+                <a class="nav-link" href="{{ route('get.subscribers') }}">
                     <span class="ks-icon la la-envelope-square"></span>
                     <span>Subscribers List</span>
                 </a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <span class="ks-icon la la-envelope"></span>
-                    <span>Send Mail to Subscriber</span>
-                </a>
-            </li>
-
             <li class="nav-item @if(Request::url() == route('user.add') || Request::url() == route('user.manage')) open @endif">
                 <a class="nav-link" href="{{ route('user.add') }}">
                     <span class="ks-icon la la-users"></span>
