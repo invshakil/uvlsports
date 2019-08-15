@@ -118,8 +118,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin/', 'middleware' => ['au
     Route::post('/create-article', ['as' => 'admin.save.article', 'uses' => 'PostController@SaveArticle']);
 
     Route::get('/articles-list', ['as' => 'admin.article.list', 'uses' => 'PostController@manageArticles']);
+    Route::get('/get-articles-list', ['as' => 'admin.get.articles', 'uses' => 'PostController@getArticles']);
     Route::get('/pending-articles-list', ['as' => 'admin.pending.article.list', 'uses' => 'PostController@managePendingArticles']);
     Route::get('/delete-article/{id}', ['as' => 'delete.article', 'uses' => 'PostController@deleteArticle']);
+    Route::post('/delete-article/', ['as' => 'delete.article', 'uses' => 'PostController@deleteBatchArticle']);
     Route::get('/edit-article/{id}', ['as' => 'edit.article', 'uses' => 'PostController@EditArticle']);
     Route::post('/edit-article/{id}', ['as' => 'update.article', 'uses' => 'PostController@UpdateArticle']);
 

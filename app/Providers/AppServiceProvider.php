@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema; //Import Schema
 
@@ -14,7 +16,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191); //Solved by increasing StringLength
+        Schema::defaultStringLength(191);
+
+        //Appending Query string to pagination
+
+        $this->app->resolving(LengthAwarePaginator::class, function ($paginator) {
+            return $paginator->appends(array_except(Input::query(), $paginator->getPageName()));
+        });
     }
 
     /**

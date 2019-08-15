@@ -10,6 +10,7 @@ use App\Image\ImagePaths;
 use App\Image\ImageUpload;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Intervention\Image\Facades\Image;
 use Validator;
@@ -208,13 +209,49 @@ class PostController extends Controller
             $data['articles'] = Article::with('author', 'admin')->latest()->where('title', "LIKE", "%" . $string . "%")
                 ->orderBy('title', 'asc')->paginate(20);
 		} else {
-            $data['articles'] = Article::with('author', 'admin')->latest()->orderBy('title', 'asc')->paginate(20);
-		}
-		
-		$data['module_navigation'] = view('backend/module_navigation/manage_article_nav', $data);
-		
-		return view('backend.dynamic.article_management.manage_articles', $data);
-	}
+            $data['articles'] = Article::with('author:id,name', 'admin:id,name')
+                ->select('id', 'title', 'category_id', 'user_id', 'slug', 'status', 'admin_id', 'created_at')
+                ->orderBy('id', 'desc')
+                ->paginate(20);
+        }
+        $data['categories'] = Category::select('id', 'name')->where('status', 1)->get();
+        $data['users'] = User::whereHas('articles')->select('id', 'name')->get();
+
+//		$data['module_navigation'] = view('backend/module_navigation/manage_article_nav', $data);
+
+        return view('backend.dynamic.article_management.article_list', $data);
+    }
+
+    public function getArticles(Request $request)
+    {
+        $query = Article::with('author:id,name', 'admin:id,name')
+            ->select('id', 'title', 'category_id', 'user_id', 'slug', 'status', 'admin_id', 'created_at', 'image')
+            ->orderBy('id', 'desc');
+
+        if (count($request->all()) > 0) {
+            $categoryId = $request->input('category_id');
+            $userId = $request->input('author_id');
+            $status = $request->input('status');
+            $string = $request->input('string');
+
+            if ($categoryId != null) {
+                $query = $query->whereRaw("FIND_IN_SET('" . $categoryId . "', category_id)");
+            }
+            if ($userId != null) {
+                $query = $query->where('user_id', '=', (int)$userId);
+            }
+            if ($status != null) {
+                $query = $query->where('status', '=', (int)$status);
+            }
+            if ($string != null) {
+                $query = $query->where('title', 'like', '%' . $string . '%');
+            }
+        }
+
+        $articles = $query->paginate(20);
+
+        return response()->json($articles);
+    }
 	
 	public function managePendingArticles(Request $request)
 	{
@@ -249,6 +286,19 @@ class PostController extends Controller
 
         return back()->with($notification);
 	}
+
+    public function deleteBatchArticle(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            Article::whereIn('id', $request->input('ids'))->delete();
+            DB::commit();
+            return response()->json(true);
+        } catch (\Throwable $throwable) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'message' => $throwable->getMessage()], 500);
+        }
+    }
 	
 	public function EditArticle($id)
 	{
@@ -296,6 +346,7 @@ class PostController extends Controller
 
         $categories = implode(',', $request->category_id);
         $article->category_id = $categories;
+        $article->admin_id = auth()->user()->id;
 
         if ($request->file('image')) {
 

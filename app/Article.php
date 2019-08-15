@@ -28,11 +28,8 @@ class Article extends Model
         return $this->hasMany(Favorite ::class, 'article_id', 'id');
     }
 
-    public function favByUser($favorites, $user_id)
-    {
-        $status = collect($favorites)->where('user_id', $user_id)->first();
-        return ($status) ? 1 : 0;
-    }
+    protected $appends = ['medium_image', 'time_format'];
+
 
     public function getCardTitleAttribute()
     {
@@ -80,6 +77,17 @@ class Article extends Model
         }
     }
 
+    public function getTimeFormatAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
+
+    public function favByUser($favorites, $user_id)
+    {
+        $status = collect($favorites)->where('user_id', $user_id)->first();
+        return ($status) ? 1 : 0;
+    }
 
     public function unlinkPreviousImage($fileName)
     {
