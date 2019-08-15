@@ -115,7 +115,7 @@
                                             <a href="{{ route('article.details', ['id'=>$article->id,'slug'=>$article->slug]) }}">{{ $article->title }}</a>
                                         </h2>
                                         <div class="entry-content">
-                                            <p align="justify">{!! strLimit($article->description, 200) !!}</p>
+                                            <p align="justify">{!! strLimit($article->meta_keyword, 200) !!}</p>
                                         </div>
                                     </div>
                                 </div><!--/post-->

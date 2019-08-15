@@ -67,7 +67,7 @@
                                                 @if(strlen($article->description) > 199)
                                                     {!! mb_substr(strip_tags($article->description), 0, strpos(strip_tags($article->description), ' ', 200)).' ...' !!}
                                                 @else
-                                                    {!! strip_tags($article->description) !!}
+                                                    {!! strLimit($article->meta_keyword, 200) !!}
                                                 @endif
                                             </p>
                                         </div>
