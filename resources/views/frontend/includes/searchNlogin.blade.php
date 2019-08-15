@@ -85,8 +85,14 @@
                    data-toggle="dropdown"><i class="fa fa-user"></i> My Account</a>
                 <div class="dropdown-menu top-user-section logged-in-dropdown">
 
+                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
                     <div class="col-md-12">
-                        <a href="{{ route('account') }}"><i class="fa fa-home"></i> Account</a>
+                        <a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> Admin</a>
+                    </div>
+                    @endif
+
+                    <div class="col-md-12">
+                        <a href="{{ route('account') }}"><i class="fa fa-user-plus"></i> Account</a>
                     </div>
 
                     <div class="col-md-12">

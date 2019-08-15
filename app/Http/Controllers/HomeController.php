@@ -27,7 +27,7 @@ class HomeController extends Controller
 
         $data['sliders'] = Article::withCount('favorites')
             ->with('author', 'favorites')->orderBy('id', 'desc')->where('featured_status', 1)->where('status', 1)->limit(3)->get();
-        $data['tweets'] = Tweet::orderBy('id', 'desc')->limit(3)->get();
+        $data['tweets'] = Tweet::orderBy('id', 'desc')->limit(5)->get();
         $data['others_sports'] = Article::with('favorites')->withCount('favorites')
             ->orderBy('id', 'desc')->whereRaw("FIND_IN_SET('9', category_id) OR FIND_IN_SET('13', category_id)")->where('status', 1)->limit(3)->get();
         $data['popular_articles'] = $this->MostPopularArticle(5);

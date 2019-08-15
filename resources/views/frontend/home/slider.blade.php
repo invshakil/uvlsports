@@ -69,16 +69,16 @@
 
                 <div class="col-sm-5">
                     <div class="widget">
-                        <ul class="post-list" style="background: transparent">
+                        <ul class="post-list" style="background: transparent; padding-top: 20px">
                             @foreach($tweets as $tweet)
-                                <li style="max-height: 122px">
+                                <li>
                                     <div class="post small-post">
-                                        <div class="entry-header">
-                                            <div class="entry-thumbnail">
-                                                <img class="img-responsive"
-                                                     src="{{ url($tweet->image) }}" alt=""/>
-                                            </div>
-                                        </div>
+                                        {{--<div class="entry-header">--}}
+                                            {{--<div class="entry-thumbnail">--}}
+                                                {{--<img class="img-responsive"--}}
+                                                     {{--src="{{ url($tweet->image) }}" alt=""/>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
                                         <div class="post-content">
                                             <div class="video-catagory" style="padding-top: 5px"><a
                                                         href="#">{{ $tweet->created_at->format('d-M-Y') }}</a></div>

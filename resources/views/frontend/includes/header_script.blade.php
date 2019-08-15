@@ -76,5 +76,17 @@
         border-left: 5px solid #f90606;
         background: #eff2fd;
     }
+
+    #navigation .dropdown-menu.top-user-section.logged-in-dropdown {
+        max-width: 150px;
+        min-width: auto;
+    }
+
+    .logged-in-dropdown div {
+        text-align: right;
+    }
+    .widget .post-list li{
+        padding: 0;
+    }
 </style>
 
