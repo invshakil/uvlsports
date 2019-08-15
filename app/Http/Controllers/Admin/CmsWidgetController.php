@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Article;
 use App\Http\Controllers\Controller;
 use App\Widget;
 use Illuminate\Http\Request;
@@ -53,6 +52,35 @@ class CmsWidgetController extends Controller
         Widget::setWidget('links', $links);
         $notification = array(
             'message' => 'Links Saved Successfully!',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    }
+
+
+    public function aboutUs()
+    {
+        $data = array();
+        $data['title'] = 'Manage About Us';
+        return view('backend.dynamic.cms_widget.about_us', $data);
+    }
+
+    public function saveAboutUs(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'about_us' => 'required|min:30',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        Widget::setWidget('about_us', saveTextEditorImage($request->input('about_us')));
+
+        $notification = array(
+            'message' => 'About Us Page Content Saved Successfully!',
             'alert-type' => 'success'
         );
         return back()->with($notification);

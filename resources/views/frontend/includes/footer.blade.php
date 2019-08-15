@@ -15,7 +15,7 @@
                     <h1 class="section-title title">আমাদের সম্পর্কে</h1>
 
                     @if(footerContent())
-                        <p align="justify">
+                        <p align="justify" style="color: #aeaeae">
                             {{ footerContent() }}
                         </p>
                     @endif
@@ -43,7 +43,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="widget news-letter">
-                    <h1 class="section-title title">নিজলেটার</h1>
+                    <h1 class="section-title title">নিউজলেটার</h1>
                     <p>নতুন আর্টিক্যাল পাবলিশড হওয়া মাত্রই পড়তে চান? আজই সাবস্ক্রিপশন করে নিন
                     </p>
 

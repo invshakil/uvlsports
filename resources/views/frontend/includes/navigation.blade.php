@@ -155,9 +155,9 @@
         <li class="home">
             <a href="{{ url('contact-us') }}">যোগাযোগ</a>
         </li>
-        {{--<li class="home">--}}
-            {{--<a href="{{ url('about-us') }}">আমাদের টিম</a>--}}
-        {{--</li>--}}
+        <li class="home">
+            <a href="{{ url('about-us') }}">আমাদের টিম</a>
+        </li>
     </ul>
 </nav>
 

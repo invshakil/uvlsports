@@ -14,4 +14,5 @@ class ImagePaths
     public static $categoryImage = 'image_upload/';
     public static $userImage = 'image_upload/users/';
     public static $articleImage = 'image_upload/post_image/';
+    public static $base = 'image_upload/';
 }

@@ -67,6 +67,19 @@
                 </a>
             </li>
 
+            <li class="nav-item dropdown @if(Request::url() == route('set.footer.content') || Request::url() == route('manage.about_us.page')) open @endif">
+                <a class="nav-link dropdown-toggle"  href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="ks-icon la la-cubes"></span>
+                    <span>CMS</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item @if(Request::url() == route('set.footer.content')) ks-active @endif"
+                       href="{{ route('set.footer.content') }}">Footer Widgets</a>
+                    <a class="dropdown-item" href="{{ route('manage.about_us.page') }}">About Us Page</a>
+                </div>
+            </li>
+
+
             <li class="nav-item @if(Request::url() == route('system.settings')) open @endif">
                 <a class="nav-link" href="{{ route('system.settings') }}">
                     <span class="ks-icon la la-cog"></span>
@@ -74,17 +87,7 @@
                 </a>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle"  href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span class="ks-icon la la-cubes"></span>
-                    <span>CMS</span>
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('set.footer.content') }}">Footer Widgets</a>
-                    <a class="dropdown-item" href="">About Us Widgets</a>
-                    <a class="dropdown-item" href="">Testimonials</a>
-                </div>
-            </li>
+
 
         </ul>
         <div class="ks-sidebar-extras-block">

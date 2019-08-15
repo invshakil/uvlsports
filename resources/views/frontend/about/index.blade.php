@@ -20,257 +20,64 @@
         </div>
         <div class="about-us welcome-section">
             <div class="row">
-                <div class="col-md-6 col-sm-12 content-section">
+                <div class="col-md-12 col-sm-12 content-section">
                     <div class="about-us-content">
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipisicing</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
-                        <p> velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12 image-section">
-                    <div class="about-us-image">
-                        <img class="img-responsive" src="{{ asset('frontend') }}/images/others/about-us.jpg" alt="" />
+                        {!! \App\Widget::getWidget('about_us') !!}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="about-us">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="about-us-content">
-                        <h2>Backgrounds</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="about-us-content">
-                        <h2>Our Approach</h2>
-                        <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit</p>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="about-us-content">
-                        <h2>Methodology</h2>
-                        <p>Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="our-team">
-            <h1 class="section-title title">NewsPress Team</h1>
+            <h1 class="section-title title">{{ config('app.name') }} Team</h1>
             <div class="team-members">
                 <div class="row">
-                    <div class="col-sm-2">
+                    @foreach($admins as $admin)
+                        <div class="col-sm-3" style="min-height: 260px">
                         <div class="single-member">
                             <div class="member-image">
                                 <div class="overlay">
                                     <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        @if($admin->user_fb)
+                                            <li><a href="{{ $admin->user_fb }}" target="_blank"><i
+                                                            class="fa fa-facebook"></i></a></li>
+                                        @endif
+                                        @if($admin->twitter)
+                                            <li><a href="{{ $admin->twitter }}" target="_blank"><i
+                                                            class="fa fa-twitter"></i></a></li>
+                                        @endif
+                                        @if($admin->email)
+                                            <li><a href="mailto:{{ $admin->email }}" target="_blank"><i
+                                                            class="fa fa-envelope"></i></a></li>
+                                        @endif
                                     </ul>
                                 </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member1.jpg" alt="" />
+                                <img class="img-responsive" src="{{ $admin->user_avatar }}" alt=""
+                                     style="height: 200px; width: auto; margin: 0 auto"/>
                             </div>
-                            <h3>Leaf Corcoran</h3>
+                            <h3>{{ $admin->name }}</h3>
                         </div>
                     </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member2.jpg" alt="" />
-                            </div>
-                            <h3>Mike Lewis</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member3.jpg" alt="" />
-                            </div>
-                            <h3>Julie MacKay</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member4.jpg" alt="" />
-                            </div>
-                            <h3>Christine Marqu</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member5.jpg" alt="" />
-                            </div>
-                            <h3>Loren Heiman</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member6.jpg" alt="" />
-                            </div>
-                            <h3>Chris Taylor</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member7.jpg" alt="" />
-                            </div>
-                            <h3>Leaf Corcoran</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member8.jpg" alt="" />
-                            </div>
-                            <h3>Alex Posey</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member9.jpg" alt="" />
-                            </div>
-                            <h3>Teddy Newell</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member10.jpg" alt="" />
-                            </div>
-                            <h3>Eli Amesefe</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member1.jpg" alt="" />
-                            </div>
-                            <h3>Leaf Corcoran</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="single-member">
-                            <div class="member-image">
-                                <div class="overlay">
-                                    <ul class="list-inline social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                    </ul>
-                                </div>
-                                <img class="img-responsive" src="{{ asset('frontend') }}/images/others/member11.jpg" alt="" />
-                            </div>
-                            <h3>Andrei Patru</h3>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div><!-- our team -->
-        <div class="testimonials">
-            <div id="testimonial" class="carousel carousel-fade slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img class="img-responsive img-circle" src="{{ asset('frontend') }}/images/others/t1.jpg" alt="" />
-                        <h3>Karol Cichoń <span>Founder, Leo Inc</span></h3>
-                        <h4>“Wow!! It's really awesome. Nice and Clean design.It's really impressive. I am really appreciate your project.”</h4>
-                    </div>
-                    <div class="item">
-                        <img class="img-responsive img-circle" src="{{ asset('frontend') }}/images/others/member5.jpg" alt="" />
-                        <h3>Andrei Piterson <span>CEO, SRT BD</span></h3>
-                        <h4>“Wow!! It's really awesome. Nice and Clean design.It's really impressive. I am really appreciate your project.”</h4>
-                    </div>
-                </div>
-            </div>
-        </div><!-- testimonial -->
+        {{--<div class="testimonials">--}}
+        {{--<div id="testimonial" class="carousel carousel-fade slide" data-ride="carousel">--}}
+        {{--<div class="carousel-inner">--}}
+        {{--<div class="item active">--}}
+        {{--<img class="img-responsive img-circle" src="{{ asset('frontend') }}/images/others/t1.jpg" alt="" />--}}
+        {{--<h3>Karol Cichoń <span>Founder, Leo Inc</span></h3>--}}
+        {{--<h4>“Wow!! It's really awesome. Nice and Clean design.It's really impressive. I am really appreciate your project.”</h4>--}}
+        {{--</div>--}}
+        {{--<div class="item">--}}
+        {{--<img class="img-responsive img-circle" src="{{ asset('frontend') }}/images/others/member5.jpg" alt="" />--}}
+        {{--<h3>Andrei Piterson <span>CEO, SRT BD</span></h3>--}}
+        {{--<h4>“Wow!! It's really awesome. Nice and Clean design.It's really impressive. I am really appreciate your project.”</h4>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--</div><!-- testimonial -->--}}
     </div>
 
 @endsection

@@ -28,13 +28,19 @@ class UserController extends Controller
 
     public function UpdateUserSettings(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:6',
+            'bio' => 'required',
+            'facebook' => 'required',
+            'twitter' => 'nullable|url',
+        ]);
         $id = auth()->user()->id;
 
         $update = User::find($id);
         $update->name = $request->name;
         $update->bio = $request->bio;
         $update->user_fb = $request->facebook;
-        $update->user_tw = $request->facebook;
+        $update->user_tw = $request->twitter;
 
         if (Input::has('image')) {
 

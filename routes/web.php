@@ -158,6 +158,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin/', 'middleware' => ['au
     Route::get('/manage-footer-content', ['as' => 'set.footer.content', 'uses' => 'CmsWidgetController@footer']);
     Route::post('/save-footer-content', ['as' => 'save.footer.content', 'uses' => 'CmsWidgetController@saveFooterContent']);
     Route::post('/save-footer-links', ['as' => 'save.footer.links', 'uses' => 'CmsWidgetController@saveFooterLinks']);
+
+    Route::get('/manage-about-us-page', ['as' => 'manage.about_us.page', 'uses' => 'CmsWidgetController@aboutUs']);
+    Route::post('/manage-about-us-page', ['as' => 'manage.about_us.page', 'uses' => 'CmsWidgetController@saveAboutUs']);
 });
 
 

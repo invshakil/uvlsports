@@ -44,10 +44,14 @@
 
                             <form action="{{ url()->current() }}" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
-                                <div class="form-group">
+                                <div class="form-group @if ($errors->has('bio')) has-error @endif">
                                     <label for="name">Name</label>
-                                    <input title="" type="text" name="name" value="{{ auth()->user()->name }}"
+                                    <input title="" type="text" name="name"
+                                           value="{{ old('name', auth()->user()->name) }}"
                                            class="form-control" required="required">
+                                    @if ($errors->has('name'))
+                                        <div class="errors">{{ $errors->first('name') }}</div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
@@ -87,22 +91,31 @@
 
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="name">Intro</label>
+                                <div class="form-group @if ($errors->has('bio')) has-error @endif">
+                                    <label for="bio">Intro</label>
                                     <textarea title="" name="bio" class="form-control"
-                                              required="required">{{ auth()->user()->bio }}</textarea>
+                                              required="required">{{ old('name', auth()->user()->bio) }}</textarea>
+                                    @if ($errors->has('bio'))
+                                        <div class="errors">{{ $errors->first('bio') }}</div>
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="name">Facebook</label>
-                                    <input title="" type="text" name="facebook" value="{{ auth()->user()->user_fb }}"
+                                <div class="form-group @if ($errors->has('facebook')) has-error @endif">
+                                    <label for="facebook">Facebook</label>
+                                    <input title="" type="url" name="facebook" value="{{ old('name', auth()->user()->user_fb) }}"
                                            class="form-control" required="required">
+                                    @if ($errors->has('facebook'))
+                                        <div class="errors">{{ $errors->first('facebook') }}</div>
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="name">Twitter</label>
-                                    <input title="" type="text" name="twitter" value="{{ auth()->user()->user_tw }}"
-                                           class="form-control" required="required">
+                                <div class="form-group @if ($errors->has('twitter')) has-error @endif">
+                                    <label for="twitter">Twitter</label>
+                                    <input title="" type="url" name="twitter" value="{{ old('name', auth()->user()->user_tw) }}"
+                                           class="form-control" >
+                                    @if ($errors->has('twitter'))
+                                        <div class="errors">{{ $errors->first('twitter') }}</div>
+                                    @endif
                                 </div>
 
 

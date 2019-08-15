@@ -13,6 +13,33 @@ function strLimit($value, $limit = 100, $end = '...')
     return $limit < $valuelen ? mb_substr($value, 0, mb_strrpos($value, ' ', $limit - $valuelen)) . $end : $value;
 }
 
+function saveTextEditorImage($detail)
+{
+    $dom = new \domdocument();
+    @$dom->loadHtml(mb_convert_encoding($detail, 'HTML-ENTITIES', 'UTF-8'));
+    $images = $dom->getelementsbytagname('img');
+
+    if (!File::exists(public_path(\App\Image\ImagePaths::$base))) {
+        File::makeDirectory(public_path() . '/' . \App\Image\ImagePaths::$base, 0777, true, true);
+    }
+    foreach ($images as $k => $img) {
+        $data = $img->getattribute('src');
+        $check_image = substr($data, 0, 10);
+        if ($check_image != "data:image") {
+            continue;
+        }
+        list($type, $data) = explode(';', $data);
+        list(, $data) = explode(',', $data);
+        $data = base64_decode($data);
+        $image_name = time() . $k . '.png';
+        $path = public_path("/") . \App\Image\ImagePaths::$base . $image_name;
+        file_put_contents($path, $data);
+        $img->removeattribute('src');
+        $img->setattribute('src', asset(\App\Image\ImagePaths::$base . $image_name));
+    }
+
+    return $detail = $dom->savehtml();
+}
 
 function defaultSeo($data, $pageName = null)
 {

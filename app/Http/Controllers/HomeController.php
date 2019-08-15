@@ -218,6 +218,7 @@ class HomeController extends Controller
         $data = array();
         $data['title'] = 'Contact Us';
         $data = defaultSeo($data);
+        $data['admins'] = User::whereIn('role', [1,2])->get();
 
         return view('frontend.about.index', $data);
     }
