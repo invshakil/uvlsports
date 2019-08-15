@@ -84,7 +84,7 @@ class UserController extends Controller
         $new = new Article();
         $new->title = $request->title;
         $new->category_id = $categories;
-        $new->description = $request->description;
+        $new->description = $new->saveTextEditorImage($request->description);
         $new->user_id = auth()->user()->id;
         $new->save();
 
@@ -105,7 +105,7 @@ class UserController extends Controller
         $new = Article::find($id);
         $new->title = $request->title;
         $new->category_id = $categories;
-        $new->description = $request->description;
+        $new->description = $new->saveTextEditorImage($request->description);
         $new->save();
 
         return redirect('account/pending-articles')->with('message', 'Article Submitted for approval.');

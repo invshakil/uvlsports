@@ -94,11 +94,20 @@
 @endsection
 
 @section('after_script')
-    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('adminAssets') }}/libs/summernote/summernote.css"> <!-- original -->
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('adminAssets') }}/assets/styles/libs/summernote/summernote.min.css"> <!-- customization -->
+    <script src="{{ asset('adminAssets') }}/libs/summernote/summernote.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
     <script>
-        CKEDITOR.replace('description');
-        CKEDITOR.config.height = '400px';
+        $('#description').summernote({
+            height: 400,
+            popover: {
+                image: [],
+
+            }
+        });
         $('#category_id').select2({});
     </script>
 @endsection

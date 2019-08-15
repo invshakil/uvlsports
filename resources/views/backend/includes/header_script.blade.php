@@ -67,8 +67,13 @@
     .select2-container--default, .select2-container--focus, .select2-selection--multiple{
         border: 1px solid  #ececec!important;
     }
-    .has-danger .select2-container, .has-danger .cke_chrome{
+    .has-danger .select2-container, .has-danger .cke_chrome, .has-danger .note-editor.note-frame{
         border: 1px solid #ed1c24 !important;
+    }
+    .note-editable blockquote{
+        border-left: 3px solid #0275d8;
+        padding-left: 10px;
+        font-style: italic;
     }
 </style>
 

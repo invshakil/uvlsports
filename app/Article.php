@@ -4,6 +4,7 @@ namespace App;
 
 use App\Image\ImagePaths;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Article extends Model
 {
@@ -71,7 +72,7 @@ class Article extends Model
 
     public function getThumbImageAttribute()
     {
-        $imagePath = ImagePaths::$articleImage . 'thumbs' . $this->image;
+        $imagePath = ImagePaths::$articleImage . 'thumbs/' . $this->image;
         if ($this->image != null && file_exists($imagePath)) {
             return asset($imagePath);
         } else {
@@ -96,5 +97,34 @@ class Article extends Model
             unlink(public_path($basePath . 'thumbs/' . $fileName)); // delete file/image
         }
         return true;
+    }
+
+
+    public function saveTextEditorImage($detail)
+    {
+        $dom = new \domdocument();
+        @$dom->loadHtml(mb_convert_encoding($detail, 'HTML-ENTITIES', 'UTF-8'));
+        $images = $dom->getelementsbytagname('img');
+
+        if (!File::exists(public_path(ImagePaths::$articleImage))) {
+            File::makeDirectory(public_path() . '/' . ImagePaths::$articleImage, 0777, true, true);
+        }
+        foreach ($images as $k => $img) {
+            $data = $img->getattribute('src');
+            $check_image = substr($data, 0, 10);
+            if ($check_image != "data:image") {
+                continue;
+            }
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+            $data = base64_decode($data);
+            $image_name = time() . $k . '.png';
+            $path = public_path("/") . ImagePaths::$articleImage . $image_name;
+            file_put_contents($path, $data);
+            $img->removeattribute('src');
+            $img->setattribute('src', asset(ImagePaths::$articleImage . $image_name));
+        }
+
+        return $detail = $dom->savehtml();
     }
 }

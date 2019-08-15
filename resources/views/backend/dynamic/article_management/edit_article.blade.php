@@ -70,14 +70,15 @@
                                                             <input type="file" name="image" id="image"
                                                                    onchange="readURL(this);">
                                                         </button>
-                                                        <br>
 
                                                         @if($info->image != null)
-                                                            <img id="blah" src="{{ $info->full_image }}"
-                                                                 class="img-responsive img-thumbnail" alt="your image"/>
+                                                            <img id="blah" src="{{ $info->medium_image }}"
+                                                                 class="img-responsive img-thumbnail" alt="your image"
+                                                                 style="max-height: 120px; margin-left: 10px"/>
                                                         @else
-                                                            <img id="blah" src="http://placehold.it/620x348"
-                                                                 class="img-responsive img-thumbnail" alt="your image"/>
+                                                            <img id="blah" src="http://placehold.it/750x450"
+                                                                 class="img-responsive img-thumbnail" alt="your image"
+                                                                 style="max-height: 120px; margin-left: 10px"/>
                                                         @endif
 
                                                         @if ($errors->has('image'))
@@ -354,13 +355,23 @@
 @endsection
 
 @section('after_js')
-
-    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('adminAssets') }}/libs/summernote/summernote.css"> <!-- original -->
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('adminAssets') }}/assets/styles/libs/summernote/summernote.min.css"> <!-- customization -->
+    <script src="{{ asset('adminAssets') }}/libs/summernote/summernote.min.js"></script>
     <script src="{{ asset('adminAssets') }}/libs/bootstrap-tokenfield/bootstrap-tokenfield.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
-        CKEDITOR.replace('description');
-        CKEDITOR.config.height = '635px';
+        $('#description').summernote({
+            height: 550,
+            popover: {
+                image: [],
+
+            }
+        });
+
+
         $('.select2').select2({});
 
         $('#tags').tokenfield();

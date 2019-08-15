@@ -71,7 +71,7 @@
                                     <th data-sort-ignore="true"> Category</th>
                                     <th> Title</th>
                                     <th data-type="numeric">Visit</th>
-                                    @if(route('favorite.articles') == false)
+                                    @if(url()->current() != route('favorite.articles'))
                                     <th> Option</th>
                                     @endif
                                 </tr>
@@ -94,9 +94,13 @@
                                             <td>
                                                 <a href="{{ route('article.details', ['id'=>$article->id,'slug'=>$article->slug]) }}" class="btn btn-success">Go to Article</a>
                                             </td>
-                                            @if(route('favorite.articles') == false)
+                                            @if(url()->current() != route('favorite.articles'))
                                             <td>
+                                                @if($article->status == 0)
                                                 <a href="{{ route('account.article.edit', ['id'=>$article->id]) }}" class="btn btn-warning">Edit</a>
+                                                @else
+                                                    <a href="javascript:void(0)" class="btn btn-success">Published</a>
+                                                @endif
                                             </td>
                                             @endif
                                         </tr>

@@ -165,7 +165,7 @@ class PostController extends Controller
         }
 		$article = new Article();
         $article->title = $request->title;
-        $article->description = $request->description;
+        $article->description = $article->saveTextEditorImage($request->description);
         $article->user_id = $request->user_id;
         $article->tags = $request->tags;
         $article->meta_title = $request->meta_title;
@@ -273,7 +273,7 @@ class PostController extends Controller
             'meta_keyword' => 'required',
             'category_id' => 'required',
             'status' => 'required',
-            'image' => 'required_if:status,1|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
         if ($validator->fails()) {
             return redirect()
@@ -285,7 +285,7 @@ class PostController extends Controller
 		$article = Article::find($id);
 
         $article->title = $request->title;
-        $article->description = $request->description;
+        $article->description = $article->saveTextEditorImage($request->description);
         $article->user_id = $request->user_id;
         $article->tags = $request->tags;
         $article->meta_title = $request->meta_title;
