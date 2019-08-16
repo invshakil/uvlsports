@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'info@uvlsports.com',
+        'address' => 'notification@uvlsports.com',
         'name' => 'UVL SPORTS',
     ],
 

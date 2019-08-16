@@ -28,8 +28,8 @@ class ContactUs extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.contact_us', $this->data)
-            ->subject($this->data['subject'])
-            ->from($this->data['email']);
+        return $this->view('emails.contact_us', $this->data)
+            ->subject($this->data['subject'] . ' - ' . $this->data['name'])
+            ->from($this->data['email'], $this->data['name']);
     }
 }

@@ -30,7 +30,7 @@ class ArticleAlertMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.article_notification', $this->articleData)
+        return $this->view('emails.article_notification', $this->articleData)
             ->subject($this->subject)
             ->from('article_alert@uvlsports.com', 'UVL SPORTS');
     }
