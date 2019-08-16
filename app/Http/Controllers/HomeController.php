@@ -144,8 +144,8 @@ class HomeController extends Controller
             ->where('status', 1)->inRandomOrder()->limit(6)->get();
 
         $data['image'] = asset('image_upload/post_image/' . $info->image);
-        $data['description'] = $info->meta_title;
-        $data['keyword'] = $info->meta_keyword;
+        $data['description'] = $info->meta_keyword;
+        $data['keyword'] = $info->tags;
         $data['type'] = "article";
         $data = defaultSeo($data);
 
@@ -177,8 +177,8 @@ class HomeController extends Controller
             ->where('status', 1)->inRandomOrder()->limit(6)->get();
 
         $data['image'] = asset('image_upload/post_image/' . $info->image);
-        $data['description'] = $info->meta_title;
-        $data['keyword'] = $info->meta_keyword;
+        $data['description'] = $info->meta_keyword;
+        $data['keyword'] = $info->tags;
         $data['type'] = "article";
         $data = defaultSeo($data);
 
@@ -284,7 +284,7 @@ class HomeController extends Controller
             'email' => $request->get('your_email'),
             'user_message' => $request->get('your_comment')
         );
-        Mail::to(['uvlsports@gmail.com', 'inverse.shakil@gmail.com', 'top2dcutlet@gmail.com'], 'UVL Sports')->send(new ContactUs($data));
+        Mail::to(['uvlsports@gmail.com', 'inverse.shakil@gmail.com', 'rahiksumail@gmail.com'], 'UVL Sports')->send(new ContactUs($data));
         return back()->with('success', 'We have received your email. We will get back at you as soon as possible. thanks for being in touch with us!');
     }
 }

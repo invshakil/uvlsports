@@ -258,6 +258,8 @@
         if (userType.length === 0) {
             userType.push({type: 'Returning Visitor', sessions: 90})
             userType.push({type: 'New Visitor', sessions: 10})
+        } else if(userType.length === 1){
+            userType.push({type: 'Returning Visitor', sessions: 90})
         }
         var canvas = document.getElementById("pieChartData");
         var ctx = canvas.getContext('2d');
