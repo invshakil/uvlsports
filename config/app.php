@@ -185,7 +185,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        Spatie\Analytics\AnalyticsServiceProvider::class,
     ],
 
     /*
@@ -236,6 +236,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
     ],
 
 ];

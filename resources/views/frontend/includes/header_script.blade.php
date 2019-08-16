@@ -42,6 +42,18 @@
       href="{{ asset('frontend') }}/images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('frontend') }}/images/ico/apple-touch-icon-57-precomposed.png">
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44033160-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-44033160-2');
+</script>
+
 
 <style>
     .pagination li a:hover, .pagination .active > a, .pagination .active > a:focus, .pagination .active > a:hover, .subscribe-me button, .btn-danger {

@@ -150,77 +150,39 @@
                 </div>
                 <div class="col-md-9">
                    <div class="card widget">
-                       <div id="lineChartData" style="height: 390px; width: 100%;"></div>
+                       <canvas id="lineChartData" style="height: 390px; width: 100%;"></canvas>
                    </div>
                 </div>
             </div>
                 <div class="row">
                     <div class="col-xl-5">
                         <div class="card widget">
-                            <div id="pieChartData" style="height: 330px; width: 100%;"></div>
+                            <canvas id="pieChartData" style="height: 345px; width: 100%;"></canvas>
                         </div>
                     </div>
                     <div class="col-xl-7">
                     <div class="card ks-card-widget ks-widget-payment-table">
                         <h5 class="card-header">
-                            Recent Articles
-
-                            <div class="ks-controls">
-                                <a href="#" class="ks-control-link">View all</a>
-                            </div>
+                            Most Visited Page
                         </h5>
-                        <div class="card-block">
+                        <div class="card-block" style="min-height: 295px">
                             <table class="table ks-payment-table">
+                                @foreach($mostVisitedPage as $item)
                                 <tr>
-                                    <td class="ks-text-bold ks-text-no-wrap">
-                                        <img src="{{ asset('adminAssets') }}/assets/img/avatars/avatar-1.jpg"
-                                             width="28" height="28"
-                                             class="ks-avatar ks-img-circle"> John Doe
+                                    <td class="ks-text-light">
+                                        <a href="{{ url('/').$item['url'] }}"
+                                           target="_blank">{{ $item['pageTitle'] }}</a>
                                     </td>
-                                    <td class="ks-text-light">Easy One Page Dashboard</td>
-                                    <td class="ks-text-bold">$150</td>
-                                    <td class="ks-text-light ks-text-right ks-text-no-wrap">3 days ago</td>
+                                    <td class="ks-text-bold">Total Page Views: {{ $item['pageViews'] }}</td>
                                 </tr>
-                                <tr>
-                                    <td class="ks-text-bold ks-text-no-wrap">
-                                        <img src="{{ asset('adminAssets') }}/assets/img/avatars/avatar-8.jpg"
-                                             width="28" height="28"
-                                             class="ks-avatar ks-img-circle"> John Doe
-                                    </td>
-                                    <td class="ks-text-light">Easy One Page Dashboard</td>
-                                    <td class="ks-text-bold">$150</td>
-                                    <td class="ks-text-light ks-text-right ks-text-no-wrap">3 days ago</td>
-                                </tr>
-                                <tr>
-                                    <td class="ks-text-bold ks-text-no-wrap">
-                                        <img src="{{ asset('adminAssets') }}/assets/img/avatars/avatar-9.jpg"
-                                             width="28" height="28"
-                                             class="ks-avatar ks-img-circle"> John Doe
-                                    </td>
-                                    <td class="ks-text-light">Easy One Page Dashboard</td>
-                                    <td class="ks-text-bold">$150</td>
-                                    <td class="ks-text-light ks-text-right ks-text-no-wrap">3 days ago</td>
-                                </tr>
-                                <tr>
-                                    <td class="ks-text-bold ks-text-no-wrap">
-                                        <img src="{{ asset('adminAssets') }}/assets/img/avatars/avatar-10.jpg"
-                                             width="28" height="28"
-                                             class="ks-avatar ks-img-circle"> John Doe
-                                    </td>
-                                    <td class="ks-text-light">Easy One Page Dashboard</td>
-                                    <td class="ks-text-bold">$150</td>
-                                    <td class="ks-text-light ks-text-right ks-text-no-wrap">3 days ago</td>
-                                </tr>
-                                <tr>
-                                    <td class="ks-text-bold ks-text-no-wrap">
-                                        <img src="{{ asset('adminAssets') }}/assets/img/avatars/avatar-11.jpg"
-                                             width="28" height="28"
-                                             class="ks-avatar ks-img-circle"> John Doe
-                                    </td>
-                                    <td class="ks-text-light">Easy One Page Dashboard</td>
-                                    <td class="ks-text-bold">$150</td>
-                                    <td class="ks-text-light ks-text-right ks-text-no-wrap">3 days ago</td>
-                                </tr>
+                                @endforeach
+                                @if(count($mostVisitedPage) == 0)
+                                    <tr>
+                                        <td class="ks-text-light text-left" colspan="2">
+                                            No Information Available
+                                        </td>
+                                    </tr>
+                                @endif
                             </table>
                         </div>
                     </div>
@@ -235,116 +197,120 @@
 @endsection
 
 @section('after_js')
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+    {{--LINE CHART DATA--}}
+
     <script>
-        window.onload = function () {
-            var chart = new CanvasJS.Chart("pieChartData", {
-                animationEnabled: true,
-                title: {
-                    text: "Visitor Status"
-                },
-                data: [{
-                    type: "pie",
-                    startAngle: 240,
-                    yValueFormatString: "##0.00\"%\"",
-                    indexLabel: "{label} {y}",
-                    dataPoints: [
-                        {y: 79.45, label: "Returning Visitor"},
-                        {y: 20.55, label: "New Visitor"},
-                    ]
+        let lastThirtyDaysTotalVisitorsAndPageViews = '{!! $lastThirtyDaysTotalVisitorsAndPageViews !!}';
+        lastThirtyDaysTotalVisitorsAndPageViews = JSON.parse(lastThirtyDaysTotalVisitorsAndPageViews)
+        var ctx = document.getElementById('lineChartData').getContext('2d');
+        var lineChart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: lastThirtyDaysTotalVisitorsAndPageViews.label,
+                datasets: [{
+                    label: "Number of Visitor",
+                    backgroundColor: 'rgb(255, 0, 0, 1)',
+                    borderColor: 'rgb(255, 0, 0, 0.3)',
+                    fill: false,
+                    data: lastThirtyDaysTotalVisitorsAndPageViews.visitors,
+                }, {
+                    label: "Page Views",
+                    backgroundColor: 'rgb(10, 10, 10, 1)',
+                    borderColor: 'rgb(10, 10, 10, 0.3)',
+                    fill: false,
+                    data: lastThirtyDaysTotalVisitorsAndPageViews.pageViews,
                 }]
-            });
-            chart.render();
+            },
 
-
-            var lineChart = new CanvasJS.Chart("lineChartData", {
-                animationEnabled: true,
-                theme: "light2",
-                title:{
-                    text: "Site Traffic"
+            // Configuration options go here
+            options: {
+                maintainAspectRatio: false,
+                title: {
+                    display: true,
+                    text: 'Website Traffic Data',
+                    position: 'bottom'
                 },
-                axisX:{
-                    valueFormatString: "DD MMM",
-                    crosshair: {
-                        enabled: true,
-                        snapToDataPoint: true
+                animation: {
+                    duration: 5000,
+                    onProgress: function (animation) {
+                        ctx.value = animation.currentStep / animation.numSteps;
+                    },
+                    onComplete: function () {
+                        window.setTimeout(function () {
+                            ctx.value = 0;
+                        }, 5000);
                     }
-                },
-                axisY: {
-                    title: "Number of Visits",
-                    crosshair: {
-                        enabled: true
-                    }
-                },
-                toolTip:{
-                    shared:true
-                },
-                legend:{
-                    cursor:"pointer",
-                    verticalAlign: "bottom",
-                    horizontalAlign: "left",
-                    dockInsidePlotArea: true,
-                    itemclick: toogleDataSeries
-                },
-                data: [{
-                    type: "line",
-                    showInLegend: true,
-                    name: "Total Visit",
-                    markerType: "square",
-                    xValueFormatString: "DD MMM, YYYY",
-                    color: "#F08080",
-                    dataPoints: [
-                        { x: new Date(2017, 0, 3), y: 650 },
-                        { x: new Date(2017, 0, 4), y: 700 },
-                        { x: new Date(2017, 0, 5), y: 710 },
-                        { x: new Date(2017, 0, 6), y: 658 },
-                        { x: new Date(2017, 0, 7), y: 734 },
-                        { x: new Date(2017, 0, 8), y: 963 },
-                        { x: new Date(2017, 0, 9), y: 847 },
-                        { x: new Date(2017, 0, 10), y: 853 },
-                        { x: new Date(2017, 0, 11), y: 869 },
-                        { x: new Date(2017, 0, 12), y: 943 },
-                        { x: new Date(2017, 0, 13), y: 970 },
-                        { x: new Date(2017, 0, 14), y: 869 },
-                        { x: new Date(2017, 0, 15), y: 890 },
-                        { x: new Date(2017, 0, 16), y: 930 }
-                    ]
-                },
-                    {
-                        type: "line",
-                        showInLegend: true,
-                        name: "Unique Visit",
-                        lineDashType: "dash",
-                        dataPoints: [
-                            { x: new Date(2017, 0, 3), y: 510 },
-                            { x: new Date(2017, 0, 4), y: 560 },
-                            { x: new Date(2017, 0, 5), y: 540 },
-                            { x: new Date(2017, 0, 6), y: 558 },
-                            { x: new Date(2017, 0, 7), y: 544 },
-                            { x: new Date(2017, 0, 8), y: 693 },
-                            { x: new Date(2017, 0, 9), y: 657 },
-                            { x: new Date(2017, 0, 10), y: 663 },
-                            { x: new Date(2017, 0, 11), y: 639 },
-                            { x: new Date(2017, 0, 12), y: 673 },
-                            { x: new Date(2017, 0, 13), y: 660 },
-                            { x: new Date(2017, 0, 14), y: 562 },
-                            { x: new Date(2017, 0, 15), y: 643 },
-                            { x: new Date(2017, 0, 16), y: 570 }
-                        ]
-                    }]
-            });
-            lineChart.render();
-
-            function toogleDataSeries(e){
-                if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                    e.dataSeries.visible = false;
-                } else{
-                    e.dataSeries.visible = true;
                 }
-                lineChart.render();
             }
-        }
+        });
+    </script>
 
+    {{--PIE CHART DATA--}}
+
+    <script>
+        let userType = '{!! $userType !!}';
+        userType = JSON.parse(userType)
+        if (userType.length === 0) {
+            userType.push({type: 'Returning Visitor', sessions: 90})
+            userType.push({type: 'New Visitor', sessions: 10})
+        }
+        var canvas = document.getElementById("pieChartData");
+        var ctx = canvas.getContext('2d');
+        var data = {
+            labels: [
+                userType[0].type,
+                userType[1].type
+            ],
+            datasets: [
+                {
+                    fill: true,
+                    backgroundColor: [
+                        '#e74c3c',
+                        '#34495e',
+                    ],
+                    data: [
+                        userType[0].sessions,
+                        userType[1].sessions
+                    ],
+                    borderColor: [
+                        '#e74c3c',
+                        '#34495e',
+                    ],
+                    borderWidth: [2, 2]
+                }
+            ]
+        };
+        var options = {
+            title: {
+                display: true,
+                text: 'Visitor Status',
+                position: 'bottom'
+            },
+            rotation: -0.7 * Math.PI,
+            animation: {
+                duration: 5000,
+                onProgress: function (animation) {
+                    ctx.value = animation.currentStep / animation.numSteps;
+                },
+                onComplete: function () {
+                    window.setTimeout(function () {
+                        ctx.value = 0;
+                    }, 5000);
+                }
+            }
+        };
+
+        // Chart declaration:
+        var pieChartData = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
 
     </script>
 @endsection

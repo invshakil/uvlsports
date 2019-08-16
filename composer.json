@@ -12,7 +12,8 @@
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "rap2hpoutre/laravel-log-viewer": "^1.2"
+        "rap2hpoutre/laravel-log-viewer": "^1.2",
+        "spatie/laravel-analytics": "3.6.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
