@@ -42,9 +42,11 @@
                             খেলার সময়সূচী
                         </h2>
 
+                        @if($game_week_name)
                         <h4>
                             {{ $game_week_name }}
                         </h4>
+                        @endif
 
                         <div class="row">
                             <div class="col-md-12">
@@ -87,8 +89,13 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
-
+                                @if(count($match_schedules) == 0)
+                                    <tr>
+                                        <td class="danger" colspan="5">
+                                            No Information available.
+                                        </td>
+                                    </tr>
+                                @endif
                                 </tbody>
                             </table>
 

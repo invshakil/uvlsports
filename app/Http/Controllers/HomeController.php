@@ -39,7 +39,7 @@ class HomeController extends Controller
                 ->where('status', 1)->limit(3)->get();
         });
         $data['popular_articles'] = Cache::remember('home.popular_articles', 3600, function () {
-            return $this->MostPopularArticle(5);
+            return $this->MostPopularArticle(10);
         });
         $data['latest_articles'] = Cache::remember('home.latest_articles', 3600, function () {
             return Article::with('favorites')->withCount('favorites')->orderBy('id', 'desc')
@@ -101,7 +101,7 @@ class HomeController extends Controller
             ->paginate(12);
         $data['category_info'] = $info;
         $data['title'] = $info->name;
-        $data['popular_articles'] = $this->MostPopularArticle(10, $info->id, null);
+        $data['popular_articles'] = $this->MostPopularArticle(15, $info->id, null);
         $data = defaultSeo($data);
 
         return view('frontend.category.index', $data);

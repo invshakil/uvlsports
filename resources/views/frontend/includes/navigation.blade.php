@@ -1,6 +1,10 @@
 @php
-    $league_categories = App\Category ::where('is_league', 1) -> where('status', 1) -> get();
-    $other_categories = App\Category ::where('is_league', 0) -> where('status', 1) -> get();
+    $league_categories = \Illuminate\Support\Facades\Cache::remember('league_categories', 3600, function (){
+        return App\Category::where('is_league', 1) -> where('status', 1) -> get();
+    });
+    $other_categories = \Illuminate\Support\Facades\Cache::remember('other_categories', 3600, function (){
+        return  App\Category ::where('is_league', 0) -> where('status', 1) -> get();
+    });
 
 @endphp
 
