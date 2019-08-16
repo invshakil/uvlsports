@@ -14,7 +14,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="{{ route('account') }}">Account</a>
                     <a class="dropdown-item" href="{{ route('account.settings') }}">Settings</a>
                 </div>
             </li>

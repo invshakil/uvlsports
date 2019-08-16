@@ -31,6 +31,7 @@ Route::get('/match-schedule/search', ['as' => 'match.schedule', 'uses' => 'HomeC
 Route::post('/create-subscribe', ['as' => 'create.subscriber', 'uses' => 'HomeController@CreateSubscriber']);
 Route::post('/save-favorite-article', ['as' => 'save.favorite', 'uses' => 'UserController@SaveFavorite']);
 
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 /*
  * AUTHENTICATION ROUTES
  */
