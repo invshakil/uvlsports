@@ -87,6 +87,12 @@
                 </a>
             </li>
 
+            <li class="nav-item @if(url()->current() == route('clear.cache')) open @endif">
+                <a class="nav-link" href="{{ route('clear.cache') }}">
+                    <span class="ks-icon la la-refresh"></span>
+                    <span>Clear Cache</span>
+                </a>
+            </li>
 
 
         </ul>

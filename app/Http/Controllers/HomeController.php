@@ -12,6 +12,7 @@ use App\Subscriber;
 use App\Tweet;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use function asset;
 use function explode;
@@ -25,17 +26,28 @@ class HomeController extends Controller
         $data = array();
         $data['title'] = 'Home';
 
-        $data['sliders'] = Article::withCount('favorites')
-            ->with('author', 'favorites')->orderBy('id', 'desc')->where('featured_status', 1)->where('status', 1)->limit(3)->get();
-        $data['tweets'] = Tweet::orderBy('id', 'desc')->limit(5)->get();
-        $data['others_sports'] = Article::with('favorites')->withCount('favorites')
-            ->orderBy('id', 'desc')->whereRaw("FIND_IN_SET('9', category_id) OR FIND_IN_SET('13', category_id)")->where('status', 1)->limit(3)->get();
-        $data['popular_articles'] = $this->MostPopularArticle(5);
-        $data['latest_articles'] = Article::with('favorites')->withCount('favorites')->orderBy('id', 'desc')
-            ->where('status', 1)
-            ->whereRaw("FIND_IN_SET('9', category_id)  = 0")
-            ->whereRaw("FIND_IN_SET('13', category_id)  = 0")
-            ->paginate(12);
+        $data['sliders'] = Cache::remember('home.sliders', 3600, function () {
+            return Article::withCount('favorites')
+                ->with('author', 'favorites')->orderBy('id', 'desc')->where('featured_status', 1)->where('status', 1)->limit(3)->get();
+        });
+        $data['tweets'] = Cache::remember('home.tweets', 3600, function () {
+            return Tweet::orderBy('id', 'desc')->limit(5)->get();
+        });
+        $data['others_sports'] = Cache::remember('home.other_sports', 3600, function () {
+            return Article::with('favorites')->withCount('favorites')
+                ->orderBy('id', 'desc')->whereRaw("FIND_IN_SET('9', category_id) OR FIND_IN_SET('13', category_id)")
+                ->where('status', 1)->limit(3)->get();
+        });
+        $data['popular_articles'] = Cache::remember('home.popular_articles', 3600, function () {
+            return $this->MostPopularArticle(5);
+        });
+        $data['latest_articles'] = Cache::remember('home.latest_articles', 3600, function () {
+            return Article::with('favorites')->withCount('favorites')->orderBy('id', 'desc')
+                ->where('status', 1)
+                ->whereRaw("FIND_IN_SET('9', category_id)  = 0")
+                ->whereRaw("FIND_IN_SET('13', category_id)  = 0")
+                ->paginate(12);
+        });
         $data = defaultSeo($data);
 
         return view('frontend.home.home', $data);

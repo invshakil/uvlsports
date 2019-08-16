@@ -162,6 +162,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin/', 'middleware' => ['au
 
     Route::get('/manage-about-us-page', ['as' => 'manage.about_us.page', 'uses' => 'CmsWidgetController@aboutUs']);
     Route::post('/manage-about-us-page', ['as' => 'manage.about_us.page', 'uses' => 'CmsWidgetController@saveAboutUs']);
+
+    Route::get('/clear-cache', function () {
+        Artisan::call('cache:clear');
+        $notification = array(
+            'message' => 'Cache Cleared!', 'alert-type' => 'success'
+        );
+        return back()->with($notification);
+    })->name('clear.cache');
 });
 
 
