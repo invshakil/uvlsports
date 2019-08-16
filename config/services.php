@@ -42,21 +42,21 @@ return [
 	'facebook' => [
 		'client_id' => '287256215072572',
 		'client_secret' => '2cecaf486d82e83ce3eb83a2610819c1',
-		'redirect' => 'http://localhost:8000/login/facebook/callback',
+        'redirect' => env('APP_URL') . '/login/facebook/callback',
 	],
 	
 	
 	'google' => [
 		'client_id' => env('15688333143-ino7tneq8p66cshto4kc8r46s0jem4m3.apps.googleusercontent.com'),
 		'client_secret' => env('95G-JVT1FOuuVlW1o5NbpGzB'),
-		'redirect' => 'http://localhost:8000/login/google/callback',
+        'redirect' => env('APP_URL') . '/login/google/callback',
 	],
 	
 	
 	'twitter' => [
 		'client_id' => env('TWITTER_CLIENT_ID'),
 		'client_secret' => env('TWITTER_CLIENT_SECRET'),
-		'redirect' => 'http://localhost:8000/login/twitter/callback',
+		'redirect' => env('APP_URL') . '/login/twitter/callback',
 	],
 
 ];
