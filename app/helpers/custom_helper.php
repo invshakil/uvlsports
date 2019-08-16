@@ -41,6 +41,15 @@ function saveTextEditorImage($detail)
     return $detail = $dom->savehtml();
 }
 
+
+/*
+ * RETURNS ADMIN EMAIL FOR EMAILING
+ */
+function adminEmails()
+{
+    return \App\User::whereIn('role', [1, 2])->select('email')->get();
+}
+
 function defaultSeo($data, $pageName = null)
 {
     // SEO

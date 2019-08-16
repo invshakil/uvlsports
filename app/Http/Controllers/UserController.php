@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Category;
+use App\Events\NewArticleSubmitted;
 use App\Favorite;
 use App\User;
 use Illuminate\Http\Request;
@@ -94,6 +95,13 @@ class UserController extends Controller
         $new->user_id = auth()->user()->id;
         $new->save();
 
+        $articleData = [
+            'article_id' => $new->id,
+            'author' => $new->author->name,
+            'title' => $new->title,
+            'created_at' => $new->created_at->format('d, F Y h:i A'),
+        ];
+        event(new NewArticleSubmitted(adminEmails(), $articleData));
         return back()->with('message', 'Article Submitted for approval.');
     }
 
