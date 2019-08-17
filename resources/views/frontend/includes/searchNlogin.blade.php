@@ -24,7 +24,7 @@
                             <div class="input-group" id="top-login-username">
                                 <span class="input-group-addon"><img
                                             src="{{ asset('frontend') }}/images/others/user-icon.png" alt=""/></span>
-                                <input type="text" name="email" class="form-control" placeholder="Username" required="">
+                                <input type="email" name="email" class="form-control" placeholder="Enter registered e-mail" required="">
                             </div>
                             <div class="input-group" id="top-login-password">
                                 <span class="input-group-addon"><img
