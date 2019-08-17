@@ -10,6 +10,7 @@ return array(
     'Rap2hpoutre\\LaravelLogViewer\\' => array($vendorDir . '/rap2hpoutre/laravel-log-viewer/src'),
     'Parsedown' => array($vendorDir . '/erusev/parsedown'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
+    'Laravelium\\Sitemap' => array($vendorDir . '/laravelium/sitemap/src'),
     'Google_Service_' => array($vendorDir . '/google/apiclient-services/src'),
     'Google_' => array($vendorDir . '/google/apiclient/src'),
     'Barryvdh' => array($vendorDir . '/barryvdh/reflection-docblock/src'),

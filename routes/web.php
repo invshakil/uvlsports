@@ -31,6 +31,44 @@ Route::get('/match-schedule/search', ['as' => 'match.schedule', 'uses' => 'HomeC
 Route::post('/create-subscribe', ['as' => 'create.subscriber', 'uses' => 'HomeController@CreateSubscriber']);
 Route::post('/save-favorite-article', ['as' => 'save.favorite', 'uses' => 'UserController@SaveFavorite']);
 
+Route::get('sitemap', function () {
+
+    // create new sitemap object
+    $sitemap = App::make('sitemap');
+
+    // set cache key (string), duration in minutes (Carbon|Datetime|int), turn on/off (boolean)
+    // by default cache is disabled
+    $sitemap->setCache('uvlsports.sitemap', 60);
+
+    // check if there is cached sitemap and build new only if is not
+    if (!$sitemap->isCached()) {
+        // add item to the sitemap (url, date, priority, freq)
+        $sitemap->add(URL::to('/'), time(), '1.0', 'daily');
+        $sitemap->add(URL::to('/about-us'), time(), '0.9', 'monthly');
+        $sitemap->add(URL::to('/contact-us'), time(), '0.9', 'monthly');
+        $sitemap->add(URL::to('/tv-schedule'), time(), '0.9', 'monthly');
+        $sitemap->add(URL::to('/authors-list'), time(), '0.9', 'monthly');
+        // get all posts from db
+        $posts = \App\Article::with('author:id,name')->orderBy('created_at', 'desc')->where('status', 1)->get();
+        // get all categories
+        $cats = \App\Category::select('id', 'name')->where('status', 1)->get();
+
+        // add every cats to the sitemap
+        foreach ($cats as $cat) {
+            $sitemap->add('/category/' . str_replace(' ', '-', $cat->name), time(), '0.8', 'daily');
+        }
+
+        // add every post to the sitemap
+        foreach ($posts as $key => $post) {
+            $sitemap->add('/article/' . $post->id . '/' . $post->slug, $post->updated_at, '0.7', 'monthly');
+        }
+
+    }
+
+    // show your sitemap (options: 'xml' (default), 'html', 'txt', 'ror-rss', 'ror-rdf')
+    return $sitemap->render('xml');
+});
+
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 /*
  * AUTHENTICATION ROUTES

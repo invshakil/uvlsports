@@ -2006,6 +2006,69 @@
         ]
     },
     {
+        "name": "laravelium/sitemap",
+        "version": "v2.7.3",
+        "version_normalized": "2.7.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://gitlab.com/Laravelium/Sitemap.git",
+            "reference": "fe11a834fbd495e81c1b36b0bfa0fa1954bc4db1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://gitlab.com/api/v4/projects/Laravelium%2FSitemap/repository/archive.zip?sha=fe11a834fbd495e81c1b36b0bfa0fa1954bc4db1",
+            "reference": "fe11a834fbd495e81c1b36b0bfa0fa1954bc4db1",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "5.5.*",
+            "php": ">=7.0.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "3.5.*",
+            "phpunit/phpunit": "~6.0"
+        },
+        "time": "2018-09-04T12:36:37+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Laravelium\\Sitemap\\SitemapServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Laravelium\\Sitemap": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roumen Damianoff",
+                "role": "Developer",
+                "email": "roumen@damianoff.com",
+                "homepage": "https://damianoff.com"
+            }
+        ],
+        "description": "Laravelium Sitemap package for Laravel.",
+        "homepage": "https://laravelium.com",
+        "keywords": [
+            "Sitemap",
+            "generator",
+            "google-news",
+            "html",
+            "laravel",
+            "laravelium",
+            "php",
+            "xml"
+        ]
+    },
+    {
         "name": "league/flysystem",
         "version": "1.0.53",
         "version_normalized": "1.0.53.0",

@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.46 on 2019-08-16 08:06:30.
+ * Generated for Laravel 5.5.46 on 2019-08-17 11:05:47.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14487,6 +14487,161 @@ namespace Barryvdh\Debugbar {
  
 }
 
+namespace Spatie\Analytics { 
+
+    /**
+     * 
+     *
+     * @see \Spatie\Analytics\Analytics
+     */ 
+    class AnalyticsFacade {
+        
+        /**
+         * 
+         *
+         * @param string $viewId
+         * @return \Spatie\Analytics\Analytics 
+         * @static 
+         */ 
+        public static function setViewId($viewId)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->setViewId($viewId);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchVisitorsAndPageViews($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchVisitorsAndPageViews($period);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTotalVisitorsAndPageViews($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTotalVisitorsAndPageViews($period);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchMostVisitedPages($period, $maxResults = 20)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchMostVisitedPages($period, $maxResults);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTopReferrers($period, $maxResults = 20)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTopReferrers($period, $maxResults);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchUserTypes($period)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchUserTypes($period);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function fetchTopBrowsers($period, $maxResults = 10)
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->fetchTopBrowsers($period, $maxResults);
+        }
+        
+        /**
+         * Call the query method on the authenticated client.
+         *
+         * @param \Spatie\Analytics\Period $period
+         * @param string $metrics
+         * @param array $others
+         * @return array|null 
+         * @static 
+         */ 
+        public static function performQuery($period, $metrics, $others = array())
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->performQuery($period, $metrics, $others);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getAnalyticsService()
+        {
+                        /** @var \Spatie\Analytics\Analytics $instance */
+                        return $instance->getAnalyticsService();
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Spatie\Analytics\Analytics::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @return void 
+         * @static 
+         */ 
+        public static function mixin($mixin)
+        {
+                        \Spatie\Analytics\Analytics::mixin($mixin);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Spatie\Analytics\Analytics::hasMacro($name);
+        }
+         
+    }
+ 
+}
+
 namespace Intervention\Image\Facades { 
 
     /**
@@ -16856,6 +17011,8 @@ namespace  {
     class Socialite extends \Laravel\Socialite\Facades\Socialite {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
+
+    class Analytics extends \Spatie\Analytics\AnalyticsFacade {}
 
     class Image extends \Intervention\Image\Facades\Image {}
  

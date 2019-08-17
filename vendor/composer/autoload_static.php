@@ -493,6 +493,13 @@ class ComposerStaticInit8a652b1e177d56afbd0fabf3eb08065f
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
         ),
+        'L' => 
+        array (
+            'Laravelium\\Sitemap' => 
+            array (
+                0 => __DIR__ . '/..' . '/laravelium/sitemap/src',
+            ),
+        ),
         'G' => 
         array (
             'Google_Service_' => 
@@ -517,6 +524,7 @@ class ComposerStaticInit8a652b1e177d56afbd0fabf3eb08065f
         'App\\Article' => __DIR__ . '/../..' . '/app/Article.php',
         'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Events\\NewArticleSubmitted' => __DIR__ . '/../..' . '/app/Events/NewArticleSubmitted.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Favorite' => __DIR__ . '/../..' . '/app/Favorite.php',
         'App\\GameWeek' => __DIR__ . '/../..' . '/app/GameWeek.php',
@@ -542,6 +550,8 @@ class ComposerStaticInit8a652b1e177d56afbd0fabf3eb08065f
         'App\\Image\\ImageDimensions' => __DIR__ . '/../..' . '/app/Image/ImageDimensions.php',
         'App\\Image\\ImagePaths' => __DIR__ . '/../..' . '/app/Image/ImagePaths.php',
         'App\\Image\\ImageUpload' => __DIR__ . '/../..' . '/app/Image/ImageUpload.php',
+        'App\\Listeners\\SendEmailAlert' => __DIR__ . '/../..' . '/app/Listeners/SendEmailAlert.php',
+        'App\\Mail\\ArticleAlertMail' => __DIR__ . '/../..' . '/app/Mail/ArticleAlertMail.php',
         'App\\Mail\\ContactUs' => __DIR__ . '/../..' . '/app/Mail/ContactUs.php',
         'App\\MatchSchedule' => __DIR__ . '/../..' . '/app/MatchSchedule.php',
         'App\\Module' => __DIR__ . '/../..' . '/app/Module.php',
@@ -12268,6 +12278,9 @@ class ComposerStaticInit8a652b1e177d56afbd0fabf3eb08065f
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
         'Laravel\\Tinker\\TinkerServiceProvider' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerServiceProvider.php',
+        'Laravelium\\Sitemap\\Model' => __DIR__ . '/..' . '/laravelium/sitemap/src/Laravelium/Sitemap/Model.php',
+        'Laravelium\\Sitemap\\Sitemap' => __DIR__ . '/..' . '/laravelium/sitemap/src/Laravelium/Sitemap/Sitemap.php',
+        'Laravelium\\Sitemap\\SitemapServiceProvider' => __DIR__ . '/..' . '/laravelium/sitemap/src/Laravelium/Sitemap/SitemapServiceProvider.php',
         'League\\Flysystem\\AdapterInterface' => __DIR__ . '/..' . '/league/flysystem/src/AdapterInterface.php',
         'League\\Flysystem\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractAdapter.php',
         'League\\Flysystem\\Adapter\\AbstractFtpAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractFtpAdapter.php',
