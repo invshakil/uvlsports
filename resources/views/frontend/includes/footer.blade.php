@@ -65,9 +65,17 @@
 </div>
 
 <div class="footer-bottom">
-    <div class="container text-center">
-        <p><a href="https://www.sshakil.com" target="_blank">Developed By Md. Syful Islam
+    <div class="container">
+        <div class="col-md-4 col-xs-12" style="padding-left: 0">
+            <a href="{{ url('/robots.txt') }}">Robots</a>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <a href="https://www.sshakil.com" target="_blank">Developed By Md. Syful Islam
                 Shakil </a>&copy; {{ date('Y') }}
-        </p>
+        </div>
+        <div class="col-md-4 col-xs-12" style="padding-right: 0; text-align: right">
+            <a href="{{ url('/sitemap') }}">Sitemap</a>
+        </div>
     </div>
+
 </div>
