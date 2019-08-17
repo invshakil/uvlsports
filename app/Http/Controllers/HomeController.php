@@ -256,8 +256,15 @@ class HomeController extends Controller
     {
         $str = $request->string;
 
-        $result = MatchSchedule::with('game_week', 'tournament')->where('title', "LIKE", "%" . $str . "%")
+        $result = MatchSchedule::with('game_week', 'tournament')
+            ->whereHas('game_week', function ($q) {
+                return $q->orderBy('id', 'desc')->first();
+            })
+            ->where('title', "LIKE", "%" . $str . "%")
             ->orWhere('channel_name', "LIKE", "%" . $str . "%")
+            ->orWhereHas('tournament', function ($q) use ($str) {
+                return $q->where('name', "LIKE", "%" . $str . "%");
+            })
             ->get();
 
         return response()->json($result);
