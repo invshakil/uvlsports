@@ -255,16 +255,15 @@ class HomeController extends Controller
     public function SearchMatch(Request $request)
     {
         $str = $request->string;
-
+        $last_game_week = GameWeek::orderBy('id', 'desc')->first();
         $result = MatchSchedule::with('game_week', 'tournament')
-            ->whereHas('game_week', function ($q) {
-                return $q->orderBy('id', 'desc')->first();
-            })
+            ->where('game_week_id', $last_game_week->id)
             ->where('title', "LIKE", "%" . $str . "%")
             ->orWhere('channel_name', "LIKE", "%" . $str . "%")
             ->orWhereHas('tournament', function ($q) use ($str) {
                 return $q->where('name', "LIKE", "%" . $str . "%");
             })
+            ->orderBy('time', 'asc')
             ->get();
 
         return response()->json($result);
