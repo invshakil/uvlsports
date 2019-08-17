@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -31,6 +32,27 @@ class LoginController extends Controller
         }
 
         return redirect('/account');
+    }
+
+    /**
+     * Attempt to log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request)
+    {
+        $user = \App\User::where([
+            'email' => $request->email,
+            'password' => md5($request->password)
+        ])->first();
+
+        if ($user) {
+            $this->guard()->login($user, $request->has('remember'));
+            return true;
+        }
+
+        return false;
     }
 
     /**

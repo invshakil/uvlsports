@@ -70,7 +70,7 @@ class SocialLoginController extends Controller
 			$newSocialUser -> name = $user -> name;
 			$newSocialUser -> image = $user -> avatar_original;
 			$newSocialUser -> role = 3;
-			$newSocialUser -> password = bcrypt(str_random(16));
+			$newSocialUser -> password = md5(str_random(16));
 			
 			$newSocialUser -> save();
 			
