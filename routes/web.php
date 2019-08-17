@@ -21,7 +21,7 @@ Route::get('category/{slug}', ['as' => 'article.by.category', 'uses' => 'HomeCon
 Route::get('/news-details/{id}/{cat_id}/{slug}', ['as' => 'article.details', 'uses' => 'HomeController@ArticleDetails2']);
 Route::get('/article/{id}/{slug}', ['as' => 'article.details', 'uses' => 'HomeController@ArticleDetails']);
 Route::get('/authors-list', ['as' => 'author.list', 'uses' => 'HomeController@GetAuthorList']);
-Route::get('/user-profile/index/{id}', ['as' => 'old.user.profile', 'uses' => 'HomeController@UserProfile']);
+//Route::get('/user-profile/index/{id}', ['as' => 'old.user.profile', 'uses' => 'HomeController@UserProfile']);
 Route::get('/author/{id}/{name}', ['as' => 'user.profile', 'uses' => 'HomeController@UserProfile']);
 Route::get('/contact-us', ['as' => 'contact.us', 'uses' => 'HomeController@ContactUs']);
 Route::post('/contact-us', ['as' => 'submit.contact.form', 'uses' => 'HomeController@SubmitContactForm']);

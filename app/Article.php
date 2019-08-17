@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Image\ImagePaths;
-use function foo\func;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 
@@ -14,7 +13,7 @@ class Article extends Model
         $categories = \Cache::remember('categories', 3600, function (){
             return Category::select('id', 'name', 'bangla_name')->get();
         });
-        return $categories->where('id', $id)->first()->name;
+        return $categories->where('id', $id)->first() ? $categories->where('id', $id)->first()->name : null;
     }
 
     public function author()

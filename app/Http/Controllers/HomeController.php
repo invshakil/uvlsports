@@ -158,31 +158,32 @@ class HomeController extends Controller
 
     public function ArticleDetails2($id, $cat_id, $slug)
     {
-        $data = array();
-
-        $hit = Article::where(['id' => $id, 'slug' => $slug, 'status' => 1])->value('hit_count');
-
-        Article::where('id', $id)->update(['hit_count' => $hit + 1]);
-
-        $info = Article::with('favorites')->withCount('favorites')->with('author')->where(['id' => $id, 'slug' => $slug, 'status' => 1])->first();
-
-        $categories = explode(',', $info->category_id);
-        $category_id = $categories[0];
-
-        $data['info'] = $info;
-        $data['title'] = $info->title;
-        $data['popular_articles'] = $this->MostPopularArticle(5);
-        $data['latest_articles'] = $this->LatestArticle(5);
-        $data['related_articles'] = Article::with('favorites')->withCount('favorites')->whereRaw("FIND_IN_SET('" . $category_id . "', category_id)")
-            ->where('status', 1)->inRandomOrder()->limit(6)->get();
-
-        $data['image'] = asset('image_upload/post_image/' . $info->image);
-        $data['description'] = $info->meta_keyword;
-        $data['keyword'] = $info->tags;
-        $data['type'] = "article";
-        $data = defaultSeo($data);
-
-        return view('frontend.article.index', $data);
+        return redirect('/article/'.$id.'/'.$slug);
+//        $data = array();
+//
+//        $hit = Article::where(['id' => $id, 'slug' => $slug, 'status' => 1])->value('hit_count');
+//
+//        Article::where('id', $id)->update(['hit_count' => $hit + 1]);
+//
+//        $info = Article::with('favorites')->withCount('favorites')->with('author')->where(['id' => $id, 'slug' => $slug, 'status' => 1])->first();
+//
+//        $categories = explode(',', $info->category_id);
+//        $category_id = $categories[0];
+//
+//        $data['info'] = $info;
+//        $data['title'] = $info->title;
+//        $data['popular_articles'] = $this->MostPopularArticle(5);
+//        $data['latest_articles'] = $this->LatestArticle(5);
+//        $data['related_articles'] = Article::with('favorites')->withCount('favorites')->whereRaw("FIND_IN_SET('" . $category_id . "', category_id)")
+//            ->where('status', 1)->inRandomOrder()->limit(6)->get();
+//
+//        $data['image'] = asset('image_upload/post_image/' . $info->image);
+//        $data['description'] = $info->meta_keyword;
+//        $data['keyword'] = $info->tags;
+//        $data['type'] = "article";
+//        $data = defaultSeo($data);
+//
+//        return view('frontend.article.index', $data);
     }
 
     public function GetAuthorList()
