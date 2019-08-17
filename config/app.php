@@ -186,6 +186,7 @@ return [
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
+        Laravelium\Sitemap\SitemapServiceProvider::class
     ],
 
     /*
