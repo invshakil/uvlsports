@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\InvalidStateException;
 
 class SocialLoginController extends Controller
 {
@@ -37,8 +38,13 @@ class SocialLoginController extends Controller
 				-> with('message', 'You did not share your profile data with our social app.');
 			
 		}
-		
-		$user = Socialite ::driver($provider) -> user();
+
+//		$user = Socialite ::driver($provider) -> user();
+        try {
+            $user = Socialite::driver($provider)->user();
+        } catch (InvalidStateException $e) {
+            $user = Socialite::driver($provider)->stateless()->user();
+        }
 		
 		$socialUser = null;
 		
