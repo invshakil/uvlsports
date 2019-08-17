@@ -132,6 +132,9 @@ class HomeController extends Controller
         $data = array();
 
         $info = Article::with('favorites')->withCount('favorites')->with('author')->where(['id' => $id, 'slug' => $slug, 'status' => 1])->first();
+        if (!$info) {
+            abort(404, 'Not Found');
+        }
         Article::where('id', $id)->update(['hit_count' => $info->hit_count + 1]);
 
         $categories = explode(',', $info->category_id);
@@ -241,7 +244,7 @@ class HomeController extends Controller
         $data = array();
         $data['title'] = 'TV Schedule';
 
-        $last_game_week = GameWeek::orderBy('id', 'desc')->first();
+        $last_game_week = GameWeek::orderBy('time', 'asc')->first();
         $data['game_week_name'] = $last_game_week->name;
         $data['match_schedules'] = MatchSchedule::with('game_week', 'tournament')->where('game_week_id', $last_game_week->id)->get();
         $data = defaultSeo($data);

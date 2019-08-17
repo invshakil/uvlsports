@@ -178,6 +178,9 @@
                                                         <textarea name="description" id="description"
                                                                   class="form-control"
                                                                   title="">{{ old('description', $info->description) }}</textarea>
+                                                        <button type="button" onclick="fixDescription()"
+                                                                class="btn btn-danger btn-sm">Auto Fix
+                                                        </button>
                                                         @if ($errors->has('description'))
                                                             <div class="has-error">
                                                                 <strong>* {{ $errors->first('description') }}</strong>
@@ -389,6 +392,32 @@
 
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        function fixDescription() {
+            let selector = $('#description');
+            let description = selector.val();
+            let fix1 = fix('।', description)
+            let fix2 = fix(',', fix1)
+            if (fix2.endsWith('।,')) {
+                fix2 = fix2.substring(0, fix2.length - 2);
+            }
+            selector.summernote("code", fix2);
+        }
+
+        function fix(string, description) {
+            let desc = description.split(string);
+            description = '';
+            desc.forEach(des => {
+                if (des.charAt(0) !== " ") {
+                    des = " " + des
+                }
+                if (des.endsWith(" ") === true) {
+                    des = des.substring(0, des.length - 1);
+                }
+                description += (des + string)
+            })
+            return description;
         }
     </script>
 @endsection
