@@ -244,9 +244,9 @@ class HomeController extends Controller
         $data = array();
         $data['title'] = 'TV Schedule';
 
-        $last_game_week = GameWeek::orderBy('time', 'asc')->first();
+        $last_game_week = GameWeek::orderBy('id', 'desc')->first();
         $data['game_week_name'] = $last_game_week->name;
-        $data['match_schedules'] = MatchSchedule::with('game_week', 'tournament')->where('game_week_id', $last_game_week->id)->get();
+        $data['match_schedules'] = MatchSchedule::with('game_week', 'tournament')->where('game_week_id', $last_game_week->id)->orderBy('time', 'asc')->get();
         $data = defaultSeo($data);
 
         return view('frontend.tv_schedule.index', $data);
