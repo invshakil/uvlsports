@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -22,7 +23,7 @@
 
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="@if(isset($type)) {{$type}} @else website @endif">
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!--CSS-->
 
 <!--Google Fonts-->
@@ -42,18 +43,44 @@
       href="{{ asset('frontend') }}/images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('frontend') }}/images/ico/apple-touch-icon-57-precomposed.png">
 
+@if(env('APP_ENV') == 'production')
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44033160-2"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() {
         dataLayer.push(arguments);
     }
+
     gtag('js', new Date());
 
     gtag('config', 'UA-44033160-2');
 </script>
-
+<!-- Google Tag Manager -->
+<script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NK8RSKS');</script>
+<!-- End Google Tag Manager -->
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NK8RSKS"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+@endif
+<script>
+    var baseUrl = "{{ env('APP_URL') }}"
+</script>
 
 <style>
     .pagination li a:hover, .pagination .active > a, .pagination .active > a:focus, .pagination .active > a:hover, .subscribe-me button, .btn-danger {
@@ -97,8 +124,31 @@
     .logged-in-dropdown div {
         text-align: right;
     }
+
     .widget .post-list li{
         padding: 0;
+    }
+
+    .scrollbar {
+        height: 900px;
+        overflow-y: scroll;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background-color: #F5F5F5;
+    }
+
+    .scrollbar::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+        background-color: #555;
     }
 </style>
 

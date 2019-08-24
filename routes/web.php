@@ -30,6 +30,7 @@ Route::get('/tv-schedule', ['as' => 'tv.schedule', 'uses' => 'HomeController@TvS
 Route::get('/match-schedule/search', ['as' => 'match.schedule', 'uses' => 'HomeController@SearchMatch']);
 Route::post('/create-subscribe', ['as' => 'create.subscriber', 'uses' => 'HomeController@CreateSubscriber']);
 Route::post('/save-favorite-article', ['as' => 'save.favorite', 'uses' => 'UserController@SaveFavorite']);
+Route::get('/latest-short-stories', ['as' => 'get.latest.stories', 'uses' => 'HomeController@getLatestStories']);
 
 Route::get('sitemap', function () {
 

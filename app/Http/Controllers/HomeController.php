@@ -297,4 +297,26 @@ class HomeController extends Controller
         Mail::to(['uvlsports@gmail.com', 'inverse.shakil@gmail.com', 'rahiksumail@gmail.com'], 'UVL Sports')->send(new ContactUs($data));
         return back()->with('success', 'We have received your email. We will get back at you as soon as possible. thanks for being in touch with us!');
     }
+
+    public function getLatestStories(Request $request)
+    {
+
+        $data = array();
+        $query = Tweet::orderBy('id', 'asc');
+        if ($request->has('page')) {
+            $set = $request->set;
+            $page = $request->page * $set;
+            $results = $query->skip($page)->take($set)->get();
+            return response()->json($results);
+        } else {
+            $set = 10;
+            $page = 0;
+            $results = $query->skip($page)->take($set)->get();
+        }
+        $data['title'] = 'খেলার সর্বশেষ সংবাদ';
+        $data['latest_articles'] = $this->LatestArticle(10);
+        $data = defaultSeo($data);
+        $data['tweets'] = $results;
+        return view('frontend.latest_short_stories.index', $data);
+    }
 }

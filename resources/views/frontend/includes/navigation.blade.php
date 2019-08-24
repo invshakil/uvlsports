@@ -148,9 +148,9 @@
             <a href="{{ url('authors-list') }}">লেখকদের প্রোফাইল</a>
         </li>
 
-        {{--<li class="home">--}}
-            {{--<a href="{{ url('latest-short-stories') }}">খেলার সর্বশেষ সংবাদ</a>--}}
-        {{--</li>--}}
+        <li class="home">
+            <a href="{{ url('latest-short-stories') }}">খেলার সর্বশেষ সংবাদ</a>
+        </li>
 
         <li class="home">
             <a href="{{ url('tv-schedule') }}">খেলার সময়সূচী</a>

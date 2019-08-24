@@ -45,3 +45,7 @@ mix.combine([
     'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
 
 ], 'public/js/app.js');
+
+mix
+    .js('resources/assets/js/tweets/index.js', 'public/js/modules/tweets.js')
+;

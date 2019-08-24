@@ -5,7 +5,7 @@
 
     @yield('after_style')
 </head><!--/head-->
-<body>
+<body class="scrollbar">
 
 <div id="main-wrapper" class="homepage">
     <header id="navigation">
