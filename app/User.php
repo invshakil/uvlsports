@@ -47,6 +47,11 @@ class User extends Authenticatable
 		return $this->hasMany(Favorite ::class, 'user_id', 'id');
 	}
 
+    public function hasTweetPermission()
+    {
+        return $this->hasOne(TweetPermission::class, 'user_id');
+    }
+
     public function getUserAvatarAttribute()
     {
         if ($this->image == null) {

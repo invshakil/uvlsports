@@ -42,7 +42,6 @@
 <link rel="apple-touch-icon-precomposed" sizes="72x72"
       href="{{ asset('frontend') }}/images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('frontend') }}/images/ico/apple-touch-icon-57-precomposed.png">
-
 @if(env('APP_ENV') == 'production')
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44033160-2"></script>
@@ -149,6 +148,10 @@
         border-radius: 10px;
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
         background-color: #555;
+    }
+
+    head, body {
+        font-family: 'Merriweather', 'SolaimanLipi', sans-serif;
     }
 </style>
 

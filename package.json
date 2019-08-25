@@ -19,6 +19,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "vue-infinite-loading": "^2.4.4"
+        "vue-infinite-loading": "^2.4.4",
+        "vue-toastr": "^2.1.2",
+        "vuelidate": "^0.7.4"
     }
 }

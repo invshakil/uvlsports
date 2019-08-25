@@ -27,6 +27,7 @@ mix.combine([
     'public/frontend/css/presets/preset1.css',
     'public/frontend/css/responsive.css',
     'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.min.css',
+    'http://mdminhazulhaque.github.io/solaimanlipi/css/solaimanlipi.css',
 
 ], 'public/css/app.css');
 

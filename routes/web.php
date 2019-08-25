@@ -106,6 +106,7 @@ Route::get('/account/favorite-articles', 'UserController@FavoriteArticles')->nam
 Route::get('/account/saved-articles', 'UserController@SavedArticle')->name('saved.articles')->middleware('auth');
 
 
+
 /*
  * SOCIAL LOGIN WITH FACEBOOK / TWITTER / GMAIL
  */

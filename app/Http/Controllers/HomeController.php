@@ -302,7 +302,7 @@ class HomeController extends Controller
     {
 
         $data = array();
-        $query = Tweet::orderBy('id', 'asc');
+        $query = Tweet::orderBy('id', 'desc');
         if ($request->has('page')) {
             $set = $request->set;
             $page = $request->page * $set;
@@ -317,6 +317,7 @@ class HomeController extends Controller
         $data['latest_articles'] = $this->LatestArticle(10);
         $data = defaultSeo($data);
         $data['tweets'] = $results;
+        $data['isAllowed'] = (new Tweet())->isAllowed();
         return view('frontend.latest_short_stories.index', $data);
     }
 }

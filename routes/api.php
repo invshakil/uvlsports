@@ -18,3 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/get-more-tweets', ['as'=> 'api.load_more_tweets', 'uses' => 'HomeController@getLatestStories']);
+//Route::get('/get-more-tweets', ['as' => 'api.load_more_tweets', 'uses' => 'HomeController@getLatestStories'])->middleware('auth.api');
+
+Route::post('/account/save-tweet', 'TweetController@save')->name('save.tweet');
+Route::patch('/account/update-tweet/{id}', 'TweetController@update')->name('update.tweet');
+Route::delete('/account/delete-tweet/{id}', 'TweetController@delete')->name('delete.tweet');
