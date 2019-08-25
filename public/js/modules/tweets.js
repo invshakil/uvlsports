@@ -16114,7 +16114,7 @@ var render = function() {
                             staticClass: "control-label",
                             attrs: { for: "title" }
                           },
-                          [_vm._v("Title")]
+                          [_vm._v("Title (*)")]
                         ),
                         _vm._v(" "),
                         _c("input", {
@@ -16176,7 +16176,7 @@ var render = function() {
                             staticClass: "control-label",
                             attrs: { for: "image" }
                           },
-                          [_vm._v("Image Url")]
+                          [_vm._v("Image Url (Optional)")]
                         ),
                         _vm._v(" "),
                         _c("input", {
@@ -16245,7 +16245,7 @@ var render = function() {
                             staticClass: "control-label",
                             attrs: { for: "description" }
                           },
-                          [_vm._v("Description")]
+                          [_vm._v("Description (*)")]
                         ),
                         _vm._v(" "),
                         _c("textarea", {

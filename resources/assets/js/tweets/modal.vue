@@ -16,7 +16,7 @@
                 <form method="post" @submit.prevent="validateBeforeSubmit">
 
                     <div :class="{'form-group': true, 'has-error': errors.title.length > 0}">
-                        <label class="control-label" for="title">Title</label>
+                        <label class="control-label" for="title">Title (*)</label>
                         <input type="text" id="title"
                                :class="['form-control']"
                                name="title"
@@ -29,7 +29,7 @@
                     </div>
 
                     <div :class="{'form-group': true, 'has-error': errors.image.length > 0}">
-                        <label class="control-label" for="image">Image Url</label>
+                        <label class="control-label" for="image">Image Url (Optional)</label>
                         <input type="text" id="image"
                                :class="['form-control']"
                                v-model.lazy="form.image"
@@ -46,7 +46,7 @@
                     </div>
 
                     <div :class="{'form-group':true, 'has-error': errors.description.length > 0}">
-                        <label class="control-label" for="description">Description</label>
+                        <label class="control-label" for="description">Description (*)</label>
                         <textarea type="text" id="description"
                                   :class="['form-control']"
                                   v-model.trim="form.description"

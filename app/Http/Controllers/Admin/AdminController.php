@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Analytics;
 use App\Article;
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\TweetPermission;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -121,11 +121,12 @@ class AdminController extends Controller
 
         if (count($request->all()) > 0) {
             $string = $request->string;
-            $data['users'] = User::where('name', "LIKE", "%" . $string . "%")
+            $data['users'] = User::with('hasTweetPermission')
+                ->where('name', "LIKE", "%" . $string . "%")
                 ->orWhere('email', "LIKE", "%" . $string . "%")
                 ->orderBy('role', 'asc')->paginate(20);
         } else {
-            $data['users'] = User::orderBy('role', 'asc')->orderBy('created_at', 'desc')->paginate(20);
+            $data['users'] = User::orderBy('role', 'asc')->with('hasTweetPermission')->orderBy('created_at', 'desc')->paginate(20);
         }
 
 
@@ -210,6 +211,29 @@ class AdminController extends Controller
         return back()->with($notification);
 
 
+    }
+
+    function tweetAccessForUser($id)
+    {
+        $user = User::find($id);
+        if (!$user->hasTweetPermission) {
+            $new = new TweetPermission();
+            $new->user_id = $id;
+            $new->save();
+            $notification = array(
+                'message' => 'Tweet Access granted!',
+                'alert-type' => 'success'
+            );
+        } else {
+            TweetPermission::where('user_id', $id)->delete();
+            $notification = array(
+                'message' => 'Tweet Access revoked!',
+                'alert-type' => 'error'
+            );
+        }
+
+
+        return back()->with($notification);
     }
 
     /*

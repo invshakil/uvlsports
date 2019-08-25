@@ -73,21 +73,50 @@
                                                     <td>
                                                         @if($user->role > 1)
                                                         <div class="pull-left">
-                                                            <a href="{{ route('promote.user', ['id'=>$user->id]) }}" onclick="return confirm('Are you sure about to promote this user?')" class="btn btn-success btn-sm"><i
-                                                                        class="la la-arrow-up"></i> Promote</a>
+                                                            <a href="{{ route('promote.user', ['id'=>$user->id]) }}"
+                                                               onclick="return confirm('Are you sure about to promote this user?')"
+                                                               class="btn btn-success-outline btn-sm">
+                                                                <i class="la la-arrow-up"></i> P
+                                                            </a>
                                                         </div>
                                                         @endif
 
-                                                            @if($user->role != 3)
+                                                        @if($user->role != 3)
                                                         <div class="pull-left">
-                                                            <a href="{{ route('demote.user', ['id'=>$user->id]) }}" onclick="return confirm('Are you sure about to demote this user?')" class="btn btn-warning btn-sm"><i
-                                                                        class="la la-arrow-down"></i> Demote</a>
+                                                            <a href="{{ route('demote.user', ['id'=>$user->id]) }}"
+                                                               onclick="return confirm('Are you sure about to demote this user?')"
+                                                               class="btn btn-warning-outline btn-sm">
+                                                                <i class="la la-arrow-down"></i> D
+                                                            </a>
                                                         </div>
-                                                            @endif
+                                                        @endif
+
+                                                        @if($user->role == 3 && !$user->hasTweetPermission)
+                                                            <div class="pull-left">
+                                                                <a href="{{ route('tweet.access', ['id'=>$user->id]) }}"
+                                                                   onclick="return confirm('Are you sure about granting tweet access to this user?')"
+                                                                   class="btn btn-info-outline btn-sm">
+                                                                    <i class="la la-check-square-o"></i> Grant Tweet
+                                                                    Access
+                                                                </a>
+                                                            </div>
+                                                        @elseif($user->role == 3)
+                                                            <div class="pull-left">
+                                                                <a href="{{ route('tweet.access', ['id'=>$user->id]) }}"
+                                                                   onclick="return confirm('Are you sure about revoking tweet access of this user?')"
+                                                                   class="btn btn-danger-outline btn-sm">
+                                                                    <i class="la la-times-circle-o"></i> Revoke Tweet
+                                                                    Access
+                                                                </a>
+                                                            </div>
+                                                        @endif
 
                                                         <div class="pull-right">
-                                                            <a href="{{ route('delete.user', ['id'=>$user->id]) }}" onclick="return confirm('Are you sure about to delete this user?')" class="btn btn-danger btn-sm"><i
-                                                                        class="la la-trash-o"></i> Delete</a>
+                                                            <a href="{{ route('delete.user', ['id'=>$user->id]) }}"
+                                                               onclick="return confirm('Are you sure about to delete this user?')"
+                                                               class="btn btn-danger btn-sm">
+                                                                <i class="la la-trash-o"></i>
+                                                            </a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -143,27 +172,5 @@
             </div>
         </div>
     </div>
-
-
-    {{--<link rel="stylesheet" type="text/css" href="libs/bootstrap-table/bootstrap-table.min.css"> <!-- Original -->--}}
-    {{--<link rel="stylesheet" type="text/css"--}}
-    {{--href="{{ asset('admin/') }}/assets/styles/libs/bootstrap-table/bootstrap-table.min.css"> <!-- Customization -->--}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/') }}/assets/styles/apps/crm/users-list.min.css">
-
-    {{--<script src="{{ asset('admin/') }}/libs/bootstrap-table/bootstrap-table.min.js"></script>--}}
-    <script type="application/javascript">
-        (function ($) {
-            $(document).ready(function () {
-//                $('#ks-datatable').bootstrapTable({
-//                    icons: {
-//                        refresh: 'la la-refresh icon-refresh',
-//                        toggle: 'la la-list-alt icon-list-alt',
-//                        columns: 'la la-th icon-th',
-//                        share: 'la la-download icon-share'
-//                    }
-//                });
-            });
-        })(jQuery);
-    </script>
 
 @endsection

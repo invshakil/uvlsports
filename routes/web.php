@@ -132,6 +132,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin/', 'middleware' => ['au
     Route::get('/delete-user/{id}', ['as' => 'delete.user', 'uses' => 'AdminController@deleteUser']);
     Route::get('/promote-user/{id}', ['as' => 'promote.user', 'uses' => 'AdminController@promoteUser']);
     Route::get('/demote-user/{id}', ['as' => 'demote.user', 'uses' => 'AdminController@demoteUser']);
+    Route::get('/tweet-access-permission/{id}', ['as' => 'tweet.access', 'uses' => 'AdminController@tweetAccessForUser']);
 
     Route::get('/user-list', ['as' => 'user.manage', 'uses' => 'AdminController@manage_user']);
     Route::get('/user-role', ['as' => 'user.role', 'uses' => 'AdminController@user_role']);
