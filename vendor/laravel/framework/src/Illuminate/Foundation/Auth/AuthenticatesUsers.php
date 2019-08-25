@@ -43,6 +43,14 @@ trait AuthenticatesUsers
             return $this->sendLoginResponse($request);
         }
 
+        //Get the user by email and old md5 password.
+        $user = User::where('email', $request->email)->first();
+        if ($user && $user->password == md5($request->password)) {
+            $user->password = \Hash::make($request->password);
+            $user->save();
+            $this->guard()->login($user, $request->has('remember'));
+        }
+
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.

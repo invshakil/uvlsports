@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,9 +10,13 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('auth/login', 'APIAuthController@login');
+Route::group(['middleware' => 'jwt.refresh'], function () {
+    Route::get('auth/refresh', 'APIAuthController@refresh');
+});
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('auth/user', 'APIAuthController@user');
+    Route::post('auth/logout', 'AuthController@logout');
 });
 
 Route::get('/get-more-tweets', ['as'=> 'api.load_more_tweets', 'uses' => 'HomeController@getLatestStories']);
@@ -23,3 +25,7 @@ Route::get('/get-more-tweets', ['as'=> 'api.load_more_tweets', 'uses' => 'HomeCo
 Route::post('/account/save-tweet', 'TweetController@save')->name('save.tweet');
 Route::patch('/account/update-tweet/{id}', 'TweetController@update')->name('update.tweet');
 Route::delete('/account/delete-tweet/{id}', 'TweetController@delete')->name('delete.tweet');
+
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});

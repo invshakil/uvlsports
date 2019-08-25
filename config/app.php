@@ -188,6 +188,7 @@ return [
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Laravelium\Sitemap\SitemapServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
     ],
 
@@ -240,6 +241,7 @@ return [
 		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
     ],
 
 ];

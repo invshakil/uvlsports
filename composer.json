@@ -16,7 +16,8 @@
         "laravel/tinker": "~1.0",
         "laravelium/sitemap": "2.7.*",
         "rap2hpoutre/laravel-log-viewer": "^1.2",
-        "spatie/laravel-analytics": "3.6.3"
+        "spatie/laravel-analytics": "3.6.3",
+        "tymon/jwt-auth": "^0.5.12"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
