@@ -73,21 +73,16 @@
                             @foreach($tweets as $tweet)
                                 <li>
                                     <div class="post small-post">
-                                        {{--<div class="entry-header">--}}
-                                            {{--<div class="entry-thumbnail">--}}
-                                                {{--<img class="img-responsive"--}}
-                                                     {{--src="{{ url($tweet->image) }}" alt=""/>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
                                         <div class="post-content">
-                                            <div class="video-catagory" style="padding-top: 5px"><a
-                                                        href="#">{{ $tweet->created_at->format('d-M-Y') }}</a></div>
+                                            <div class="video-catagory" style="padding-top: 5px">
+                                                <a href="{{ url('latest-short-stories') }}">{{ $tweet->time }}</a>
+                                            </div>
                                             <h2 class="entry-title">
-                                                <a href="#"
+                                                <a href="{{ url('latest-short-stories') }}"
                                                    style="font-size: 14px">{{ $tweet->title }}</a>
                                             </h2>
                                         </div>
-                                    </div><!--/post-->
+                                    </div>
                                 </li>
                             @endforeach
 

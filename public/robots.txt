@@ -5,3 +5,6 @@ Allow: /sitemap
 Disallow: /account
 Disallow: /login
 Disallow: /register
+Disallow: /login/facebook/redirect
+Disallow: /login/twitter/redirect
+Disallow: /login/google/redirect
