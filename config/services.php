@@ -47,15 +47,15 @@ return [
 	
 	
 	'google' => [
-		'client_id' => env('15688333143-ino7tneq8p66cshto4kc8r46s0jem4m3.apps.googleusercontent.com'),
-		'client_secret' => env('95G-JVT1FOuuVlW1o5NbpGzB'),
+        'client_id' => '15688333143-ino7tneq8p66cshto4kc8r46s0jem4m3.apps.googleusercontent.com',
+        'client_secret' => '95G-JVT1FOuuVlW1o5NbpGzB',
         'redirect' => env('APP_URL') . '/login/google/callback',
 	],
 	
 	
 	'twitter' => [
-		'client_id' => env('TWITTER_CLIENT_ID'),
-		'client_secret' => env('TWITTER_CLIENT_SECRET'),
+        'client_id' => 'CfqZ1Wd14shcmldnuwzVasl9U',
+        'client_secret' => 'dHrhYJ06fU0KZZuPsnRwzk96d8FHZUVIc47gjDufX6eIwGmWWo',
 		'redirect' => env('APP_URL') . '/login/twitter/callback',
 	],
 

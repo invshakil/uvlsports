@@ -9,7 +9,26 @@
 
 
 @section('after_style')
+    <style>
+        .comments a {
+            background: -webkit-linear-gradient(left, #ff6a4d, #ff4d6a);
+            padding: 8px 8px;
+            margin: 4px;
+            border-radius: 5px;
+            color: #fff;
+        }
 
+        ul.list-inline {
+            font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+
+        ul.list-inline li a {
+            font-weight: 600;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -44,15 +63,20 @@
 
                                                 <div class="entry-meta">
                                                     <ul class="list-inline">
-                                                        <li class="posted-by"><i class="fa fa-user"></i> by <a
-                                                                    href="{{ route('user.profile', ['id'=>$info->author->id, 'name'=> str_replace(' ','-', $info->author->name)]) }}">{{ $info->author->name }}</a>
-                                                        </li>
-                                                        <li class="publish-date"><a href="#"><i
-                                                                        class="fa fa-clock-o"></i> {{ $info->created_at->format('d M Y') }}
+                                                        <li class="posted-by"><i class="fa fa-user"></i>
+                                                            <a href="{{ route('user.profile', ['id'=>$info->author->id, 'name'=> str_replace(' ','-', $info->author->name)]) }}">
+                                                                {{ $info->author->name }}
                                                             </a>
                                                         </li>
-                                                        <li class="views"><a href="#"><i
-                                                                        class="fa fa-eye"></i>{{ $info->hit_count }}</a>
+                                                        <li class="publish-date">
+                                                            <a href="#">
+                                                                <i class="fa fa-clock-o"></i>{{ $info->created_at->format('d M Y') }}
+                                                            </a>
+                                                        </li>
+                                                        <li class="views">
+                                                            <a href="#">
+                                                                <i class="fa fa-eye"></i>{{ $info->hit_count }}
+                                                            </a>
                                                         </li>
                                                         <li class="loves">
                                                             @if(Auth::check())
@@ -69,12 +93,14 @@
                                                                 </a>
                                                             @endif
                                                         </li>
-                                                        <li class="comments"><i class="fa fa-tags-o"></i><a href="#">
-                                                                @foreach($categories as $category)
-                                                                    <a class="btn btn-success" style="color:#fff"
-                                                                       href="#">{{ $info->category($category) }}</a>
-                                                                @endforeach
-                                                            </a>
+                                                        <li class="comments">
+                                                            <i class="fa fa-tags"></i>
+                                                            @foreach($categories as $index => $category)
+                                                                @php $name =  $info->category($category);@endphp
+                                                                <a href="{{ route('article.by.category', ['slug'=>str_replace(' ', '-', $name)])  }}">
+                                                                    {{ $name }}
+                                                                </a>
+                                                            @endforeach
                                                         </li>
                                                     </ul>
                                                 </div>
