@@ -1,5 +1,5 @@
 <div class="widget follow-us">
-    <h1 class="section-title title">Follow Us</h1>
+    <h1 class="section-title title">ফলো করুন</h1>
     <ul class="list-inline social-icons">
 
         @if(facebook())

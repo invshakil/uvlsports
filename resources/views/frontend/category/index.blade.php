@@ -93,7 +93,7 @@
 
 
                         <div class="widget">
-                            <h1 class="section-title title">Popular in {{ $category_info->name }}</h1>
+                            <h1 class="section-title title">{{ $category_info->name }}তে জনপ্রিয়</h1>
                             <ul class="post-list">
                                 @include('frontend.popular')
                             </ul>

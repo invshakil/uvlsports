@@ -31,7 +31,7 @@
 
 
                         <div class="widget">
-                            <h1 class="section-title title">Popular Articles!</h1>
+                            <h1 class="section-title title">জনপ্রিয় লেখাসমূহ</h1>
                             {{--POPULAR--}}
                             @include('frontend.popular')
 

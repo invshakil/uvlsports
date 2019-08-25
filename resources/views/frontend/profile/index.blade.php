@@ -86,7 +86,7 @@
                     </div><!--/#site-content-->
 
                     <div id="site-content" class="site-content" >
-                        <h1 class="section-title">{{ $title }} এর লেখা আর্টিক্যাল সমগ্র</h1>
+                        <h1 class="section-title">{{ $title }} এর লেখাসমূহ</h1>
                         <div class="section listing-news">
 
 

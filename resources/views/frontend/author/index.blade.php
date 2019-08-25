@@ -88,7 +88,7 @@
                     <!--/#widget-->
 
                         <div class="widget">
-                            <h1 class="section-title title">This is Rising!</h1>
+                            <h1 class="section-title title">এই লেখকের জনপ্রিয় সমূহ</h1>
                             <ul class="post-list">
                                 @include('frontend.latest')
                             </ul>

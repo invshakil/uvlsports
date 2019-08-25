@@ -12,7 +12,7 @@
         </div>
 
         <div class="widget">
-            <h1 class="section-title title">জনপ্রিয় সংবাদসমূহ</h1>
+            <h1 class="section-title title">জনপ্রিয় লেখাসমূহ</h1>
             <ul class="post-list">
                 @include('frontend.popular')
             </ul>

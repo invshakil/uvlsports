@@ -113,7 +113,7 @@
                     @include('frontend.follow_us')
 
                     <div class="widget">
-                        <h1 class="section-title title">Latest Articles</h1>
+                        <h1 class="section-title title">সর্বশেষ লেখাসমূহ</h1>
                         <ul class="post-list">
                            @include('frontend.latest')
                         </ul>
