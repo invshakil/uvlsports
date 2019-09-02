@@ -21,8 +21,8 @@ class APIAuthController extends Controller
             return response([
                 'status' => 'error',
                 'error' => 'invalid.credentials',
-                'msg' => 'Invalid Credentials.'
-            ], 400);
+                'msg' => 'Invalid Credentials.',
+            ], 401);
         }
         return response([
             'status' => 'success'
