@@ -13,7 +13,7 @@ class Article extends Model
         $categories = \Cache::remember('categories', 3600, function (){
             return Category::select('id', 'name', 'bangla_name')->get();
         });
-        return $categories->where('id', $id)->first() ? $categories->where('id', $id)->first()->name : null;
+        return $categories->where('id', $id)->first() ? $categories->where('id', $id)->first()->bangla_name : null;
     }
 
     public function author()
@@ -31,7 +31,7 @@ class Article extends Model
         return $this->hasMany(Favorite ::class, 'article_id', 'id');
     }
 
-    protected $appends = ['medium_image', 'time_format'];
+    protected $appends = ['full_image', 'medium_image', 'time_format'];
 
 
     public function getCardTitleAttribute()
@@ -56,7 +56,7 @@ class Article extends Model
         if ($this->image != null && file_exists($imagePath)) {
             return asset($imagePath);
         } else {
-            return 'https://via.placeholder.com/275x160';
+            return logo();
         }
     }
 
@@ -66,7 +66,7 @@ class Article extends Model
         if ($this->image != null && file_exists($imagePath)) {
             return asset($imagePath);
         } else {
-            return 'https://via.placeholder.com/275x160';
+            return logo();
         }
     }
 
@@ -76,7 +76,7 @@ class Article extends Model
         if ($this->image != null && file_exists($imagePath)) {
             return asset($imagePath);
         } else {
-            return 'https://via.placeholder.com/80x45';
+            return logo();
         }
     }
 

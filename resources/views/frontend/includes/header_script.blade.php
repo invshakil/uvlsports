@@ -153,5 +153,10 @@
     head, body {
         font-family: 'Merriweather', 'SolaimanLipi', sans-serif;
     }
+
+    .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
+        padding: 10px;
+        margin: 0 auto;
+    }
 </style>
 

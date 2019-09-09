@@ -19,6 +19,8 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('auth/logout', 'APIAuthController@logout');
 });
 
+Route::get('/get-articles', ['as'=> 'api.get_articles', 'uses' => 'HomeController@getLatestArticles']);
+Route::get('/get-article-details/{id}', ['as'=> 'api.get_article_details', 'uses' => 'HomeController@getArticleDetails']);
 Route::get('/get-more-tweets', ['as'=> 'api.load_more_tweets', 'uses' => 'HomeController@getLatestStories']);
 //Route::get('/get-more-tweets', ['as' => 'api.load_more_tweets', 'uses' => 'HomeController@getLatestStories'])->middleware('auth.api');
 
