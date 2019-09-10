@@ -301,7 +301,7 @@ class HomeController extends Controller
     public function getLatestArticles(Request $request)
     {
         $query = Article::select('id', 'title', 'description', 'user_id', 'created_at', 'image')
-            ->with('author:id,name')->orderBy('id', 'desc');
+            ->with('author:id,name')->orderBy('id', 'desc')->where('status', 1);
         if ($request->has('page')) {
             $set = $request->set;
             $page = $request->page * $set;
