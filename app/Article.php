@@ -56,7 +56,7 @@ class Article extends Model
         if ($this->image != null && file_exists($imagePath)) {
             return asset($imagePath);
         } else {
-            return logo();
+            return asset(logo());
         }
     }
 
@@ -66,7 +66,7 @@ class Article extends Model
         if ($this->image != null && file_exists($imagePath)) {
             return asset($imagePath);
         } else {
-            return logo();
+            return asset(logo());
         }
     }
 
@@ -76,7 +76,7 @@ class Article extends Model
         if ($this->image != null && file_exists($imagePath)) {
             return asset($imagePath);
         } else {
-            return logo();
+            return asset(logo());
         }
     }
 
