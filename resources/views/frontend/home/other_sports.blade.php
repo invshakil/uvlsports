@@ -1,7 +1,7 @@
 <div class="row">
     @foreach($others_sports as $others_sport)
         <div class="col-sm-4">
-            <div class="post feature-post">
+            <div class="post feature-post custom-thumbnail">
                 <div class="entry-header">
                     <div class="entry-thumbnail">
                         <img class="img-responsive"

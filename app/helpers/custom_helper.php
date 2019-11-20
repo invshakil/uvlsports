@@ -137,3 +137,8 @@ function logo()
         return \App\Setting::getSetting('logo');
     });
 }
+
+function defaultImage()
+{
+    return 'default.png';
+}

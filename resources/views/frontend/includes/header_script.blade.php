@@ -43,39 +43,39 @@
       href="{{ asset('frontend') }}/images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('frontend') }}/images/ico/apple-touch-icon-57-precomposed.png">
 @if(env('APP_ENV') == 'production')
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44033160-2"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44033160-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-    gtag('js', new Date());
+        gtag('js', new Date());
 
-    gtag('config', 'UA-44033160-2');
-</script>
-<!-- Google Tag Manager -->
-<script>(function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-            'gtm.start':
-                new Date().getTime(), event: 'gtm.js'
-        });
-        var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-NK8RSKS');</script>
-<!-- End Google Tag Manager -->
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NK8RSKS"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
+        gtag('config', 'UA-44033160-2');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NK8RSKS');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NK8RSKS"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
 @endif
 <script>
     var baseUrl = "{{ env('APP_URL') }}"
@@ -110,7 +110,7 @@
         text-decoration: none;
     }
 
-    .entry-content blockquote{
+    .entry-content blockquote {
         border-left: 5px solid #f90606;
         background: #eff2fd;
     }
@@ -124,7 +124,7 @@
         text-align: right;
     }
 
-    .widget .post-list li{
+    .widget .post-list li {
         padding: 0;
     }
 
@@ -152,6 +152,14 @@
 
     head, body {
         font-family: 'Merriweather', 'SolaimanLipi', sans-serif;
+    }
+
+    .custom-thumbnail .entry-header img {
+        max-height: 220px;
+    }
+
+    .medium-post .entry-header img {
+        max-height: 150px;
     }
 
     .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
