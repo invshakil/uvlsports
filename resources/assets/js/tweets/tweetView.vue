@@ -7,6 +7,7 @@
                     v-if="is_allowed">Create Tweet
             </button>
         </h1>
+        <form-modal></form-modal>
         <div v-for="(tweet, index) in results" class="post">
 
             <div class="entry-header">
@@ -50,8 +51,6 @@
         <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler">
             <div slot="no-more">No more tweets available to show.</div>
         </infinite-loading>
-
-        <form-modal></form-modal>
         <vue-toastr ref="mytoast"></vue-toastr>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <modal v-if="showModal" @close="showModal = false" @open="showModal = true">
+        <modal v-show="showModal" @close="showModal = false" @open="showModal = true">
             <!--
               you can use custom content here to overwrite
               default content
@@ -102,7 +102,7 @@
                     _this.index = param;
                 }
                 _this.showModal = true;
-                window.scrollTo(0,0);
+                window.scrollTo(0, 0);
             });
         },
         data() {
@@ -127,6 +127,11 @@
 
         methods: {
             checkValidation() {
+                this.errors = {
+                    title: [],
+                    description: [],
+                    image: [],
+                };
                 if (this.form.title === '') {
                     this.errors.title.push('Title is required');
                 } else if (this.form.title.length < 15) {
