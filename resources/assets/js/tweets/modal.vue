@@ -96,7 +96,7 @@
                     _this.form = {
                         title: data.title,
                         description: data.description,
-                        image: data.image
+                        image: data.image === null ? '' : data.image
                     };
                     _this.edit_id = data.id;
                     _this.index = param;
@@ -199,7 +199,7 @@
 
             saveData() {
                 var _this = this;
-                let url = _this.baseUrl + '/api/account/save-tweet';
+                let url = _this.baseUrl + '/account/save-tweet';
                 axios.post(url, _this.form)
                     .then((response) => {
                             _this.$toastr.s('SUCCESS', 'Tweet Saved Successfully!')
@@ -226,7 +226,7 @@
 
             updateData() {
                 var _this = this;
-                axios.patch(this.baseUrl + '/api/account/update-tweet' + '/' + _this.edit_id, this.form)
+                axios.patch(this.baseUrl + '/account/update-tweet' + '/' + _this.edit_id, this.form)
                     .then((response) => {
                             _this.$toastr.s('SUCCESS MESSAGE', 'Tweet Saved Successfully!')
                             _this.showModal = false;

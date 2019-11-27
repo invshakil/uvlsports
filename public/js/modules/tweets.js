@@ -15505,7 +15505,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         infiniteHandler: function infiniteHandler($state) {
             var _this2 = this;
 
-            var url = this.baseUrl + '/api/get-more-tweets';
+            var url = this.baseUrl + '/get-more-tweets';
             axios.get(url, {
                 params: {
                     set: this.set,
@@ -15536,7 +15536,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         deleteData: function deleteData(id, index) {
             var _this = this;
             if (confirm('Are you sure about to delete this tweet?')) {
-                axios.delete(this.baseUrl + '/api/account/delete-tweet' + '/' + id).then(function (response) {
+                axios.delete(this.baseUrl + '/account/delete-tweet' + '/' + id).then(function (response) {
                     _this.$toastr.s('SUCCESS MESSAGE', 'Tweet Deleted Successfully!');
                     _this.results.splice(index, 1);
                 }).catch(function (error) {
@@ -15767,7 +15767,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.form = {
                     title: data.title,
                     description: data.description,
-                    image: data.image
+                    image: data.image === null ? '' : data.image
                 };
                 _this.edit_id = data.id;
                 _this.index = param;
@@ -15867,7 +15867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         saveData: function saveData() {
             var _this = this;
-            var url = _this.baseUrl + '/api/account/save-tweet';
+            var url = _this.baseUrl + '/account/save-tweet';
             axios.post(url, _this.form).then(function (response) {
                 _this.$toastr.s('SUCCESS', 'Tweet Saved Successfully!');
                 _this.showModal = false;
@@ -15890,7 +15890,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         updateData: function updateData() {
             var _this = this;
-            axios.patch(this.baseUrl + '/api/account/update-tweet' + '/' + _this.edit_id, this.form).then(function (response) {
+            axios.patch(this.baseUrl + '/account/update-tweet' + '/' + _this.edit_id, this.form).then(function (response) {
                 _this.$toastr.s('SUCCESS MESSAGE', 'Tweet Saved Successfully!');
                 _this.showModal = false;
                 _this.$eventHub.$emit('data-updated', response.data, _this.index);

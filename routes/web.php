@@ -105,7 +105,10 @@ Route::get('/account/pending-articles', 'UserController@PendingArticles')->name(
 Route::get('/account/favorite-articles', 'UserController@FavoriteArticles')->name('favorite.articles')->middleware('auth');
 Route::get('/account/saved-articles', 'UserController@SavedArticle')->name('saved.articles')->middleware('auth');
 
-
+Route::get('/get-more-tweets', ['as'=> 'load_more_tweets', 'uses' => 'HomeController@getLatestStories']);
+Route::post('/account/save-tweet', 'TweetController@save')->name('save.tweet')->middleware('auth');
+Route::patch('/account/update-tweet/{id}', 'TweetController@update')->name('update.tweet')->middleware('auth');
+Route::delete('/account/delete-tweet/{id}', 'TweetController@delete')->name('delete.tweet')->middleware('auth');
 
 /*
  * SOCIAL LOGIN WITH FACEBOOK / TWITTER / GMAIL

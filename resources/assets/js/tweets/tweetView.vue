@@ -106,7 +106,7 @@
         },
         methods: {
             infiniteHandler($state) {
-                let url = this.baseUrl + '/api/get-more-tweets'
+                let url = this.baseUrl + '/get-more-tweets'
                 axios.get(url, {
                     params: {
                         set: this.set,
@@ -136,7 +136,7 @@
             deleteData(id, index) {
                 let _this = this;
                 if (confirm('Are you sure about to delete this tweet?')) {
-                    axios.delete(this.baseUrl + '/api/account/delete-tweet' + '/' + id)
+                    axios.delete(this.baseUrl + '/account/delete-tweet' + '/' + id)
                         .then((response) => {
                             _this.$toastr.s('SUCCESS MESSAGE', 'Tweet Deleted Successfully!')
                             _this.results.splice(index, 1)
