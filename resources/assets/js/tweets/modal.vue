@@ -251,10 +251,10 @@
 
 <style>
     .has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {
-        color: #ff0e10;
+        color: #ff7075;
     }
 
     .has-error .form-control {
-        border-color: #ff0e10;
+        border-color: #ff7075;
     }
 </style>

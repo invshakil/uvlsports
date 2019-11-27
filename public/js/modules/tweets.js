@@ -15653,7 +15653,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {\n    color: #ff0e10;\n}\n.has-error .form-control {\n    border-color: #ff0e10;\n}\n", ""]);
+exports.push([module.i, "\n.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label {\n    color: #ff7075;\n}\n.has-error .form-control {\n    border-color: #ff7075;\n}\n", ""]);
 
 // exports
 
