@@ -17,17 +17,13 @@ Route::group(['middleware' => 'jwt.refresh'], function () {
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('auth/user', 'APIAuthController@user');
     Route::post('auth/logout', 'APIAuthController@logout');
+
+    Route::post('/account/save-tweet', 'TweetController@save')->name('save.tweet');
+    Route::patch('/account/update-tweet/{id}', 'TweetController@update')->name('update.tweet');
+    Route::delete('/account/delete-tweet/{id}', 'TweetController@delete')->name('delete.tweet');
 });
 
 Route::get('/get-articles', ['as'=> 'api.get_articles', 'uses' => 'HomeController@getLatestArticles']);
 Route::get('/get-article-details/{id}', ['as'=> 'api.get_article_details', 'uses' => 'HomeController@getArticleDetails']);
 Route::get('/get-more-tweets', ['as'=> 'api.load_more_tweets', 'uses' => 'HomeController@getLatestStories']);
-//Route::get('/get-more-tweets', ['as' => 'api.load_more_tweets', 'uses' => 'HomeController@getLatestStories'])->middleware('auth.api');
 
-Route::post('/account/save-tweet', 'TweetController@save')->name('save.tweet');
-Route::patch('/account/update-tweet/{id}', 'TweetController@update')->name('update.tweet');
-Route::delete('/account/delete-tweet/{id}', 'TweetController@delete')->name('delete.tweet');
-
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
