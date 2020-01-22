@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tweet;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,16 +26,23 @@ class APIAuthController extends Controller
             ], 401);
         }
         return response([
-            'status' => 'success'
+            'status' => 'success',
+            'userInfo' => $this->getUserInfo()
         ])->header('Authorization', $token);
+    }
+
+    public function getUserInfo()
+    {
+        $user = User::find(Auth::user()->id);
+        $user->hasTweetAccess = (new Tweet())->isAllowed();
+        return $user;
     }
 
     public function user(Request $request)
     {
-        $user = User::find(Auth::user()->id);
         return response([
             'status' => 'success',
-            'data' => $user
+            'userInfo' => $this->getUserInfo()
         ]);
     }
 
