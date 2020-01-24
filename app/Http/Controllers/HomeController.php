@@ -298,29 +298,6 @@ class HomeController extends Controller
         return back()->with('success', 'We have received your email. We will get back at you as soon as possible. thanks for being in touch with us!');
     }
 
-    public function getLatestArticles(Request $request)
-    {
-        $query = Article::select('id', 'title', 'user_id', 'created_at', 'image')
-            ->with('author:id,name')->orderBy('id', 'desc')->where('status', 1);
-        if ($request->has('page')) {
-            $set = $request->set;
-            $page = $request->page * $set;
-            $results = $query->skip($page)->take($set)->get();
-            return response()->json($results);
-        } else {
-            $set = 10;
-            $page = 0;
-            $results = $query->skip($page)->take($set)->get();
-        }
-        return response()->json($results);
-    }
-
-    public function getArticleDetails(Request $request, $id)
-    {
-        $result = Article::with('author:id,name')->where('id', $id)->first();
-        $result->categories = $result->category($result->category_id);
-        return response()->json($result);
-    }
 
     public function getLatestStories(Request $request)
     {

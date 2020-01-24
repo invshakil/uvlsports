@@ -23,7 +23,8 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::delete('/account/delete-tweet/{id}', 'TweetController@delete')->name('delete.tweet');
 });
 
-Route::get('/get-articles', ['as'=> 'api.get_articles', 'uses' => 'HomeController@getLatestArticles']);
-Route::get('/get-article-details/{id}', ['as'=> 'api.get_article_details', 'uses' => 'HomeController@getArticleDetails']);
-Route::get('/get-more-tweets', ['as'=> 'api.load_more_tweets', 'uses' => 'HomeController@getLatestStories']);
+Route::get('/get-categories', ['as'=> 'api.get_categories', 'uses' => 'Api\CmsController@getCategories']);
+Route::get('/get-articles', ['as'=> 'api.get_articles', 'uses' => 'Api\CmsController@getLatestArticles']);
+Route::get('/get-article-details/{id}', ['as'=> 'api.get_article_details', 'uses' => 'Api\CmsController@getArticleDetails']);
+Route::get('/get-more-tweets', ['as'=> 'api.load_more_tweets', 'uses' => 'Api\CmsController@getLatestStories']);
 
