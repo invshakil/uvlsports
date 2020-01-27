@@ -96,9 +96,9 @@
                                                         <li class="comments">
                                                             <i class="fa fa-tags"></i>
                                                             @foreach($categories as $index => $category)
-                                                                @php $name =  $info->category($category);@endphp
-                                                                <a href="{{ route('article.by.category', ['slug'=>str_replace(' ', '-', $name)])  }}">
-                                                                    {{ $name }}
+                                                                @php $category =  $info->category($category);@endphp
+                                                                <a href="{{ route('article.by.category', ['slug'=>str_replace(' ', '-', $category->bangla_name)])  }}">
+                                                                    {{ $category->bangla_name }}
                                                                 </a>
                                                             @endforeach
                                                         </li>
@@ -189,7 +189,8 @@
                             </div>
 
                             <div class="section">
-                                <h1 class="section-title">More in {{ $info->category($categories[0]) }}</h1>
+                                @php $category =  $info->category($categories[0]);@endphp
+                                <h1 class="section-title">আরো পড়ুন {{ $category->bangla_name }} ক্যাটাগরিতে</h1>
                                 <div class="row">
 
                                     @foreach($related_articles as  $article)

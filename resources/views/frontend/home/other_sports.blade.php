@@ -9,7 +9,12 @@
                              alt="{{ $others_sport->title }}"/>
                     </div>
                     @php $categories = explode(',',$others_sport->category_id); $category_id = $categories[0]; @endphp
-                    <div class="catagory technology"><span><a href="#">{{ $others_sport->category($category_id) }}</a></span></div>
+                    @php $category =  $others_sport->category($category_id);@endphp
+                    <div class="catagory technology">
+                        <span>
+                            <a href="{{ route('article.by.category', ['slug'=>str_replace(' ','-',$category->bangla_name)]) }}">{{ $category->bangla_name }}</a>
+                        </span>
+                    </div>
                 </div>
                 <div class="post-content">
                     <div class="entry-meta">

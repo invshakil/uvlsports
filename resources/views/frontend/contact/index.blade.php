@@ -15,7 +15,7 @@
 
     <div class="container">
         <div class="page-breadcrumbs">
-            <h1 class="section-title title">Contact Us</h1>
+            <h1 class="section-title title"> আমাদের সাথে যোগাযোগ করুন</h1>
         </div>
         <div class="row">
             <div class="col-sm-8 col-md-9">
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="contact-info">
-                        <h1 class="section-title title">Contact Information</h1>
+                        <h1 class="section-title title"> যোগাযোগের প্রয়োজনীয় তথ্যসমূহ</h1>
                         <ul class="list-inline">
                             <li class="box-design">
                                 <h2>Comilla</h2>

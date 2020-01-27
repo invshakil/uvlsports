@@ -24,9 +24,10 @@
                                         @endif
                                     </div>
                                     @php $categories = explode(',',$slider->category_id); $category_id = $categories[0]; @endphp
+                                    @php $category =  $slider->category($category_id);@endphp
                                     <div class="catagory world"><a
-                                                href="{{ route('article.by.category', ['slug'=>str_replace(' ','-',$slider->category($category_id))]) }}">
-                                            {{ $slider->category($category_id) }}
+                                                href="{{ route('article.by.category', ['slug'=>str_replace(' ','-',$category->bangla_name)]) }}">
+                                            {{ $category->bangla_name }}
                                         </a>
                                     </div>
                                 </div>

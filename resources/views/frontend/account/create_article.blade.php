@@ -32,7 +32,7 @@
 
                 <div class="col-sm-9 page-content">
                     <div class="inner-box">
-                        <h2 class="title-2"><i class=" fa fa-edit"></i> Create New Article </h2>
+                        <h2 class="title-2"><i class=" fa fa-edit"></i>নতুন লেখা সাবমিট করুন </h2>
 
                         @if(Session::has('message'))
                             <div class="alert alert-success"><span class="fa fa-check"></span><em> {!! session('message') !!}</em></div>
@@ -59,7 +59,7 @@
 
                                     <select name="category_id[]" multiple id="category_id" class="form-control">
                                         @foreach($categories as $category)
-                                            <option value="{{ $category->id }}" {{ ( in_array($category->id, old("category_id", [])) ? "selected":"") }}>{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" {{ ( in_array($category->id, old("category_id", [])) ? "selected":"") }}>{{ $category->bangla_name }}</option>
                                         @endforeach
                                     </select>
 

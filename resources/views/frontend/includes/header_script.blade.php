@@ -82,6 +82,9 @@
 </script>
 
 <style>
+    .homepage .navbar-brand{
+        padding: 2px 15px;
+    }
     .pagination li a:hover, .pagination .active > a, .pagination .active > a:focus, .pagination .active > a:hover, .subscribe-me button, .btn-danger {
         border-color: #ed1c24;
     }
@@ -116,8 +119,8 @@
     }
 
     #navigation .dropdown-menu.top-user-section.logged-in-dropdown {
-        max-width: 150px;
-        min-width: auto;
+        max-width: 250px;
+        min-width: 200px;
     }
 
     .logged-in-dropdown div {

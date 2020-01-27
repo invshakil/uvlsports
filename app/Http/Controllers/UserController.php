@@ -34,41 +34,12 @@ class UserController extends Controller
             'bio' => 'required',
             'facebook' => 'required',
             'twitter' => 'nullable|url',
+            'image' => 'mimes:jpeg,jpg,|nullable|max:1000' // max 10000kb
         ]);
-        $id = auth()->user()->id;
 
-        $update = User::find($id);
-        $update->name = $request->name;
-        $update->bio = $request->bio;
-        $update->user_fb = $request->facebook;
-        $update->user_tw = $request->twitter;
-
-        if (Input::has('image')) {
-
-            $image = auth()->user()->image;
-
-            if ($image != '') {
-                if (file_exists(asset($image))) // make sure it exits inside the folder
-                {
-                    unlink(asset($image)); // delete file/image
-                }
-            }
-
-            $image = Input::file('image');
-            $filename = 'user_' . time() . '.' . $image->getClientOriginalExtension();
-
-            $path = public_path('/image_upload/users/' . $filename);
-
-
-            Image::make($image->getRealPath())->resize(400, 400, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($path);
-
-            $update->image = '/image_upload/users/' . $filename;
-        }
-
-        $update->save();
-
+        $data = $request->only('name', 'bio', 'facebook', 'twitter', 'image');
+        $data['id'] = auth()->user()->id;
+        User::updateProfile($data);
         return back()->with('message', 'Account Information Updated.');
     }
 
@@ -85,23 +56,10 @@ class UserController extends Controller
         $request->validate([
             'title' => 'required|min:30',
             'category_id' => 'required',
-            'description' => 'required|min:150',
+            'description' => 'required|min:200',
         ]);
-        $categories = implode(',', $request->category_id);
-        $new = new Article();
-        $new->title = $request->title;
-        $new->category_id = $categories;
-        $new->description = $new->saveTextEditorImage($request->description);
-        $new->user_id = auth()->user()->id;
-        $new->save();
-
-        $articleData = [
-            'article_id' => $new->id,
-            'author' => $new->author->name,
-            'title' => $new->title,
-            'created_at' => $new->created_at->format('d, F Y h:i A'),
-        ];
-        event(new NewArticleSubmitted(adminEmails(), $articleData));
+        $data = $request->only('title', 'category_id', 'description');
+        User::saveArticle($data);
         return back()->with('message', 'Article Submitted for approval.');
     }
 

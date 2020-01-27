@@ -15,7 +15,7 @@
         @if(! auth()->check())
             <li class="dropdown user-panel">
                 <a href="javascript:void(0);" class="dropdown-toggle"
-                   data-toggle="dropdown"><i class="fa fa-user"></i> Sign In</a>
+                   data-toggle="dropdown"><i class="fa fa-user"></i> লগিন করুন</a>
                 <div class="dropdown-menu top-user-section" id="modal-login">
                     <div class="top-user-form">
                         <form method="post" action="{{  route('login') }}" role="form">
@@ -42,9 +42,10 @@
                             </div>
 
                             <div>
-                                <p class="reset-user"><a href="{{ url('password/reset')  }}">Forgot
-                                        Password/Username?</a></p>
-                                <button class="btn btn-danger" type="submit">Login</button>
+                                <p class="reset-user">
+                                    <a href="{{ url('password/reset')  }}">পাসওয়ার্ড উদ্ধার করতে চান?</a>
+                                </p>
+                                <button class="btn btn-danger" type="submit">সাবমিট</button>
                             </div>
                         </form>
                     </div>
@@ -74,7 +75,7 @@
                         </div>
                     </div>
                     <div class="create-account">
-                        <a href="{{ route('register') }}">Create a New Account</a>
+                        <a href="{{ route('register') }}">নতুন একাউন্ট খুলুন</a>
                     </div>
                 </div>
             </li>
@@ -82,22 +83,21 @@
 
             <li class="dropdown user-panel">
                 <a href="javascript:void(0);" class="dropdown-toggle"
-                   data-toggle="dropdown"><i class="fa fa-user"></i> My Account</a>
+                   data-toggle="dropdown"><i class="fa fa-user"></i> আমার একাউণ্ট</a>
                 <div class="dropdown-menu top-user-section logged-in-dropdown">
 
                     @if(auth()->user()->role == 1 || auth()->user()->role == 2)
                     <div class="col-md-12">
-                        <a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> Admin</a>
+                        <a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> এডমিন একাউন্ট</a>
                     </div>
                     @endif
 
                     <div class="col-md-12">
-                        <a href="{{ route('account') }}"><i class="fa fa-user-plus"></i> Account</a>
+                        <a href="{{ route('account') }}"><i class="fa fa-user-plus"></i> নিজস্ব একাউন্ট</a>
                     </div>
 
                     <div class="col-md-12">
-
-                        <a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Logout</a>
+                        <a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> লগ আউট করুন</a>
                     </div>
                 </div>
             </li>

@@ -13,7 +13,7 @@ class Article extends Model
         $categories = \Cache::remember('categories', 3600, function (){
             return Category::select('id', 'name', 'bangla_name')->get();
         });
-        return $categories->where('id', $id)->first() ? $categories->where('id', $id)->first()->bangla_name : null;
+        return $categories->where('id', $id)->first() ? $categories->where('id', $id)->first() : null;
     }
 
     public function author()

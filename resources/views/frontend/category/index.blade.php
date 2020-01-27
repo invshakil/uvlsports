@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div id="site-content" class="site-content">
-                        <h1 class="section-title">{{ $category_info->name }}</h1>
+                        <h1 class="section-title">{{ $category_info->bangla_name }}</h1>
                         <div class="section listing-news">
 
                             @foreach($articles as $article)
@@ -93,7 +93,7 @@
 
 
                         <div class="widget">
-                            <h1 class="section-title title">{{ $category_info->name }}তে জনপ্রিয়</h1>
+                            <h1 class="section-title title">জনপ্রিয় {{ $category_info->bangla_name }}</h1>
                             <ul class="post-list">
                                 @include('frontend.popular')
                             </ul>

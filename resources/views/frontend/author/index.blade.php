@@ -46,7 +46,7 @@
                                                         {{ $author->name }}
                                                     </a>
                                                 </h2>
-                                                <p>Total Article: {{ count($author->articles) }}</p>
+                                                <p>সর্বমোট লিখেছেন: {{ count($author->articles) }}</p>
                                             </div>
 
                                             <div class="author-social">

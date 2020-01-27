@@ -92,7 +92,10 @@ class HomeController extends Controller
     {
         $name = str_replace('-', ' ', $slug);
         $data = array();
-        $info = Category::where('name', $name)->first();
+        $info = Category::where('bangla_name', $name)->first();
+        if (!$info) {
+            abort(404);
+        }
         $data['articles'] = Article::with('favorites')
             ->withCount('favorites')
             ->orderBy('id', 'desc')
@@ -161,38 +164,13 @@ class HomeController extends Controller
 
     public function ArticleDetails2($id, $cat_id, $slug)
     {
-        return redirect('/article/'.$id.'/'.$slug);
-//        $data = array();
-//
-//        $hit = Article::where(['id' => $id, 'slug' => $slug, 'status' => 1])->value('hit_count');
-//
-//        Article::where('id', $id)->update(['hit_count' => $hit + 1]);
-//
-//        $info = Article::with('favorites')->withCount('favorites')->with('author')->where(['id' => $id, 'slug' => $slug, 'status' => 1])->first();
-//
-//        $categories = explode(',', $info->category_id);
-//        $category_id = $categories[0];
-//
-//        $data['info'] = $info;
-//        $data['title'] = $info->title;
-//        $data['popular_articles'] = $this->MostPopularArticle(5);
-//        $data['latest_articles'] = $this->LatestArticle(5);
-//        $data['related_articles'] = Article::with('favorites')->withCount('favorites')->whereRaw("FIND_IN_SET('" . $category_id . "', category_id)")
-//            ->where('status', 1)->inRandomOrder()->limit(6)->get();
-//
-//        $data['image'] = asset('image_upload/post_image/' . $info->image);
-//        $data['description'] = $info->meta_keyword;
-//        $data['keyword'] = $info->tags;
-//        $data['type'] = "article";
-//        $data = defaultSeo($data);
-//
-//        return view('frontend.article.index', $data);
+        return redirect('/article/' . $id . '/' . $slug);
     }
 
     public function GetAuthorList()
     {
         $data = array();
-        $data['title'] = 'Author List';
+        $data['title'] = 'লেখকদের তালিক';
         $data['latest_articles'] = $this->LatestArticle(10);
         $data['authors'] = User::with('articles')->whereHas('articles')->withCount('articles')->orderBy('articles_count', 'desc')->paginate(21);
 
@@ -223,7 +201,7 @@ class HomeController extends Controller
     public function ContactUs()
     {
         $data = array();
-        $data['title'] = 'Contact Us';
+        $data['title'] = 'যোগাযাগ';
         $data['latest_articles'] = $this->LatestArticle(5);
         $data = defaultSeo($data);
         return view('frontend.contact.index', $data);
@@ -232,9 +210,9 @@ class HomeController extends Controller
     public function AboutUs()
     {
         $data = array();
-        $data['title'] = 'Contact Us';
+        $data['title'] = 'আমাদের সম্পর্কে';
         $data = defaultSeo($data);
-        $data['admins'] = User::whereIn('role', [1,2])->get();
+        $data['admins'] = User::whereIn('role', [1, 2])->get();
 
         return view('frontend.about.index', $data);
     }
@@ -242,7 +220,7 @@ class HomeController extends Controller
     public function TvSchedule()
     {
         $data = array();
-        $data['title'] = 'TV Schedule';
+        $data['title'] = 'খেলার সময়সূচী';
 
         $last_game_week = GameWeek::orderBy('id', 'desc')->first();
         $data['game_week_name'] = $last_game_week->name;

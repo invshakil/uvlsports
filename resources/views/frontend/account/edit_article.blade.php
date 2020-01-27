@@ -32,7 +32,7 @@
 
                 <div class="col-sm-9 page-content">
                     <div class="inner-box">
-                        <h2 class="title-2"><i class=" fa fa-edit"></i> Update Article Information </h2>
+                        <h2 class="title-2"><i class=" fa fa-edit"></i> লেখা আপডেট করুন </h2>
 
                         @if(Session::has('message'))
                             <div class="alert alert-success"><span
@@ -60,7 +60,7 @@
                                                     @if($category->id == $c) selected @endif
                                                     @endforeach
 
-                                            >{{ $category->name }}</option>
+                                            >{{ $category->bangla_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

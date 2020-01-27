@@ -18,6 +18,8 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('auth/user', 'APIAuthController@user');
     Route::post('auth/logout', 'APIAuthController@logout');
 
+    Route::patch('auth/profile-update/{id}', 'Api\UserController@updateProfile');
+
     Route::post('/account/save-tweet', 'TweetController@save')->name('save.tweet');
     Route::patch('/account/update-tweet/{id}', 'TweetController@update')->name('update.tweet');
     Route::delete('/account/delete-tweet/{id}', 'TweetController@delete')->name('delete.tweet');

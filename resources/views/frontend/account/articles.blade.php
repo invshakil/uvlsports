@@ -52,7 +52,7 @@
                         <div>
                             <a href="{{ route('create.article') }}"
                                class="btn btn-default"><i
-                                        class="fa fa-plus"></i> Create new Article</a>
+                                        class="fa fa-plus"></i> নতুন লেখা সাবমিট করুন</a>
                         </div>
                         <br>
 
@@ -86,18 +86,18 @@
                                             <td>
                                                 @foreach($categories as $category)
                                                     <a class="btn btn-info"
-                                                       href="#">{{ $article->category($category) }}</a>
+                                                       href="#">{{ $article->category($category)->bangla_name }}</a>
                                                 @endforeach
                                             </td>
                                             <td>{{ $article->title }}
                                             </td>
                                             <td>
-                                                <a href="{{ route('article.details', ['id'=>$article->id,'slug'=>$article->slug]) }}" class="btn btn-success">Go to Article</a>
+                                                <a href="{{ route('article.details', ['id'=>$article->id,'slug'=>$article->slug]) }}" class="btn btn-success"> পড়ুন</a>
                                             </td>
                                             @if(url()->current() != route('favorite.articles'))
                                             <td>
                                                 @if($article->status == 0)
-                                                <a href="{{ route('account.article.edit', ['id'=>$article->id]) }}" class="btn btn-warning">Edit</a>
+                                                <a href="{{ route('account.article.edit', ['id'=>$article->id]) }}" class="btn btn-warning">আপডেট করুন</a>
                                                 @else
                                                     <a href="javascript:void(0)" class="btn btn-success">Published</a>
                                                 @endif

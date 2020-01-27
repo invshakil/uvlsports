@@ -20,17 +20,17 @@ Route::get('/search', ['as' => 'search', 'uses' => 'HomeController@SearchResult'
 Route::get('category/{slug}', ['as' => 'article.by.category', 'uses' => 'HomeController@GetArticleByCategory']);
 Route::get('/news-details/{id}/{cat_id}/{slug}', ['as' => 'article.details', 'uses' => 'HomeController@ArticleDetails2']);
 Route::get('/article/{id}/{slug}', ['as' => 'article.details', 'uses' => 'HomeController@ArticleDetails']);
-Route::get('/authors-list', ['as' => 'author.list', 'uses' => 'HomeController@GetAuthorList']);
+Route::get('/লেখকদের-তালিকা', ['as' => 'author.list', 'uses' => 'HomeController@GetAuthorList']);
 //Route::get('/user-profile/index/{id}', ['as' => 'old.user.profile', 'uses' => 'HomeController@UserProfile']);
 Route::get('/author/{id}/{name}', ['as' => 'user.profile', 'uses' => 'HomeController@UserProfile']);
-Route::get('/contact-us', ['as' => 'contact.us', 'uses' => 'HomeController@ContactUs']);
+Route::get('/যোগাযোগ', ['as' => 'contact.us', 'uses' => 'HomeController@ContactUs']);
 Route::post('/contact-us', ['as' => 'submit.contact.form', 'uses' => 'HomeController@SubmitContactForm']);
-Route::get('/about-us', ['as' => 'about.us', 'uses' => 'HomeController@AboutUs']);
-Route::get('/tv-schedule', ['as' => 'tv.schedule', 'uses' => 'HomeController@TvSchedule']);
+Route::get('/আমাদের-সম্পর্কে', ['as' => 'about.us', 'uses' => 'HomeController@AboutUs']);
+Route::get('/খেলার-সময়সূচী', ['as' => 'tv.schedule', 'uses' => 'HomeController@TvSchedule']);
 Route::get('/match-schedule/search', ['as' => 'match.schedule', 'uses' => 'HomeController@SearchMatch']);
 Route::post('/create-subscribe', ['as' => 'create.subscriber', 'uses' => 'HomeController@CreateSubscriber']);
 Route::post('/save-favorite-article', ['as' => 'save.favorite', 'uses' => 'UserController@SaveFavorite']);
-Route::get('/latest-short-stories', ['as' => 'get.latest.stories', 'uses' => 'HomeController@getLatestStories']);
+Route::get('/খেলার-সর্বশেষ-সংবাদ', ['as' => 'get.latest.stories', 'uses' => 'HomeController@getLatestStories']);
 
 Route::get('sitemap', function () {
 
@@ -105,7 +105,7 @@ Route::get('/account/pending-articles', 'UserController@PendingArticles')->name(
 Route::get('/account/favorite-articles', 'UserController@FavoriteArticles')->name('favorite.articles')->middleware('auth');
 Route::get('/account/saved-articles', 'UserController@SavedArticle')->name('saved.articles')->middleware('auth');
 
-Route::get('/get-more-tweets', ['as'=> 'load_more_tweets', 'uses' => 'HomeController@getLatestStories']);
+Route::get('/get-more-tweets', ['as' => 'load_more_tweets', 'uses' => 'HomeController@getLatestStories']);
 Route::post('/account/save-tweet', 'TweetController@save')->name('save.tweet')->middleware('auth');
 Route::patch('/account/update-tweet/{id}', 'TweetController@update')->name('update.tweet')->middleware('auth');
 Route::delete('/account/delete-tweet/{id}', 'TweetController@delete')->name('delete.tweet')->middleware('auth');
