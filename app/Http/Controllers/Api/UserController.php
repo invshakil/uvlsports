@@ -41,7 +41,7 @@ class UserController extends Controller
      * @returns boolean
      */
 
-    function savePendingArticle(Request $request, $userId)
+    function saveArticle(Request $request, $articleId = false)
     {
         try {
             $request->validate([
@@ -51,6 +51,9 @@ class UserController extends Controller
             ]);
 
             $data = $request->only('title', 'category_id', 'description');
+            if ($articleId) {
+                $data['id'] = $articleId;
+            }
             User::saveArticle($data);
             return response()->json(true);
         } catch (\Exception $exception) {
@@ -62,17 +65,52 @@ class UserController extends Controller
     {
         try {
             $articlesQuery = Article::where('user_id', auth()->user()->id);
-            if ($request->has('pending')) {
-                $articlesQuery = $articlesQuery->where('status', 0);
-            } elseif ($request->has('published')) {
-                $articlesQuery = $articlesQuery->where('status', 1);
+             
+            $articlesQuery = $articlesQuery->latest()->select('id', 'user_id', 'title', 'image', 'category_id', 'created_at', 'status');
+            
+            if ($request->has('status') && $request->input('status') != '*') {
+                $articlesQuery = $articlesQuery->where('status', $request->input('status'));
             }
-            $articles = $articlesQuery->latest()->select('id', 'user_id', 'title', 'image', 'categories')->paginate(10);
-            $data = $request->only('title', 'category_id', 'description');
-            User::saveArticle($data);
-            return response()->json(true);
+
+            if ($request->has('page')) {
+                $set = $request->set;
+                $page = $request->page * $set;
+                $articles = $articlesQuery->skip($page)->take($set)->get();
+            } else {
+                $set = 10;
+                $page = 0;
+                $articles = $articlesQuery->skip($page)->take($set)->get();
+            }
+
+            return response()->json(['articles' => $articles]);
         } catch (\Exception $exception) {
             return response()->json(['message' => $exception->getMessage()], $exception->getCode());
+        }
+    }
+
+    function getArticleDetails(Request $request){
+        try {
+                $id = $request->id;
+                $article = Article::where('id', $id)->first()->toArray();
+                $article['category_id'] = explode(',', (int) $article['category_id']);
+                return response()->json($article);
+            } catch (\Exception $exception) {
+                return response()->json(['message' => $exception->getMessage()], $exception->getCode());
+        }
+    }
+
+    function deleteArticle(Request $request, $id)
+    {
+        try {
+                $article = Article::where('id', $id)->first();
+                if ($article->image != ''){
+                    (new Article)->unlinkPreviousImage($article->image);
+                }
+                Article ::destroy($id);
+
+                return response()->json(true);
+            } catch (\Exception $exception) {
+                return response()->json(['message' => $exception->getMessage()], $exception->getCode());
         }
     }
 }

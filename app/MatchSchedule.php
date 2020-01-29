@@ -16,4 +16,11 @@ class MatchSchedule extends Model
 	{
 		return $this->belongsTo(Tournament::class);
 	}
+
+	protected $appends = ['formatted_time'];
+
+	public function getFormattedTimeAttribute()
+    {
+        return date('h:i A | dS, F Y', strtotime($this->time));
+    }
 }

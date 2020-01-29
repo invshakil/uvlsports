@@ -30,6 +30,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['user_avatar'];
+
     public function articles()
     {
         return $this->hasMany(Article ::class, 'user_id', 'id');
@@ -113,18 +115,23 @@ class User extends Authenticatable
     public static function saveArticle($data)
     {
         $categories = implode(',', $data['category_id']);
-        $new = new Article();
-        $new->title = $data['title'];
-        $new->category_id = $categories;
-        $new->description = $new->saveTextEditorImage($data['description']);
-        $new->user_id = auth()->user()->id;
-        $new->save();
+        if (isset($data['id']) && $data['id'] != null) {
+            $article = Article::find($data['id']);
+        } else {
+            $article = new Article();
+        }
+    
+        $article->title = $data['title'];
+        $article->category_id = $categories;
+        $article->description = $article->saveTextEditorImage($data['description']);
+        $article->user_id = auth()->user()->id;
+        $article->save();
 
         $articleData = [
-            'article_id' => $new->id,
-            'author' => $new->author->name,
-            'title' => $new->title,
-            'created_at' => $new->created_at->format('d, F Y h:i A'),
+            'article_id' => $article->id,
+            'author' => $article->author->name,
+            'title' => $article->title,
+            'created_at' => $article->created_at->format('d, F Y h:i A'),
         ];
         return event(new NewArticleSubmitted(adminEmails(), $articleData));
     }
